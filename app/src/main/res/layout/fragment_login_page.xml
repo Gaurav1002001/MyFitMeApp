@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/emily3"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageButton
+        android:id="@+id/backButton1"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_marginStart="16dp"
+        app:srcCompat="@drawable/back_arrow_white"
+        style="@style/Widget.AppCompat.Button.Borderless"/>
+
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp">
+
+        <ImageView android:id="@+id/imageView4"
+            android:paddingLeft="0sp"
+            android:paddingTop="0sp"
+            android:paddingRight="0sp"
+            android:paddingBottom="0sp"
+            android:layout_width="173dp"
+            android:layout_height="247dp"
+            app:srcCompat="@drawable/fitness"
+            style="?android:attr/borderlessButtonStyle"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="286dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="66dp"
+            app:cardCornerRadius="40dp">
+
+            <com.facebook.login.widget.LoginButton
+                android:layout_gravity="center"
+                android:id="@+id/facebookButton"
+                android:paddingLeft="30dp"
+                android:paddingTop="25dp"
+                android:paddingBottom="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/open_sans"
+                style="@style/FacebookLoginButton"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="286dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            app:cardCornerRadius="40dp"
+            style="@style/GoogleSignInButton">
+
+            <com.shobhitpuri.custombuttons.GoogleSignInButton
+                android:textSize="17sp"
+                android:id="@+id/googleSignInButton"
+                android:layout_width="250dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:text="Continue with Google"
+                android:textAllCaps="false"
+                style="@style/GoogleSignInButton"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:textSize="17sp"
+            android:textColor="#fffafa"
+            android:id="@+id/emailButton"
+            android:background="@drawable/rounded_buttons2"
+            android:layout_width="286dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            android:text="Sign Up with Phone or Email"
+            android:textAllCaps="false"
+            android:fontFamily="@font/open_sans"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:backgroundTint="#44d7a8"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

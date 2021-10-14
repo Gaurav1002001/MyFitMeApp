@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/know_user"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:text="WHAT IS YOUR FITNESS GOAL?"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textview1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textview"
+        android:padding="12dp"
+        android:text="knowing your goal helps us tailor your experience"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textview1"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <FrameLayout
+            android:id="@+id/button_frame1"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_border">
+
+            <CheckBox
+                android:id="@+id/button_stayHealthy"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/checkbox_custom_background"
+                android:button="@null"
+                android:drawableStart="@drawable/heart_24"
+                android:paddingStart="15dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="40dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:paddingStart="10dp"
+                    android:paddingTop="5dp"
+                    android:text="Stay Healthy"
+                    android:textColor="@color/goodgrey"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:paddingStart="10dp"
+                    android:text="I have a healthy lifestyle and I want to\10stick to it"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/button_frame2"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_border">
+
+            <CheckBox
+                android:id="@+id/button_buildMuscle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/checkbox_custom_background"
+                android:button="@null"
+                android:drawableStart="@drawable/biceps_24"
+                android:paddingStart="15dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="40dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:paddingStart="10dp"
+                    android:paddingTop="5dp"
+                    android:text="Build Muscle"
+                    android:textColor="@color/goodgrey"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:paddingStart="10dp"
+                    android:text="I want to see real muscle growth"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/button_frame3"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_border">
+
+            <CheckBox
+                android:id="@+id/button_loseWeight"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/checkbox_custom_background"
+                android:button="@null"
+                android:drawableStart="@drawable/weight_24"
+                android:paddingStart="15dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="40dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:paddingStart="10dp"
+                    android:paddingTop="5dp"
+                    android:text="Lose Weight"
+                    android:textColor="@color/goodgrey"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:paddingStart="10dp"
+                    android:text="I want to slim down and feel better"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/button_frame4"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_border">
+
+            <CheckBox
+                android:id="@+id/button_getFit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/checkbox_custom_background"
+                android:button="@null"
+                android:drawableStart="@drawable/walking_24"
+                android:paddingStart="15dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="40dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:paddingStart="10dp"
+                    android:paddingTop="5dp"
+                    android:text="Get Fit"
+                    android:textColor="@color/goodgrey"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:paddingStart="10dp"
+                    android:text="I want to improve my overall fitness"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/goodgrey" />
+
+        <Button
+            android:id="@+id/buttonContinue"
+            android:layout_width="329dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/rounded_button"
+            android:text="Next"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            app:backgroundTint="@color/darkgreen" />
+    </LinearLayout>
+</RelativeLayout>

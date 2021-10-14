@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backyoga"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/buttonAccount"
+            android:layout_width="317dp"
+            android:layout_height="198dp"
+            android:alpha="0"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="317dp"
+            android:layout_height="198dp"
+            android:alpha="0"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="match_parent"
+            android:layout_height="198dp"
+            android:layout_gravity="center"
+            android:alpha="0"
+            android:text="Button" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dot_background"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:title="Yoga "
+        app:titleTextColor="@color/cardview_dark_background" />
+</RelativeLayout>

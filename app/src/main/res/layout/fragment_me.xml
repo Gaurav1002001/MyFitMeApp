@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/greenlayout"
+        android:background="#11f5df"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"/>
+
+    <LinearLayout
+        android:background="#f6f6f6"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/greenlayout"/>
+
+    <LinearLayout
+        android:id="@+id/topbar"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="25dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profileImageView"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/ic_baseline_account_circle_24"/>
+
+            <TextView
+                android:textSize="25sp"
+                android:textColor="@color/white"
+                android:id="@+id/email"
+                android:paddingLeft="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"/>
+
+            <View
+                android:background="@color/pin_normal"
+                android:layout_width="361dp"
+                android:layout_height="7dp"
+                android:layout_marginTop="15dp"
+                android:alpha="0.3"
+                android:layout_marginStart="5dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativelayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/topbar">
+
+        <LinearLayout
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:id="@+id/cardview"
+            android:background="@drawable/circularbordersolid_2"
+            android:layout_width="300dp"
+            android:layout_height="70dp"
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="@color/white">
+
+            <FrameLayout
+                android:id="@+id/button_frame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:textColor="@color/black"
+                    android:id="@+id/button_weight"
+                    android:background="@drawable/rounded_button_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:stateListAnimator="@null"
+                    app:backgroundTint="@color/white"
+                    style="@style/Widget.AppCompat.Button.Borderless"/>
+
+                <TextView
+                    android:textSize="10sp"
+                    android:textColor="@color/goodgrey"
+                    android:gravity="center"
+                    android:layout_gravity="start"
+                    android:id="@+id/weight"
+                    android:padding="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="WEIGHT"/>
+
+                <LinearLayout
+                    android:layout_gravity="left|center_vertical|center_horizontal|center|start"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="11dp"
+                    android:layout_marginTop="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <View
+                            android:id="@+id/view1"
+                            android:background="@color/pin_normal"
+                            android:layout_width="8dp"
+                            android:layout_height="3dp"
+                            android:layout_centerVertical="true"
+                            android:alpha="0.8"/>
+
+                        <View
+                            android:id="@+id/view2"
+                            android:background="@color/pin_normal"
+                            android:layout_width="10dp"
+                            android:layout_height="2dp"
+                            android:layout_marginLeft="13dp"
+                            android:layout_centerVertical="true"
+                            android:alpha="0.8"/>
+
+                        <TextView
+                            android:textSize="20sp"
+                            android:textColor="@color/goodgrey"
+                            android:id="@+id/display_weight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_gravity="right|center_vertical|center_horizontal|center|end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+                    android:layout_marginEnd="10dp"/>
+
+            </FrameLayout>
+
+            <View
+                android:layout_gravity="center_vertical"
+                android:background="@color/pin_normal"
+                android:layout_width="1dp"
+                android:layout_height="50dp"
+                android:alpha="0.4"/>
+
+            <FrameLayout
+                android:id="@+id/button_frame_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:textColor="@color/black"
+                    android:id="@+id/button_bmi"
+                    android:background="@drawable/rounded_button_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:stateListAnimator="@null"
+                    app:backgroundTint="@color/white"/>
+
+                <TextView
+                    android:textSize="10sp"
+                    android:textColor="@color/goodgrey"
+                    android:gravity="center"
+                    android:layout_gravity="start"
+                    android:id="@+id/bmi"
+                    android:padding="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="BMI"/>
+
+                <LinearLayout
+                    android:layout_gravity="left|center_vertical|center_horizontal|center|start"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="11dp"
+                    android:layout_marginTop="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <View
+                            android:id="@+id/view3"
+                            android:background="@color/pin_normal"
+                            android:layout_width="8dp"
+                            android:layout_height="3dp"
+                            android:layout_centerVertical="true"
+                            android:alpha="0.8"/>
+
+                        <View
+                            android:id="@+id/view4"
+                            android:background="@color/pin_normal"
+                            android:layout_width="10dp"
+                            android:layout_height="2dp"
+                            android:layout_marginLeft="13dp"
+                            android:layout_centerVertical="true"
+                            android:alpha="0.8"/>
+
+                        <TextView
+                            android:textSize="20sp"
+                            android:textColor="@color/goodgrey"
+                            android:id="@+id/display_bmi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_gravity="right|center_vertical|center_horizontal|center|end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+                    android:layout_marginEnd="10dp"/>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_below="@+id/relativelayout">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:gravity="center_vertical"
+                android:id="@+id/buttonProfile"
+                android:layout_width="312dp"
+                android:layout_height="50dp"
+                android:text="Profile"
+                android:textAllCaps="false"
+                app:backgroundTint="@color/white"
+                style="@style/Widget.AppCompat.Button.Borderless"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_gravity="center_vertical"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/profile_pic"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_gravity="center_horizontal"
+            android:background="@color/pin_normal"
+            android:layout_width="325dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="7dp"
+            android:alpha="0.1"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp">
+
+            <Button
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:gravity="center_vertical"
+                android:id="@+id/buttonFriends"
+                android:layout_width="312dp"
+                android:layout_height="50dp"
+                android:text="Friends"
+                android:textAllCaps="false"
+                app:backgroundTint="@color/white"
+                style="@style/Widget.AppCompat.Button.Borderless"/>
+
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_people_24"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_gravity="center_horizontal"
+            android:background="@color/pin_normal"
+            android:layout_width="325dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="7dp"
+            android:alpha="0.1"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp">
+
+            <Button
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:gravity="center_vertical"
+                android:id="@+id/buttonAccount"
+                android:layout_width="312dp"
+                android:layout_height="50dp"
+                android:text="Account"
+                android:textAllCaps="false"
+                app:backgroundTint="@color/white"
+                style="@style/Widget.AppCompat.Button.Borderless"/>
+
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_account_circle_24"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_gravity="center_horizontal"
+            android:background="@color/pin_normal"
+            android:layout_width="325dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="7dp"
+            android:alpha="0.1"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp">
+
+            <Button
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:gravity="center_vertical"
+                android:id="@+id/buttonReminder"
+                android:layout_width="312dp"
+                android:layout_height="50dp"
+                android:text="Reminder"
+                android:textAllCaps="false"
+                app:backgroundTint="@color/white"
+                style="@style/Widget.AppCompat.Button.Borderless"/>
+
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_access_alarm_24"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_gravity="center_horizontal"
+            android:background="@color/pin_normal"
+            android:layout_width="325dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="7dp"
+            android:alpha="0.1"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp">
+
+            <Button
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:gravity="center_vertical"
+                android:id="@+id/buttonAbout_Us"
+                android:layout_width="312dp"
+                android:layout_height="50dp"
+                android:text="About Us"
+                android:textAllCaps="false"
+                app:backgroundTint="@color/white"
+                style="@style/Widget.AppCompat.Button.Borderless"/>
+
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_thumb_up_24"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_gravity="center_horizontal"
+            android:background="@color/pin_normal"
+            android:layout_width="325dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="7dp"
+            android:alpha="0.1"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp">
+
+            <Button
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:gravity="center_vertical"
+                android:id="@+id/buttonRecommend"
+                android:layout_width="312dp"
+                android:layout_height="50dp"
+                android:text="Recommend FitMe to friends"
+                android:textAllCaps="false"
+                app:backgroundTint="@color/white"
+                style="@style/Widget.AppCompat.Button.Borderless"/>
+
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_share_24"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_gravity="center_horizontal"
+            android:background="@color/pin_normal"
+            android:layout_width="325dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="7dp"
+            android:alpha="0.1"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

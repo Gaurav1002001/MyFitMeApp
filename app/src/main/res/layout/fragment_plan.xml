@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/view"
+            app:title="Training Plan"/>
+
+        <View
+            android:id="@+id/view"
+            android:background="@color/pin_normal"
+            android:layout_width="match_parent"
+            android:layout_height="2.5dp"
+            android:alpha="0.08"/>
+
+        <RelativeLayout
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="318dp"
+                android:layout_height="213dp"
+                android:layout_marginTop="18dp"
+                android:src="@drawable/med_"/>
+
+            <Button
+                android:id="@+id/meditationButton"
+                android:layout_width="318dp"
+                android:layout_height="213dp"
+                android:layout_marginTop="18dp"
+                android:alpha="0"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="322dp"
+                android:layout_height="210dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/yoga_"/>
+
+            <Button
+                android:id="@+id/yogaButton"
+                android:layout_width="322dp"
+                android:layout_height="199dp"
+                android:layout_marginTop="9.5dp"
+                android:alpha="0"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="330dp"
+                android:layout_height="165dp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/gym_"/>
+
+            <Button
+                android:layout_gravity="center"
+                android:id="@+id/gymButton"
+                android:layout_width="330dp"
+                android:layout_height="165dp"
+                android:layout_marginTop="4dp"
+                android:alpha="0"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
+

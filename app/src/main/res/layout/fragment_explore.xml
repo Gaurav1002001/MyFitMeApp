@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarExplore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="Explore"/>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/pullToRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbarExplore"
+        android:layout_marginStart="13dp">
+
+        <ScrollView
+            android:scrollbars="none"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <View
+                    android:background="@color/pin_normal"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:layout_below="@+id/toolbarExplore"
+                    android:alpha="0.1"/>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Hello"/>
+
+                    <TextView
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:id="@+id/userName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="7.5dp"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:textColor="@color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Great job showing commitment to your goal."/>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="315dp"
+                    android:layout_marginTop="-30dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageView5"
+                            android:layout_width="335dp"
+                            android:layout_height="350dp"
+                            android:src="@drawable/revive"/>
+
+                        <Button
+                            android:layout_width="330dp"
+                            android:layout_height="245dp"
+                            android:layout_marginTop="30dp"
+                            android:alpha="0" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:background="@color/pin_normal"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:layout_below="@+id/toolbarExplore"
+                    android:alpha="0.1"/>
+
+                <TextView
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:text="WORKOUTS UNDER 15 MINUTES"/>
+
+                <HorizontalScrollView
+                    android:scrollbars="none"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-30dp"
+                    android:layout_marginEnd="10dp">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:layout_width="250dp"
+                                android:layout_height="305dp"
+                                android:src="@drawable/india"/>
+
+                            <Button
+                                android:id="@+id/indiaButton"
+                                android:layout_width="250dp"
+                                android:layout_height="185dp"
+                                android:layout_marginTop="40dp"
+                                android:alpha="0" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="12dp">
+
+                            <ImageView
+                                android:layout_width="250dp"
+                                android:layout_height="305dp"
+                                android:src="@drawable/golf"/>
+
+                            <Button
+                                android:id="@+id/golfButton"
+                                android:layout_width="250dp"
+                                android:layout_height="185dp"
+                                android:layout_marginTop="40dp"
+                                android:alpha="0"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="12dp">
+
+                            <ImageView
+                                android:layout_width="250dp"
+                                android:layout_height="305dp"
+                                android:src="@drawable/delta"/>
+
+                            <Button
+                                android:id="@+id/deltaButton"
+                                android:layout_width="250dp"
+                                android:layout_height="185dp"
+                                android:layout_marginTop="40dp"
+                                android:alpha="0"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="12dp">
+
+                            <ImageView
+                                android:layout_width="250dp"
+                                android:layout_height="305dp"
+                                android:src="@drawable/echo"/>
+
+                            <Button
+                                android:id="@+id/echoButton"
+                                android:layout_width="250dp"
+                                android:layout_height="185dp"
+                                android:layout_marginTop="40dp"
+                                android:alpha="0"/>
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
+                <View
+                    android:background="@color/pin_normal"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:layout_marginTop="-30dp"
+                    android:layout_below="@+id/toolbarExplore"
+                    android:alpha="0.1"/>
+
+                <TextView
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:text="Yoga for women"/>
+
+                <HorizontalScrollView
+                    android:scrollbars="none"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:layout_width="250dp"
+                                android:layout_height="150dp"
+                                android:src="@drawable/mother"/>
+
+                            <Button
+                                android:id="@+id/motherhoodButton"
+                                android:layout_width="250dp"
+                                android:layout_height="150dp"
+                                android:alpha="0"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="12dp">
+
+                            <ImageView
+                                android:layout_width="250dp"
+                                android:layout_height="150dp"
+                                android:src="@drawable/menstrual"/>
+
+                            <Button
+                                android:id="@+id/menstrualButton"
+                                android:layout_width="250dp"
+                                android:layout_height="150dp"
+                                android:alpha="0"/>
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
+                <View
+                    android:background="@color/pin_normal"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/toolbarExplore"
+                    android:alpha="0.1"/>
+
+                <TextView
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="284dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Better Life"/>
+
+                <HorizontalScrollView
+                    android:scrollbars="none"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-5dp"
+                    android:layout_marginEnd="10dp">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:layout_width="250dp"
+                                android:layout_height="150dp"
+                                android:src="@drawable/soothing"/>
+
+                            <Button
+                                android:id="@+id/soothingButton"
+                                android:layout_width="250dp"
+                                android:layout_height="150dp"
+                                android:alpha="0"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="12dp">
+
+                            <ImageView
+                                android:layout_width="250dp"
+                                android:layout_height="150dp"
+                                android:src="@drawable/breathing_circulation"/>
+
+                            <Button
+                                android:id="@+id/breathingButton"
+                                android:layout_width="250dp"
+                                android:layout_height="150dp"
+                                android:alpha="0"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="12dp">
+
+                            <ImageView
+                                android:layout_width="250dp"
+                                android:layout_height="150dp"
+                                android:src="@drawable/morning"/>
+
+                            <Button
+                                android:id="@+id/morningButton"
+                                android:layout_width="250dp"
+                                android:layout_height="150dp"
+                                android:alpha="0"/>
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
+                <View
+                    android:background="@color/pin_normal"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/toolbarExplore"
+                    android:alpha="0.1"/>
+
+                <ImageView
+                    android:layout_width="335dp"
+                    android:layout_height="300dp"
+                    android:layout_marginTop="-10dp"
+                    android:src="@drawable/nutrition"/>
+
+                <View
+                    android:background="@color/pin_normal"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:layout_below="@+id/toolbarExplore"
+                    android:alpha="0.1"/>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp">
+
+                    <TextView
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="284dp"
+                        android:layout_height="wrap_content"
+                        android:text="Meditation"/>
+
+                    <ImageButton
+                        android:id="@+id/forwardButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+                        style="?android:attr/borderlessButtonStyle"/>
+
+                </LinearLayout>
+
+                <HorizontalScrollView
+                    android:scrollbars="none"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="7dp">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/stay_circle"
+                                android:layout_width="110dp"
+                                android:layout_height="105dp"
+                                android:src="@drawable/stay_circle"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/stay_circle"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="10dp"
+                                android:text="Stay in the\n moment"
+                                android:textSize="13sp" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/body_circle"
+                                android:layout_width="110dp"
+                                android:layout_height="105dp"
+                                android:src="@drawable/body_circle"/>
+
+                            <TextView
+                                android:textSize="13sp"
+                                android:gravity="center_horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:text="Body\n Awareness"
+                                android:layout_below="@+id/body_circle"
+                                android:layout_centerHorizontal="true"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/breathing_circle"
+                                android:layout_width="110dp"
+                                android:layout_height="105dp"
+                                android:src="@drawable/breathing_circle"/>
+
+                            <TextView
+                                android:textSize="13sp"
+                                android:gravity="center_horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:text="Breathing\n Meditation"
+                                android:layout_below="@+id/breathing_circle"
+                                android:layout_centerHorizontal="true"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/training_circle"
+                                android:layout_width="110dp"
+                                android:layout_height="105dp"
+                                android:src="@drawable/training_circle"/>
+
+                            <TextView
+                                android:textSize="13sp"
+                                android:gravity="center_horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:text="Training\n Awareness"
+                                android:layout_below="@+id/training_circle"
+                                android:layout_centerHorizontal="true"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/accepting_circle"
+                                android:layout_width="110dp"
+                                android:layout_height="105dp"
+                                android:src="@drawable/accepting_circle"/>
+
+                            <TextView
+                                android:textSize="13sp"
+                                android:gravity="center_horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:text="Accepting\n Emotions"
+                                android:layout_below="@+id/accepting_circle"
+                                android:layout_centerHorizontal="true"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/cultivative_circle"
+                                android:layout_width="110dp"
+                                android:layout_height="105dp"
+                                android:src="@drawable/cultivative_circle"/>
+
+                            <TextView
+                                android:textSize="13sp"
+                                android:gravity="center_horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:text="Cultivative\n Patience"
+                                android:layout_below="@+id/cultivative_circle"
+                                android:layout_centerHorizontal="true"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/connect_circle"
+                                android:layout_width="110dp"
+                                android:layout_height="105dp"
+                                android:src="@drawable/connect_circle"/>
+
+                            <TextView
+                                android:textSize="13sp"
+                                android:gravity="center_horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:text="Connect to life"
+                                android:layout_below="@+id/connect_circle"
+                                android:layout_centerHorizontal="true"/>
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</RelativeLayout>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "543141335360",
+    "project_id": "myfitmeapp-e940b",
+    "storage_bucket": "myfitmeapp-e940b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543141335360:android:e81230e9e8997ebe8aeaa5",
+        "android_client_info": {
+          "package_name": "com.example.myfitmeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "543141335360-c1j49v3114vg83qpatbqn3pominqq47s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtV96ue8f6g0qLlurBoLlc6aivouOPC7Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "543141335360-c1j49v3114vg83qpatbqn3pominqq47s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
