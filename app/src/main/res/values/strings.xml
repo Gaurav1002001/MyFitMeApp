@@ -16,4 +16,21 @@
     <string name="zero">0:00</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+    <string name="continue_with_g_or_f">CONTINUE WITH G or f</string>
+    <string name="by_continuing_you_agree_to_the_terms_of_services_and_privacy_policy">By Continuing you agree to the Terms of services and Privacy policy</string>
+    <string name="enter_your_mobile_number">Enter your mobile number</string>
+    <string name="registeration_means_that_you_agree_to_fitme_s_terms_of_use">Registeration means that you agree to FitMe\'s Terms of Use.</string>
+    <string name="please_also_review_our_privacy_policy_and_notice_at_collection_ndo_not_sell_my_personal_information">Please also review our Privacy Policy and Notice at Collection</string>
+    <string name="health">A solid nutritional foundation goes hand in hand with your training plan. Our week-by-week guide helps you maximize your results!</string>
+    <string name="title_activity_payment_page">Payment_PageActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_training_status">TrainingStatusActivity</string>
+    <string name="title_activity_taining_status">TainingStatusActivity</string>
 </resources>

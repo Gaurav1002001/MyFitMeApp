@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 public class Detailed extends AppCompatActivity {
@@ -52,7 +54,7 @@ public class Detailed extends AppCompatActivity {
         tvTime.setText(time);
         tvDesc.setText(desc);
 
-        Picasso.with(Detailed.this).load(imageUrl).into(imageView);
+        Glide.with(Detailed.this).load(imageUrl).into(imageView);
 
         webView.getSettings().setDomStorageEnabled(true);
         webView.getSettings().setJavaScriptEnabled(true);

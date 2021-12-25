@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.kofigyan.stateprogressbar.StateProgressBar;
 
@@ -22,6 +23,7 @@ public class KnowUserFragment_b extends Fragment {
     private CheckBox checkBox3;
     private CheckBox checkBox4;
     private StateProgressBar stateProgressBar;
+    Bundle args;
 
     public KnowUserFragment_b() {
         // Required empty public constructor
@@ -31,6 +33,7 @@ public class KnowUserFragment_b extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_know_user_b, container, false);
 
+        args = this.getArguments();
         stateProgressBar = requireActivity().findViewById(R.id.your_state_progress_bar);
 
         ImageButton imageButton = requireActivity().findViewById(R.id.backButton);
@@ -93,12 +96,11 @@ public class KnowUserFragment_b extends Fragment {
         });
 
         Button button = view.findViewById(R.id.buttonContinue);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                requireFragmentManager().beginTransaction().replace(R.id.container, new KnowUserFragment_c(), null).addToBackStack(null).commit();
-                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
-            }
+        button.setOnClickListener(v -> {
+            KnowUserFragment_c fragment_c = new KnowUserFragment_c();
+            fragment_c.setArguments(args);
+            requireFragmentManager().beginTransaction().replace(R.id.container, fragment_c, null).addToBackStack(null).commit();
+            stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FIVE);
         });
         return view;
     }

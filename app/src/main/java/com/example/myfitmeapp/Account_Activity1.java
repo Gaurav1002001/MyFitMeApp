@@ -1,15 +1,14 @@
 package com.example.myfitmeapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
@@ -19,25 +18,27 @@ import androidx.core.internal.view.SupportMenu;
 import com.facebook.AccessToken;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class Account_Activity1 extends AppCompatActivity {
 
-    private static final String TAG = "REAUTHENTICATE";
     AlertDialog alertDialog;
     AlertDialog.Builder dialogBuilder;
-    DocumentReference documentReference;
     FirebaseFirestore fStore;
     SwitchCompat facebookSwitch;
     SwitchCompat googleSwitch;
     private FirebaseAuth mAuth;
     GoogleApiClient mGoogleApiClient;
     private FirebaseUser mUser;
-    String previousID;
     String userID;
 
     @Override
@@ -45,18 +46,23 @@ public class Account_Activity1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account1);
 
+        mAuth = FirebaseAuth.getInstance();
+        mUser = mAuth.getCurrentUser();
+
         Toolbar mToolbar = findViewById(R.id.toolbar5);
-        mToolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
-        mToolbar.setTitle("Account");
-        mToolbar.setTitleTextColor(Color.WHITE);
         mToolbar.inflateMenu(R.menu.menu_horizontal);
         mToolbar.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.moreVertical) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Are you sure?");
                 builder.setMessage("Deleting this account will result in completely removing your account from the system and you won't be able to access the app.");
-                builder.setPositiveButton("Delete", (dialogInterface, i) ->
-                        mUser.delete().addOnCompleteListener((OnCompleteListener) task -> deleteProfile()));
+                builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //deleteUser();
+                        deleteProfileImage();
+                    }
+                });
                 builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
                 AlertDialog dialog = builder.create();
                 dialog.show();
@@ -74,11 +80,7 @@ public class Account_Activity1 extends AppCompatActivity {
         mToolbar.setNavigationOnClickListener(view -> onBackPressed());
 
         userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        previousID = userID;
         fStore = FirebaseFirestore.getInstance();
-        documentReference = fStore.collection("users").document(userID);
-        mAuth = FirebaseAuth.getInstance();
-        mUser = FirebaseAuth.getInstance().getCurrentUser();
         facebookSwitch = findViewById(R.id.switch1);
         googleSwitch = findViewById(R.id.switch2);
 
@@ -134,16 +136,61 @@ public class Account_Activity1 extends AppCompatActivity {
     }
 
     private void updateUI() {
-        Toast.makeText(this, "Log Out", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(Account_Activity1.this, Main_PageActivity.class));
+        startActivity(new Intent(Account_Activity1.this, Main_PageActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
         finish();
     }
 
-    public void deleteProfile() {
-        fStore.collection("users").document(previousID).delete()
-                .addOnSuccessListener(aVoid -> Log.d(Account_Activity1.TAG, "DocumentSnapshot successfully deleted!")).addOnFailureListener(e -> Log.w(Account_Activity1.TAG, "Error deleting document", e));
-            Log.d(TAG, "User account deleted.");
-            Toast.makeText(this, "Account Deleted", Toast.LENGTH_SHORT).show();
-            updateUI();
+    public void deleteUser() {
+        DocumentReference docRef = fStore.collection("users").document(userID);
+        docRef.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    mUser.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(Account_Activity1.this, "Account Deleted", Toast.LENGTH_SHORT).show();
+                                updateUI();
+                            } else {
+                                Toast.makeText(Account_Activity1.this, "Error Deleting Account", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                } else {
+                    Toast.makeText(Account_Activity1.this, "Error Deleting Account", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void deleteProfileImage() {
+        DocumentReference docRef = fStore.collection("users").document(userID);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot document = task.getResult();
+                if (task.isSuccessful()) {
+                    if (document.get("imageUrl") != null) {
+                        String imageUrl = document.getString("imageUrl");
+                        StorageReference strRef = FirebaseStorage.getInstance().getReferenceFromUrl(imageUrl);
+                        strRef.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    deleteUser();
+                                } else {
+                                    Toast.makeText(Account_Activity1.this, "Error Deleting Account", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+                    } else {
+                        deleteUser();
+                    }
+                } else {
+                    Toast.makeText(Account_Activity1.this, "Error Deleting Account", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }

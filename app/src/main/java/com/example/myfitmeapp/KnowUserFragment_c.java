@@ -23,6 +23,8 @@ import com.kofigyan.stateprogressbar.StateProgressBar;
 public class KnowUserFragment_c extends Fragment {
 
     private StateProgressBar stateProgressBar;
+    String gender,birthday,height,weight,bmi;
+    Bundle args;
 
     public KnowUserFragment_c() {
         // Required empty public constructor
@@ -32,24 +34,39 @@ public class KnowUserFragment_c extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_know_user_c, container, false);
 
+        args = this.getArguments();
+        if(args != null) {
+            gender = args.getString("gender");
+            birthday = args.getString("birthday");
+            height = args.getString("height");
+            weight = args.getString("weight");
+            bmi = args.getString("bmi");
+        }
+
+        String name = getActivity().getIntent().getStringExtra("fullName");
+
         stateProgressBar = requireActivity().findViewById(R.id.your_state_progress_bar);
         final TextInputLayout textInputLayout = view.findViewById(R.id.editLoginWrapper);
         final TextView counter = view.findViewById(R.id.counter);
 
         ImageButton backButton = requireActivity().findViewById(R.id.backButton);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getSupportFragmentManager().popBackStack();
-                stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FOUR);
-            }
+        backButton.setOnClickListener(v -> {
+            getActivity().getSupportFragmentManager().popBackStack();
+            stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.FOUR);
         });
 
-        view.findViewById(R.id.buttonContinue).setOnClickListener(new View.OnClickListener() {
-            public final void onClick(View view) {
-                startActivity(new Intent(getActivity(), ThankYou.class));
-                requireActivity().finish();
-            }
+        view.findViewById(R.id.buttonContinue).setOnClickListener(view1 -> {
+            Intent intent = new Intent(getActivity(),ThankYou.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("fullName",name);
+            bundle.putString("gender",gender);
+            bundle.putString("birthday",birthday);
+            bundle.putString("height",height);
+            bundle.putString("weight",weight);
+            bundle.putString("bmi",bmi);
+            intent.putExtras(bundle);
+            startActivity(intent);
+            requireActivity().finish();
         });
 
         CheckBox checkBox = view.findViewById(R.id.button_other);

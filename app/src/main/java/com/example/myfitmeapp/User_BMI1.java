@@ -13,7 +13,6 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.kofigyan.stateprogressbar.StateProgressBar;
@@ -24,24 +23,21 @@ public class User_BMI1 extends Fragment {
 
     private TextView bmiResult;
     DecimalFormat decimalFormat;
-    DocumentReference documentReference;
     private TextInputEditText editHeight;
     private TextInputEditText editWeight;
-    FirebaseFirestore fStore;
     int heightValue = 175;
     private StateProgressBar stateProgressBar;
-    String userID;
     int weightValue = 75;
+
+    Bundle args;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user__b_m_i, container, false);
 
+        args = this.getArguments();
         stateProgressBar = requireActivity().findViewById(R.id.your_state_progress_bar);
         decimalFormat = new DecimalFormat(".#");
-        fStore = FirebaseFirestore.getInstance();
-        userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        documentReference = fStore.collection("users").document(this.userID);
 
         editHeight = view.findViewById(R.id.height);
         editWeight = view.findViewById(R.id.weight);
@@ -93,21 +89,49 @@ public class User_BMI1 extends Fragment {
         String weight = editWeight.getText().toString();
         String bmi = bmiResult.getText().toString();
 
-        documentReference = fStore.collection("users").document(this.userID);
-        if (editHeight.getText().toString().isEmpty()) {
-            documentReference.update("height", "175cm");
-        }
-        if (editWeight.getText().toString().isEmpty()) {
-            documentReference.update("weight", "75kg");
-        }
-        if (bmiResult.getText().toString().isEmpty()) {
-            documentReference.update("bmi", "24.5");
+        if (editHeight.getText().toString().isEmpty() && editWeight.getText().toString().isEmpty() &&
+                bmiResult.getText().toString().isEmpty()) {
+            args.putString("height", "175cm");
+            args.putString("weight", "75kg");
+            args.putString("bmi", "24.5");
+        } else if (!editHeight.getText().toString().isEmpty() && editWeight.getText().toString().isEmpty() &&
+                bmiResult.getText().toString().isEmpty()) {
+            args.putString("height", height);
+            args.putString("weight", "75kg");
+            args.putString("bmi", "24.5");
+        } else if (editHeight.getText().toString().isEmpty() && editWeight.getText().toString().isEmpty() &&
+                !bmiResult.getText().toString().isEmpty()) {
+            args.putString("height", "175cm");
+            args.putString("weight", "75kg");
+            args.putString("bmi", bmi);
+        } else if (editHeight.getText().toString().isEmpty() && !editWeight.getText().toString().isEmpty() &&
+                bmiResult.getText().toString().isEmpty()) {
+            args.putString("height", "175cm");
+            args.putString("weight", weight);
+            args.putString("bmi", "24.5");
+        } else if (!editHeight.getText().toString().isEmpty() && !editWeight.getText().toString().isEmpty() &&
+                bmiResult.getText().toString().isEmpty()) {
+            args.putString("height", height);
+            args.putString("weight", weight);
+            args.putString("bmi", "24.5");
+        } else if (!editHeight.getText().toString().isEmpty() && editWeight.getText().toString().isEmpty() &&
+                !bmiResult.getText().toString().isEmpty()) {
+            args.putString("height", height);
+            args.putString("weight", "75kg");
+            args.putString("bmi", bmi);
+        } else if (editHeight.getText().toString().isEmpty() && !editWeight.getText().toString().isEmpty() &&
+                !bmiResult.getText().toString().isEmpty()) {
+            args.putString("height", "175cm");
+            args.putString("weight", weight);
+            args.putString("bmi", bmi);
         } else {
-            documentReference.update("height", height);
-            documentReference.update("weight", weight);
-            documentReference.update("bmi", bmi);
+            args.putString("height", height);
+            args.putString("weight", weight);
+            args.putString("bmi", bmi);
         }
-        requireFragmentManager().beginTransaction().replace(R.id.container, new KnowUserFragment_a(), null).addToBackStack(null).commit();
+        KnowUserFragment_a fragment = new KnowUserFragment_a();
+        fragment.setArguments(args);
+        requireFragmentManager().beginTransaction().replace(R.id.container, fragment, null).addToBackStack(null).commit();
         stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.THREE);
     }
 

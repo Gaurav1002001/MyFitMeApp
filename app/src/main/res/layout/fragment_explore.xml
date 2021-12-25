@@ -1,124 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarExplore"
+    <RelativeLayout
+        android:id="@+id/internetLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:title="Explore"/>
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/pullToRefresh"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbarExplore"
-        android:layout_marginStart="13dp">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarExplore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:title="Explore" />
 
         <ScrollView
-            android:scrollbars="none"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_below="@id/toolbarExplore"
+            android:scrollbars="none">
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <View
-                    android:background="@color/pin_normal"
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
                     android:layout_below="@+id/toolbarExplore"
-                    android:alpha="0.1"/>
+                    android:alpha="0.1"
+                    android:background="@color/pin_normal" />
 
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:textSize="30sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"
+                        android:id="@+id/greetText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="13dp"
                         android:layout_marginTop="5dp"
-                        android:text="Hello"/>
+                        android:text="Hello"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <TextView
-                        android:textSize="30sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"
                         android:id="@+id/userName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:layout_marginStart="7.5dp"/>
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
                 <TextView
-                    android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="13dp"
                     android:layout_marginTop="5dp"
-                    android:text="Great job showing commitment to your goal."/>
+                    android:text="Great job showing commitment to your goal."
+                    android:textColor="@color/black" />
 
-                <LinearLayout
-                    android:orientation="vertical"
+                <ImageView
+                    android:id="@+id/imageView5"
                     android:layout_width="wrap_content"
-                    android:layout_height="315dp"
-                    android:layout_marginTop="-30dp">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <ImageView
-                            android:id="@+id/imageView5"
-                            android:layout_width="335dp"
-                            android:layout_height="350dp"
-                            android:src="@drawable/revive"/>
-
-                        <Button
-                            android:layout_width="330dp"
-                            android:layout_height="245dp"
-                            android:layout_marginTop="30dp"
-                            android:alpha="0" />
-
-                    </RelativeLayout>
-
-                </LinearLayout>
+                    android:layout_height="245dp"
+                    android:layout_marginStart="13dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/revive" />
 
                 <View
-                    android:background="@color/pin_normal"
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
                     android:layout_below="@+id/toolbarExplore"
-                    android:alpha="0.1"/>
+                    android:layout_marginTop="20dp"
+                    android:alpha="0.1"
+                    android:background="@color/pin_normal" />
 
                 <TextView
-                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="13dp"
                     android:layout_marginTop="10dp"
-                    android:text="WORKOUTS UNDER 15 MINUTES"/>
+                    android:text="WORKOUTS UNDER 15 MINUTES"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
 
                 <HorizontalScrollView
-                    android:scrollbars="none"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="13dp"
                     android:layout_marginTop="-30dp"
-                    android:layout_marginEnd="10dp">
+                    android:layout_marginEnd="10dp"
+                    android:scrollbars="none">
 
                     <LinearLayout
-                        android:orientation="horizontal"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -127,7 +119,7 @@
                             <ImageView
                                 android:layout_width="250dp"
                                 android:layout_height="305dp"
-                                android:src="@drawable/india"/>
+                                android:src="@drawable/india" />
 
                             <Button
                                 android:id="@+id/indiaButton"
@@ -146,14 +138,14 @@
                             <ImageView
                                 android:layout_width="250dp"
                                 android:layout_height="305dp"
-                                android:src="@drawable/golf"/>
+                                android:src="@drawable/golf" />
 
                             <Button
                                 android:id="@+id/golfButton"
                                 android:layout_width="250dp"
                                 android:layout_height="185dp"
                                 android:layout_marginTop="40dp"
-                                android:alpha="0"/>
+                                android:alpha="0" />
 
                         </RelativeLayout>
 
@@ -165,14 +157,14 @@
                             <ImageView
                                 android:layout_width="250dp"
                                 android:layout_height="305dp"
-                                android:src="@drawable/delta"/>
+                                android:src="@drawable/delta" />
 
                             <Button
                                 android:id="@+id/deltaButton"
                                 android:layout_width="250dp"
                                 android:layout_height="185dp"
                                 android:layout_marginTop="40dp"
-                                android:alpha="0"/>
+                                android:alpha="0" />
 
                         </RelativeLayout>
 
@@ -184,14 +176,14 @@
                             <ImageView
                                 android:layout_width="250dp"
                                 android:layout_height="305dp"
-                                android:src="@drawable/echo"/>
+                                android:src="@drawable/echo" />
 
                             <Button
                                 android:id="@+id/echoButton"
                                 android:layout_width="250dp"
                                 android:layout_height="185dp"
                                 android:layout_marginTop="40dp"
-                                android:alpha="0"/>
+                                android:alpha="0" />
 
                         </RelativeLayout>
 
@@ -200,30 +192,33 @@
                 </HorizontalScrollView>
 
                 <View
-                    android:background="@color/pin_normal"
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
-                    android:layout_marginTop="-30dp"
                     android:layout_below="@+id/toolbarExplore"
-                    android:alpha="0.1"/>
+                    android:layout_marginTop="-30dp"
+                    android:alpha="0.1"
+                    android:background="@color/pin_normal" />
 
                 <TextView
-                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="13dp"
                     android:layout_marginTop="10dp"
-                    android:text="Yoga for women"/>
+                    android:text="Yoga for women"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
 
                 <HorizontalScrollView
-                    android:scrollbars="none"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp">
+                    android:layout_marginStart="13dp"
+                    android:layout_marginEnd="10dp"
+                    android:scrollbars="none">
 
                     <LinearLayout
-                        android:orientation="horizontal"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -232,13 +227,13 @@
                             <ImageView
                                 android:layout_width="250dp"
                                 android:layout_height="150dp"
-                                android:src="@drawable/mother"/>
+                                android:src="@drawable/mother" />
 
                             <Button
                                 android:id="@+id/motherhoodButton"
                                 android:layout_width="250dp"
                                 android:layout_height="150dp"
-                                android:alpha="0"/>
+                                android:alpha="0" />
 
                         </RelativeLayout>
 
@@ -250,13 +245,13 @@
                             <ImageView
                                 android:layout_width="250dp"
                                 android:layout_height="150dp"
-                                android:src="@drawable/menstrual"/>
+                                android:src="@drawable/menstrual" />
 
                             <Button
                                 android:id="@+id/menstrualButton"
                                 android:layout_width="250dp"
                                 android:layout_height="150dp"
-                                android:alpha="0"/>
+                                android:alpha="0" />
 
                         </RelativeLayout>
 
@@ -265,33 +260,35 @@
                 </HorizontalScrollView>
 
                 <View
-                    android:background="@color/pin_normal"
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
-                    android:layout_marginTop="10dp"
                     android:layout_below="@+id/toolbarExplore"
-                    android:alpha="0.1"/>
+                    android:layout_marginTop="10dp"
+                    android:alpha="0.1"
+                    android:background="@color/pin_normal" />
 
                 <TextView
-                    android:textSize="18sp"
-                    android:textColor="@color/black"
-                    android:layout_gravity="center_vertical"
                     android:layout_width="284dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="13dp"
                     android:layout_marginTop="10dp"
-                    android:text="Better Life"/>
+                    android:text="Better Life"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
                 <HorizontalScrollView
-                    android:scrollbars="none"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="13dp"
                     android:layout_marginTop="-5dp"
-                    android:layout_marginEnd="10dp">
+                    android:layout_marginEnd="10dp"
+                    android:scrollbars="none">
 
                     <LinearLayout
-                        android:orientation="horizontal"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -300,13 +297,13 @@
                             <ImageView
                                 android:layout_width="250dp"
                                 android:layout_height="150dp"
-                                android:src="@drawable/soothing"/>
+                                android:src="@drawable/soothing" />
 
                             <Button
                                 android:id="@+id/soothingButton"
                                 android:layout_width="250dp"
                                 android:layout_height="150dp"
-                                android:alpha="0"/>
+                                android:alpha="0" />
 
                         </RelativeLayout>
 
@@ -318,13 +315,13 @@
                             <ImageView
                                 android:layout_width="250dp"
                                 android:layout_height="150dp"
-                                android:src="@drawable/breathing_circulation"/>
+                                android:src="@drawable/breathing_circulation" />
 
                             <Button
                                 android:id="@+id/breathingButton"
                                 android:layout_width="250dp"
                                 android:layout_height="150dp"
-                                android:alpha="0"/>
+                                android:alpha="0" />
 
                         </RelativeLayout>
 
@@ -336,13 +333,13 @@
                             <ImageView
                                 android:layout_width="250dp"
                                 android:layout_height="150dp"
-                                android:src="@drawable/morning"/>
+                                android:src="@drawable/morning" />
 
                             <Button
                                 android:id="@+id/morningButton"
                                 android:layout_width="250dp"
                                 android:layout_height="150dp"
-                                android:alpha="0"/>
+                                android:alpha="0" />
 
                         </RelativeLayout>
 
@@ -351,61 +348,102 @@
                 </HorizontalScrollView>
 
                 <View
-                    android:background="@color/pin_normal"
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
                     android:layout_marginTop="10dp"
-                    android:layout_below="@+id/toolbarExplore"
-                    android:alpha="0.1"/>
+                    android:alpha="0.1"
+                    android:background="@color/pin_normal" />
 
-                <ImageView
-                    android:layout_width="335dp"
-                    android:layout_height="300dp"
-                    android:layout_marginTop="-10dp"
-                    android:src="@drawable/nutrition"/>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="13dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    app:cardCornerRadius="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/nutritionButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="170dp"
+                            android:src="@drawable/nutrition" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="15dp"
+                            android:text="HEALTH &amp; NUTRITION"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginEnd="15dp"
+                            android:layout_marginBottom="20dp"
+                            android:text="Maximize your training results with valuable health and nutrition tips!"
+                            android:textColor="@color/black_80"
+                            android:textSize="15sp" />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
 
                 <View
-                    android:background="@color/pin_normal"
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
                     android:layout_below="@+id/toolbarExplore"
-                    android:alpha="0.1"/>
+                    android:layout_marginTop="20dp"
+                    android:alpha="0.1"
+                    android:background="@color/pin_normal" />
 
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="5dp">
+                    android:layout_marginStart="13dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:textSize="18sp"
-                        android:textColor="@color/black"
-                        android:layout_gravity="center_vertical"
                         android:layout_width="284dp"
                         android:layout_height="wrap_content"
-                        android:text="Meditation"/>
+                        android:layout_gravity="center_vertical"
+                        android:text="Meditation"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
 
                     <ImageButton
                         android:id="@+id/forwardButton"
+                        style="?android:attr/borderlessButtonStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                        style="?android:attr/borderlessButtonStyle"/>
+                        android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
 
                 </LinearLayout>
 
                 <HorizontalScrollView
-                    android:scrollbars="none"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="13dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginEnd="7dp"
                     android:layout_marginBottom="5dp"
-                    android:layout_marginEnd="7dp">
+                    android:scrollbars="none">
 
                     <LinearLayout
-                        android:orientation="horizontal"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
 
                         <RelativeLayout
                             android:layout_width="wrap_content"
@@ -415,7 +453,7 @@
                                 android:id="@+id/stay_circle"
                                 android:layout_width="110dp"
                                 android:layout_height="105dp"
-                                android:src="@drawable/stay_circle"/>
+                                android:src="@drawable/stay_circle" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -437,17 +475,17 @@
                                 android:id="@+id/body_circle"
                                 android:layout_width="110dp"
                                 android:layout_height="105dp"
-                                android:src="@drawable/body_circle"/>
+                                android:src="@drawable/body_circle" />
 
                             <TextView
-                                android:textSize="13sp"
-                                android:gravity="center_horizontal"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:text="Body\n Awareness"
                                 android:layout_below="@+id/body_circle"
-                                android:layout_centerHorizontal="true"/>
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="10dp"
+                                android:gravity="center_horizontal"
+                                android:text="Body\n Awareness"
+                                android:textSize="13sp" />
 
                         </RelativeLayout>
 
@@ -460,17 +498,17 @@
                                 android:id="@+id/breathing_circle"
                                 android:layout_width="110dp"
                                 android:layout_height="105dp"
-                                android:src="@drawable/breathing_circle"/>
+                                android:src="@drawable/breathing_circle" />
 
                             <TextView
-                                android:textSize="13sp"
-                                android:gravity="center_horizontal"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:text="Breathing\n Meditation"
                                 android:layout_below="@+id/breathing_circle"
-                                android:layout_centerHorizontal="true"/>
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="10dp"
+                                android:gravity="center_horizontal"
+                                android:text="Breathing\n Meditation"
+                                android:textSize="13sp" />
 
                         </RelativeLayout>
 
@@ -483,17 +521,17 @@
                                 android:id="@+id/training_circle"
                                 android:layout_width="110dp"
                                 android:layout_height="105dp"
-                                android:src="@drawable/training_circle"/>
+                                android:src="@drawable/training_circle" />
 
                             <TextView
-                                android:textSize="13sp"
-                                android:gravity="center_horizontal"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:text="Training\n Awareness"
                                 android:layout_below="@+id/training_circle"
-                                android:layout_centerHorizontal="true"/>
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="10dp"
+                                android:gravity="center_horizontal"
+                                android:text="Training\n Awareness"
+                                android:textSize="13sp" />
 
                         </RelativeLayout>
 
@@ -506,17 +544,17 @@
                                 android:id="@+id/accepting_circle"
                                 android:layout_width="110dp"
                                 android:layout_height="105dp"
-                                android:src="@drawable/accepting_circle"/>
+                                android:src="@drawable/accepting_circle" />
 
                             <TextView
-                                android:textSize="13sp"
-                                android:gravity="center_horizontal"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:text="Accepting\n Emotions"
                                 android:layout_below="@+id/accepting_circle"
-                                android:layout_centerHorizontal="true"/>
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="10dp"
+                                android:gravity="center_horizontal"
+                                android:text="Accepting\n Emotions"
+                                android:textSize="13sp" />
 
                         </RelativeLayout>
 
@@ -529,17 +567,17 @@
                                 android:id="@+id/cultivative_circle"
                                 android:layout_width="110dp"
                                 android:layout_height="105dp"
-                                android:src="@drawable/cultivative_circle"/>
+                                android:src="@drawable/cultivative_circle" />
 
                             <TextView
-                                android:textSize="13sp"
-                                android:gravity="center_horizontal"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:text="Cultivative\n Patience"
                                 android:layout_below="@+id/cultivative_circle"
-                                android:layout_centerHorizontal="true"/>
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="10dp"
+                                android:gravity="center_horizontal"
+                                android:text="Cultivative\n Patience"
+                                android:textSize="13sp" />
 
                         </RelativeLayout>
 
@@ -552,17 +590,17 @@
                                 android:id="@+id/connect_circle"
                                 android:layout_width="110dp"
                                 android:layout_height="105dp"
-                                android:src="@drawable/connect_circle"/>
+                                android:src="@drawable/connect_circle" />
 
                             <TextView
-                                android:textSize="13sp"
-                                android:gravity="center_horizontal"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:text="Connect to life"
                                 android:layout_below="@+id/connect_circle"
-                                android:layout_centerHorizontal="true"/>
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="10dp"
+                                android:gravity="center_horizontal"
+                                android:text="Connect to life"
+                                android:textSize="13sp" />
 
                         </RelativeLayout>
 
@@ -574,6 +612,57 @@
 
         </ScrollView>
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/noInternetLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/no_internet_image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="128dp"
+            android:src="@drawable/img_emptystates_networkerror" />
+
+        <TextView
+            android:id="@+id/no_internet_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/no_internet_image"
+            android:layout_centerHorizontal="true"
+            android:text="Network Error"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/no_internet_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/no_internet_heading"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="Please check your network"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/try_again_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/no_internet_text"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/teal_200"
+            android:paddingHorizontal="32dp"
+            android:text="Try Again"
+            android:textAllCaps="false"
+            app:cornerRadius="24dp" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

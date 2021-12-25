@@ -1,89 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/emily3"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_purple_gradient">
 
-    <ImageButton
-        android:id="@+id/backButton1"
-        android:layout_width="48dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:layout_marginStart="16dp"
-        app:srcCompat="@drawable/back_arrow_white"
-        style="@style/Widget.AppCompat.Button.Borderless"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="375dp"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/bg_register_home_top_yoga" />
 
     <LinearLayout
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp">
+        android:layout_marginTop="?actionBarSize"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-        <ImageView android:id="@+id/imageView4"
-            android:paddingLeft="0sp"
-            android:paddingTop="0sp"
-            android:paddingRight="0sp"
-            android:paddingBottom="0sp"
-            android:layout_width="173dp"
-            android:layout_height="247dp"
-            app:srcCompat="@drawable/fitness"
-            style="?android:attr/borderlessButtonStyle"/>
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager1"
+            android:layout_width="270dp"
+            android:layout_height="240dp"
+            android:layout_marginTop="20dp" />
+
+        <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+            android:id="@+id/dots_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            app:dotsColor="@color/white_40"
+            app:dotsCornerRadius="8dp"
+            app:dotsSize="6dp"
+            app:dotsSpacing="3dp"
+            app:dotsWidthFactor="2.5"
+            app:progressMode="false"
+            app:selectedDotColor="@color/white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
             android:layout_width="286dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="66dp"
+            android:layout_height="49dp"
+            android:layout_marginTop="10dp"
             app:cardCornerRadius="40dp">
 
             <com.facebook.login.widget.LoginButton
-                android:layout_gravity="center"
                 android:id="@+id/facebookButton"
-                android:paddingLeft="30dp"
-                android:paddingTop="25dp"
-                android:paddingBottom="25dp"
+                style="@style/FacebookLoginButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:fontFamily="@font/open_sans"
-                style="@style/FacebookLoginButton"/>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="286dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="15dp"
-            app:cardCornerRadius="40dp"
-            style="@style/GoogleSignInButton">
-
-            <com.shobhitpuri.custombuttons.GoogleSignInButton
-                android:textSize="17sp"
-                android:id="@+id/googleSignInButton"
-                android:layout_width="250dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="15dp"
-                android:text="Continue with Google"
-                android:textAllCaps="false"
-                style="@style/GoogleSignInButton"/>
+                android:layout_gravity="center"
+                android:paddingLeft="30dp"
+                android:paddingTop="25dp"
+                android:paddingBottom="25dp"/>
 
         </androidx.cardview.widget.CardView>
 
         <Button
-            android:textSize="17sp"
-            android:textColor="#fffafa"
-            android:id="@+id/emailButton"
-            android:background="@drawable/rounded_buttons2"
+            android:id="@+id/googleSignInButton"
             android:layout_width="286dp"
-            android:layout_height="50dp"
+            android:layout_height="49dp"
             android:layout_marginTop="15dp"
+            android:background="@drawable/rounded_buttons2"
+            android:backgroundTint="@color/white"
+            android:drawableStart="@drawable/googleg_standard_color_18dp"
+            android:gravity="center"
+            android:paddingStart="30dp"
+            android:paddingEnd="47dp"
+            android:text="Continue with Google"
+            android:textAllCaps="false"
+            android:textColor="@color/black_70"
+            android:textSize="17sp" />
+
+        <Button
+            android:id="@+id/emailButton"
+            android:layout_width="286dp"
+            android:layout_height="49dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/rounded_buttons2"
+            android:backgroundTint="@color/yoga_green"
+            android:fontFamily="@font/open_sans"
+            android:paddingStart="28dp"
+            android:paddingEnd="40dp"
             android:text="Sign Up with Phone or Email"
             android:textAllCaps="false"
-            android:fontFamily="@font/open_sans"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Have an account?"
+                android:textColor="@color/white_90"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/textLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:textColor="@color/yoga_green_line_dark"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            android:backgroundTint="#44d7a8"/>
+            android:text="Registeration means that you agree to Fitme's Terms Of Use."
+            android:textColor="@color/white_60"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/please_also_review_our_privacy_policy_and_notice_at_collection_ndo_not_sell_my_personal_information"
+            android:textColor="@color/white_60"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Do Not Sell My Personal Information"
+            android:textColor="@color/white_60"
+            android:textSize="12sp" />
 
     </LinearLayout>
 

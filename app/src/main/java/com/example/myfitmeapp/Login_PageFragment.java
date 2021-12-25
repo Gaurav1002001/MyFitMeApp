@@ -3,16 +3,20 @@ package com.example.myfitmeapp;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -20,6 +24,9 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
@@ -28,15 +35,19 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AdditionalUserInfo;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 
 import org.json.JSONException;
+
+import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Login_PageFragment extends Fragment {
 
@@ -47,6 +58,14 @@ public class Login_PageFragment extends Fragment {
     private CallbackManager mCallbackManager;
     private GoogleSignInClient mGoogleSignInClient;
     private ProgressDialog mProgress;
+    private FragmentTransaction fragmentTransaction;
+
+    ViewPager viewPager;
+    ViewPagerAdapter adapter;
+    int currentPage = 0;
+    DotsIndicator dotsIndicator;
+
+    private final Integer[] images = {R.drawable.pass, R.drawable.bodybuilder, R.drawable.img_register_guide_video, R.drawable.img_register_guide_workouts, R.drawable.preview3};
 
     public Login_PageFragment() {
         // Required empty public constructor
@@ -54,18 +73,34 @@ public class Login_PageFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        FacebookSdk.sdkInitialize(getActivity().getApplicationContext());
         View view =  inflater.inflate(R.layout.fragment_login_page, container, false);
 
+        FacebookSdk.sdkInitialize(requireActivity());
         mAuth = FirebaseAuth.getInstance();
         mProgress = new ProgressDialog(getActivity());
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        viewPager = view.findViewById(R.id.viewPager1);
+        dotsIndicator = view.findViewById(R.id.dots_indicator);
+        adapter = new ViewPagerAdapter(getActivity(),images);
+        viewPager.setAdapter(adapter);
+        dotsIndicator.setViewPager(viewPager);
 
-        view.findViewById(R.id.backButton1).setOnClickListener(new View.OnClickListener() {
-
-            public final void onClick(View view) {
-                requireActivity().onBackPressed();
+        final Handler handler = new Handler();
+        final Runnable Update = () -> {
+            if (currentPage == images.length) {
+                currentPage = 0;
             }
-        });
+            viewPager.setCurrentItem(currentPage++, true);
+        };
+
+        Timer timer = new Timer(); // This will create a new Thread
+        timer.schedule(new TimerTask() { // task to be scheduled
+            @Override
+            public void run() {
+                handler.post(Update);
+            }
+        }, 2000, 4000);
 
         mCallbackManager = CallbackManager.Factory.create();
         LoginButton loginButton = view.findViewById(R.id.facebookButton);
@@ -100,13 +135,24 @@ public class Login_PageFragment extends Fragment {
         view.findViewById(R.id.emailButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();;
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.setCustomAnimations(R.anim.slide_in_up,R.anim.slide_out,R.anim.slide_in,R.anim.slide_in_down);
                 fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.replace(R.id.fragment_container, new EmailFragment());
+                fragmentTransaction.replace(R.id.mainPage_Container, new EmailFragment());
                 fragmentTransaction.commit();
             }
+        });
+
+        TextView textLogin = view.findViewById(R.id.textLogin);
+        String mystring = "Log In";
+        SpannableString content = new SpannableString(mystring);
+        content.setSpan(new UnderlineSpan(), 0, mystring.length(), 5);
+        textLogin.setText(content);
+
+        textLogin.setOnClickListener(v -> {
+            fragmentTransaction.setCustomAnimations(R.anim.slide_in_up,R.anim.slide_out,R.anim.slide_in,R.anim.slide_in_down);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.replace(R.id.mainPage_Container, new EmailFragment2());
+            fragmentTransaction.commit();
         });
 
         return view;
@@ -122,40 +168,70 @@ public class Login_PageFragment extends Fragment {
 
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(requireActivity(), new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Log.d(TAG, "signInWithCredential:success");
-                            /*if (((AdditionalUserInfo) Objects.requireNonNull(((AuthResult) task.getResult()).getAdditionalUserInfo())).isNewUser()) {
-                                startActivity(new Intent(getActivity(), KnowUserActivity_B.class));
-                                requireActivity().finish();
-                            } else {
-                                startActivity(new Intent(getActivity(), MainActivity.class));
-                                requireActivity().finish();
-                            }*/
-                            GraphRequest request = GraphRequest.newMeRequest(token, (object, response) -> {
-                                Log.v("LoginActivity", response.toString());
-                                try {
-                                    Login_PageFragment.this.email = object.getString("email").trim();
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            });
-                            Bundle parameters = new Bundle();
-                            parameters.putString(GraphRequest.FIELDS_PARAM, "name,email,gender,birthday");
-                            request.setParameters(parameters);
-                            request.executeAsync();
-                            updateUI();
-                            Toast.makeText(getActivity(), "Signed In Successfully", Toast.LENGTH_SHORT).show();
-                            return;
+                .addOnCompleteListener(requireActivity(), task -> {
+                    if (task.isSuccessful()) {
+                        Log.d(TAG, "signInWithCredential:success");
+                        if (((AdditionalUserInfo) Objects.requireNonNull(((AuthResult) task.getResult()).getAdditionalUserInfo())).isNewUser()) {
+                            startActivity(new Intent(getActivity(), KnowUserActivity_B.class));
+                            requireActivity().finish();
+                        } else {
+                            startActivity(new Intent(getActivity(), MainActivity.class));
+                            requireActivity().finish();
                         }
-                        Log.w(TAG, "signInWithCredential:failure", task.getException());
-                        mProgress.dismiss();
-                        Toast.makeText(getActivity(), "Authentication failed.", Toast.LENGTH_SHORT).show();
+                        GraphRequest request = GraphRequest.newMeRequest(token, (object, response) -> {
+                            Log.v("LoginActivity", response.toString());
+                                    if (object != null) {
+                                        try {
+                                            String name = object.getString("name");
+                                            String email = object.getString("email");
+                                            String fbUserID = object.getString("id");
+
+                                            disconnectFromFacebook();
+
+                                            // do action after Facebook login success
+                                            // or call your API
+                                        } catch (JSONException | NullPointerException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                        });
+                        Bundle parameters = new Bundle();
+                        parameters.putString(
+                                "fields",
+                                "id, name, email, gender, birthday");
+                        request.setParameters(parameters);
+                        request.executeAsync();
+                        //updateUI();
+                        return;
                     }
+                    Log.w(TAG, "signInWithCredential:failure", task.getException());
+                    mProgress.dismiss();
+                    Toast.makeText(getActivity(), "Authentication failed.", Toast.LENGTH_SHORT).show();
                 });
     }
+
+    public void disconnectFromFacebook()
+    {
+        if (AccessToken.getCurrentAccessToken() == null) {
+            return; // already logged out
+        }
+
+        new GraphRequest(
+                AccessToken.getCurrentAccessToken(),
+                "/me/permissions/",
+                null,
+                HttpMethod.DELETE,
+                new GraphRequest
+                        .Callback() {
+                    @Override
+                    public void onCompleted(GraphResponse graphResponse)
+                    {
+                        LoginManager.getInstance().logOut();
+                    }
+                })
+                .executeAsync();
+    }
+
 
     private void updateUI() {
         Intent intent = new Intent(getActivity(), MainActivity.class);
@@ -214,4 +290,7 @@ public class Login_PageFragment extends Fragment {
         });
     }
 
+    public void onBackPressed() {
+        //handle back press event
+    }
 }

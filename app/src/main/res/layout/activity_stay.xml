@@ -1,18 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/mountainbackground">
 
-    <ImageButton
-        android:id="@+id/backButton"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="50dp"
+    <Toolbar
+        android:id="@+id/backToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:layout_marginTop="24dp"
+        android:navigationIcon="@drawable/back_arrow_white" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/back_arrow_white"/>
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="135dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="290dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/img_meditation_maingraphics" />
+
+        <ImageView
+            android:id="@+id/imagePlayPause"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_meditation_play" />
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/relativelayout"
@@ -21,12 +39,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="490dp">
 
-        <ImageView
-            android:id="@+id/imagePlayPause"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#0000"
-            android:src="@drawable/play" />
     </RelativeLayout>
 
     <LinearLayout
@@ -49,11 +61,11 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="5dp"
-                android:src="@drawable/ic_baseline_access_time_24" />
+                android:src="@drawable/ic_meditation_time" />
 
             <TextView
                 android:id="@+id/textCurrentTime"

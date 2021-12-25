@@ -6,34 +6,37 @@
     android:background="@drawable/account"
     android:fitsSystemWindows="true">
 
-    <FrameLayout
-        android:id="@+id/containor"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar5"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/bg_splash_yoga_gradient"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+        app:title="Account"
+        app:titleTextColor="@color/white"/>
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/teal_200" />
+    <LinearLayout
+        android:layout_below="@+id/toolbar5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="65dp"
+        android:orientation="vertical"
+        android:padding="15dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="65dp"
-            android:orientation="vertical">
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="15dp"
-                android:orientation="horizontal">
+                android:layout_height="match_parent">
 
                 <TextView
                     android:id="@+id/textView12"
-                    android:layout_width="217dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="Email"
@@ -42,101 +45,97 @@
 
                 <Button
                     android:id="@+id/connectButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="35dp"
-                    android:background="@drawable/rounded_button"
+                    android:layout_width="120dp"
+                    android:layout_height="27dp"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/round_buttonborder_green"
                     android:text="Connect Email"
                     android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="10sp"
-                    app:backgroundTint="@color/teal_200" />
+                    android:textColor="@color/light_green_90"
+                    android:textSize="13sp" />
 
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:alpha="0.1"
-                android:background="@color/pin_normal" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="15dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView14"
-                    android:layout_width="275dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="Facebook"
-                    android:textColor="@android:color/secondary_text_light"
-                    android:textSize="18sp" />
-
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/switch1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:alpha="0.1"
-                android:background="@color/pin_normal" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="15dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView15"
-                    android:layout_width="275dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="Google"
-                    android:textColor="@android:color/secondary_text_light"
-                    android:textSize="18sp" />
-
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/switch2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:alpha="0.1"
-                android:background="@color/pin_normal" />
-
-            <Button
-                android:id="@+id/logoutButton"
-                android:layout_width="250dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="72dp"
-                android:background="@drawable/rounded_button"
-                android:text="Log out"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                app:backgroundTint="@color/teal_200" />
+            </RelativeLayout>
 
         </LinearLayout>
 
-    </FrameLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:alpha="0.1"
+            android:background="@color/pin_normal" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="275dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="Facebook"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="18sp" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:alpha="0.1"
+            android:background="@color/pin_normal" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="275dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="Google"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="18sp" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:alpha="0.1"
+            android:background="@color/pin_normal" />
+
+        <Button
+            android:id="@+id/logoutButton"
+            android:layout_width="270dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="72dp"
+            android:background="@drawable/round_buttonborder_green"
+            android:text="Log out"
+            android:textAllCaps="false"
+            android:textColor="@color/light_green_90"
+            android:textSize="18sp" />
+
+    </LinearLayout>
 
 </RelativeLayout>

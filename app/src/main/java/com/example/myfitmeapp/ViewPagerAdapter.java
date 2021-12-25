@@ -17,14 +17,13 @@ class ViewPagerAdapter extends PagerAdapter {
 
     Context context;
 
-    int[] images;
+    private final Integer[] images;
 
     LayoutInflater mLayoutInflater;
 
-    public ViewPagerAdapter(Context context, int[] images) {
-        this.context = context;
+    public ViewPagerAdapter(Context context , Integer[] images) {
+        this.context = context.getApplicationContext();
         this.images = images;
-        mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -34,30 +33,23 @@ class ViewPagerAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-        return view == ((LinearLayout) object);
+        return view == object;
     }
 
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, final int position) {
-        // inflating the item.xml
-        View itemView = mLayoutInflater.inflate(R.layout.custom_layout, container, false);
-
-        // referencing the image view from the item.xml file
-        ImageView imageView = (ImageView) itemView.findViewById(R.id.imageViewer);
-
-        // setting the image in the imageView
+        mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = mLayoutInflater.inflate(R.layout.custom_layout, container, false);
+        ImageView imageView = view.findViewById(R.id.imageViewer);
         imageView.setImageResource(images[position]);
+        container.addView(view);
 
-        // Adding the View
-        Objects.requireNonNull(container).addView(itemView);
-
-        return itemView;
+        return view;
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-
         container.removeView((LinearLayout) object);
     }
 }

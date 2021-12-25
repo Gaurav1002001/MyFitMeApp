@@ -20,6 +20,14 @@
             android:textSize="25sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="Just a moment while we optimize based on your answers"
+            android:textColor="@color/black" />
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,7 +41,8 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
-                android:src="@drawable/circle_100" />
+                android:src="@drawable/circle_100"
+                android:visibility="invisible"/>
 
             <ImageView
                 android:id="@+id/done"
@@ -43,12 +52,6 @@
                 app:srcCompat="@drawable/avd_done" />
         </RelativeLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:gravity="center"
-            android:text="Just a moment while we optimize based on your answers"
-            android:textColor="@color/black" />
     </LinearLayout>
+
 </RelativeLayout>

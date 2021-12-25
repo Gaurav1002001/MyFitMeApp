@@ -2,10 +2,13 @@ package com.example.myfitmeapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import com.example.myfitmeapp.Yoga.Yoga_AdvancedActivity;
+import com.example.myfitmeapp.Yoga.Yoga_BeginnerActivity;
+import com.example.myfitmeapp.Yoga.Yoga_IntermediateActivity;
 
 public class YogaPageActivity extends AppCompatActivity {
     @Override
@@ -13,31 +16,18 @@ public class YogaPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_yoga_page);
 
-        /*Toolbar mToolbar = findViewById(R.id.toolbar2);
+        Toolbar mToolbar = findViewById(R.id.toolbar2);
         mToolbar.setNavigationIcon(R.drawable.back_arrow_black);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            public final void onClick(View view) {
-                YogaPageActivity.this.lambda$onCreate$0$YogaPageActivity(view);
-            }
-        });
+        mToolbar.setNavigationOnClickListener(view ->
+                onBackPressed());
 
-        findViewById(R.id.buttonAccount).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button4).setOnClickListener(view ->
+                startActivity(new Intent(YogaPageActivity.this, Yoga_BeginnerActivity.class)));
 
-            public final void onClick(View view) {
-                YogaPageActivity.this.lambda$onCreate$1$YogaPageActivity(view);
-            }
-        });
-        findViewById(R.id.button5).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button5).setOnClickListener(view ->
+                startActivity(new Intent(YogaPageActivity.this, Yoga_IntermediateActivity.class)));
 
-            public final void onClick(View view) {
-                YogaPageActivity.this.lambda$onCreate$2$YogaPageActivity(view);
-            }
-        });
-        findViewById(R.id.button6).setOnClickListener(new View.OnClickListener() {
-
-            public final void onClick(View view) {
-                YogaPageActivity.this.lambda$onCreate$3$YogaPageActivity(view);
-            }
-        });*/
+        findViewById(R.id.button6).setOnClickListener(view ->
+                startActivity(new Intent(YogaPageActivity.this, Yoga_AdvancedActivity.class)));
     }
 }

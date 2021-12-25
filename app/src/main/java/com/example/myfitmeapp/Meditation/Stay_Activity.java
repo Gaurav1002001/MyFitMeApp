@@ -9,6 +9,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toolbar;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.myfitmeapp.Meditation_PageActivity;
 import com.example.myfitmeapp.R;
@@ -19,9 +21,9 @@ import java.io.IOException;
 
 public class Stay_Activity extends AppCompatActivity {
 
-    /*private Handler handler = new Handler();
+    //private Handler handler = new Handler();
     private ImageView imagePlayPause;
-    private MediaPlayer mediaPlayer;
+    /*private MediaPlayer mediaPlayer;
     private SeekBar seekBar;
     private TextView textCurrentTime;
     private final Runnable updater = new Runnable() {
@@ -37,19 +39,22 @@ public class Stay_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stay);
 
+        Toolbar mToolbar = findViewById(R.id.backToolbar);
+        mToolbar.setNavigationOnClickListener(v -> onBackPressed());
+
+        imagePlayPause = findViewById(R.id.imagePlayPause);
+        //textCurrentTime = findViewById(R.id.textCurrentTime);
+        //seekBar = findViewById(R.id.playerSeekbar);
+        //mediaPlayer = new MediaPlayer();
+        imagePlayPause.setOnClickListener(v -> {
+
+        });
+                //Stay_Activity.this.lambda$onCreate$0$Stay_Activity(view));
+
     }
 
-        /*this.imagePlayPause = (ImageView) findViewById(R.id.imagePlayPause);
-        this.textCurrentTime = (TextView) findViewById(R.id.textCurrentTime);
-        this.seekBar = (SeekBar) findViewById(R.id.playerSeekbar);
-        this.mediaPlayer = new MediaPlayer();
-        this.imagePlayPause.setOnClickListener(new View.OnClickListener() {
 
-            public final void onClick(View view) {
-                Stay_Activity.this.lambda$onCreate$0$Stay_Activity(view);
-            }
-        });
-        this.mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+        /*this.mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 
             public final void onCompletion(MediaPlayer mediaPlayer) {
                 Stay_Activity.this.lambda$onCreate$1$Stay_Activity(mediaPlayer);

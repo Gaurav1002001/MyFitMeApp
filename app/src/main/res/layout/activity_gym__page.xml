@@ -70,13 +70,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/dot_background"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:contentInsetLeft="0dp"
-        app:contentInsetStart="0dp"
-        app:contentInsetStartWithNavigation="0dp"
+        android:layout_height="?actionBarSize"
         app:title="Home Wokout"
         app:titleTextColor="@color/cardview_dark_background" />
 </RelativeLayout>

@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "543141335360-524es6ldgto4hesb5v1a2fo1ngt64nga.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myfitmeapp",
+            "certificate_hash": "9e4628bff98bdffa90562e27484b4d3a63e5ac87"
+          }
+        },
+        {
           "client_id": "543141335360-c1j49v3114vg83qpatbqn3pominqq47s.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -7,10 +7,18 @@
     android:orientation="vertical"
     android:fitsSystemWindows="true">
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="240dp"
-        android:background="@color/teal_200" />
+        android:background="@drawable/bg_splash_yoga_gradient" />
+
+    <LinearLayout
+        android:layout_below="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray_f2" />
+
 
     <LinearLayout
         android:id="@+id/topbar"
@@ -24,7 +32,7 @@
             android:id="@+id/backButton"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@color/teal_200"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:padding="10dp"
             android:src="@drawable/ic_baseline_arrow_back_24" />
 
@@ -55,7 +63,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_centerInParent="true"
-                android:background="@color/teal_200"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:padding="6dp"
                 android:src="@drawable/ic_notifications_white_24dp" />
 
@@ -107,19 +115,27 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="130dp"
+                            android:layout_height="130dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/person_45_45" />
+
                         <ProgressBar
                             android:id="@+id/progress"
                             android:layout_width="match_parent"
                             android:layout_height="80dp"
                             android:layout_centerVertical="true"
-                            android:visibility="visible" />
+                            android:visibility="invisible" />
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/profile_Image"
                             android:layout_width="130dp"
                             android:layout_height="130dp"
                             android:scaleType="centerCrop" />
+
                     </RelativeLayout>
+
                 </androidx.cardview.widget.CardView>
 
                 <LinearLayout
@@ -282,7 +298,7 @@
                                 android:hint="phone number"
                                 android:inputType="phone"
                                 android:textColor="@color/goodgrey"
-                                android:textSize="15sp"/>
+                                android:textSize="15sp" />
 
                         </LinearLayout>
 
@@ -381,11 +397,11 @@
                                 android:layout_height="32dp"
                                 android:layout_marginEnd="12dp"
                                 android:background="@drawable/selectable_text_bg_color_checked_state"
+                                android:gravity="center"
                                 android:minWidth="70dp"
                                 android:text="Male"
                                 android:textColor="@drawable/selectable_text_color_checked_state"
-                                android:textSize="14sp"
-                                android:gravity="center"/>
+                                android:textSize="14sp" />
 
                             <com.example.myfitmeapp.MyRadioButton
                                 android:id="@+id/acrb_female"
@@ -394,11 +410,11 @@
                                 android:layout_height="32dp"
                                 android:layout_marginEnd="12dp"
                                 android:background="@drawable/selectable_text_bg_color_checked_state"
+                                android:gravity="center"
                                 android:minWidth="70dp"
                                 android:text="Female"
                                 android:textColor="@drawable/selectable_text_color_checked_state"
-                                android:textSize="14sp"
-                                android:gravity="center"/>
+                                android:textSize="14sp" />
                         </RadioGroup>
                     </LinearLayout>
                 </LinearLayout>

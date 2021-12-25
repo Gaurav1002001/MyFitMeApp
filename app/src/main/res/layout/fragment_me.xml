@@ -4,55 +4,75 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:id="@+id/greenlayout"
-        android:background="#11f5df"
+    
+    <RelativeLayout
+        android:id="@+id/green_back"
         android:layout_width="match_parent"
-        android:layout_height="240dp"/>
+        android:layout_height="260dp"
+        android:background="@drawable/bg_splash_yoga_gradient">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="130dp"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/bg_me_top_yoga"
+            android:visibility="visible" />
+
+    </RelativeLayout>
 
     <LinearLayout
-        android:background="#f6f6f6"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/greenlayout"/>
+        android:layout_below="@+id/green_back"
+        android:background="@color/gray_f2" />
 
     <LinearLayout
         android:id="@+id/topbar"
-        android:padding="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:padding="16dp">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="25dp">
+            android:layout_marginTop="50dp"
+            android:orientation="vertical">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profileImageView"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/ic_baseline_account_circle_24"/>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:src="@drawable/person_45_45" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profileImageView"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp" />
+
+            </RelativeLayout>
 
             <TextView
-                android:textSize="25sp"
-                android:textColor="@color/white"
                 android:id="@+id/email"
-                android:paddingLeft="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="10dp"
+                android:paddingLeft="5dp"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
 
             <View
-                android:background="@color/pin_normal"
-                android:layout_width="361dp"
+                android:layout_width="match_parent"
                 android:layout_height="7dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
                 android:layout_marginTop="15dp"
                 android:alpha="0.3"
-                android:layout_marginStart="5dp"/>
+                android:background="@drawable/view_backgorund"
+                android:backgroundTint="@color/pin_normal"/>
 
         </LinearLayout>
 
@@ -65,14 +85,14 @@
         android:layout_below="@+id/topbar">
 
         <LinearLayout
-            android:gravity="center_horizontal"
-            android:orientation="horizontal"
             android:id="@+id/cardview"
-            android:background="@drawable/circularbordersolid_2"
             android:layout_width="300dp"
             android:layout_height="70dp"
             android:layout_centerHorizontal="true"
-            android:backgroundTint="@color/white">
+            android:background="@drawable/circularbordersolid_2"
+            android:backgroundTint="@color/white"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
 
             <FrameLayout
                 android:id="@+id/button_frame"
@@ -81,33 +101,33 @@
                 android:layout_weight="1">
 
                 <Button
-                    android:textColor="@color/black"
                     android:id="@+id/button_weight"
-                    android:background="@drawable/rounded_button_3"
+                    style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@drawable/rounded_button_3"
                     android:stateListAnimator="@null"
-                    app:backgroundTint="@color/white"
-                    style="@style/Widget.AppCompat.Button.Borderless"/>
+                    android:textColor="@color/black"
+                    app:backgroundTint="@color/white" />
 
                 <TextView
-                    android:textSize="10sp"
-                    android:textColor="@color/goodgrey"
-                    android:gravity="center"
-                    android:layout_gravity="start"
                     android:id="@+id/weight"
-                    android:padding="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="WEIGHT"/>
+                    android:layout_gravity="start"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="WEIGHT"
+                    android:textColor="@color/goodgrey"
+                    android:textSize="10sp" />
 
                 <LinearLayout
-                    android:layout_gravity="left|center_vertical|center_horizontal|center|start"
-                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="left|center_vertical|center_horizontal|center|start"
                     android:layout_marginLeft="11dp"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
@@ -115,81 +135,82 @@
 
                         <View
                             android:id="@+id/view1"
-                            android:background="@color/pin_normal"
                             android:layout_width="8dp"
                             android:layout_height="3dp"
                             android:layout_centerVertical="true"
-                            android:alpha="0.8"/>
+                            android:alpha="0.8"
+                            android:background="@color/pin_normal" />
 
                         <View
                             android:id="@+id/view2"
-                            android:background="@color/pin_normal"
                             android:layout_width="10dp"
                             android:layout_height="2dp"
-                            android:layout_marginLeft="13dp"
                             android:layout_centerVertical="true"
-                            android:alpha="0.8"/>
+                            android:layout_marginStart="13dp"
+                            android:alpha="0.8"
+                            android:background="@color/pin_normal" />
 
                         <TextView
-                            android:textSize="20sp"
-                            android:textColor="@color/goodgrey"
                             android:id="@+id/display_weight"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/goodgrey"
+                            android:textSize="20sp" />
 
                     </RelativeLayout>
 
                 </LinearLayout>
 
                 <ImageView
-                    android:layout_gravity="right|center_vertical|center_horizontal|center|end"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                    android:layout_marginEnd="10dp"/>
+                    android:layout_gravity="right|center_vertical|center_horizontal|center|end"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
 
             </FrameLayout>
 
             <View
-                android:layout_gravity="center_vertical"
-                android:background="@color/pin_normal"
                 android:layout_width="1dp"
                 android:layout_height="50dp"
-                android:alpha="0.4"/>
+                android:layout_gravity="center_vertical"
+                android:alpha="0.4"
+                android:background="@color/pin_normal" />
 
             <FrameLayout
                 android:id="@+id/button_frame_2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:background="@drawable/round_buttonborder">
 
                 <Button
-                    android:textColor="@color/black"
                     android:id="@+id/button_bmi"
-                    android:background="@drawable/rounded_button_4"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@drawable/rounded_button_4"
                     android:stateListAnimator="@null"
-                    app:backgroundTint="@color/white"/>
+                    android:textColor="@color/black"
+                    app:backgroundTint="@color/white" />
 
                 <TextView
-                    android:textSize="10sp"
-                    android:textColor="@color/goodgrey"
-                    android:gravity="center"
-                    android:layout_gravity="start"
                     android:id="@+id/bmi"
-                    android:padding="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="BMI"/>
+                    android:layout_gravity="start"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="BMI"
+                    android:textColor="@color/goodgrey"
+                    android:textSize="10sp" />
 
                 <LinearLayout
-                    android:layout_gravity="left|center_vertical|center_horizontal|center|start"
-                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="left|center_vertical|center_horizontal|center|start"
                     android:layout_marginLeft="11dp"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
@@ -197,38 +218,38 @@
 
                         <View
                             android:id="@+id/view3"
-                            android:background="@color/pin_normal"
                             android:layout_width="8dp"
                             android:layout_height="3dp"
                             android:layout_centerVertical="true"
-                            android:alpha="0.8"/>
+                            android:alpha="0.8"
+                            android:background="@color/pin_normal" />
 
                         <View
                             android:id="@+id/view4"
-                            android:background="@color/pin_normal"
                             android:layout_width="10dp"
                             android:layout_height="2dp"
-                            android:layout_marginLeft="13dp"
                             android:layout_centerVertical="true"
-                            android:alpha="0.8"/>
+                            android:layout_marginLeft="13dp"
+                            android:alpha="0.8"
+                            android:background="@color/pin_normal" />
 
                         <TextView
-                            android:textSize="20sp"
-                            android:textColor="@color/goodgrey"
                             android:id="@+id/display_bmi"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/goodgrey"
+                            android:textSize="20sp" />
 
                     </RelativeLayout>
 
                 </LinearLayout>
 
                 <ImageView
-                    android:layout_gravity="right|center_vertical|center_horizontal|center|end"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                    android:layout_marginEnd="10dp"/>
+                    android:layout_gravity="right|center_vertical|center_horizontal|center|end"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
 
             </FrameLayout>
 
@@ -327,9 +348,9 @@
 
             <ImageView
                 android:layout_gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_account_circle_24"/>
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_baseline_person_24"/>
 
         </LinearLayout>
 

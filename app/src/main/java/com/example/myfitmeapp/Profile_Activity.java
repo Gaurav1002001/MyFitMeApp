@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -16,7 +15,6 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -29,7 +27,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.ViewCompat;
-import androidx.fragment.app.FragmentActivity;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -39,13 +36,13 @@ import com.bumptech.glide.request.target.Target;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -65,7 +62,6 @@ public class Profile_Activity extends AppCompatActivity {
 
     public static final int CAMERA_REQUEST_CODE = 102;
     public static final int GALLERY_REQUEST_CODE = 105;
-    private static final String TAG = "MainActivity";
     private GoogleSignInAccount acct;
     private MyRadioButton acrbFemale;
     private MyRadioButton acrbMale;
@@ -101,29 +97,29 @@ public class Profile_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        profileImageView = (CircleImageView) findViewById(R.id.profile_Image);
-        userName = (EditText) findViewById(R.id.user_Name);
-        userEmail = (EditText) findViewById(R.id.user_Email);
-        userPhone = (EditText) findViewById(R.id.user_phone);
-        userLocation = (EditText) findViewById(R.id.user_location);
-        userBirthday = (EditText) findViewById(R.id.birthday);
-        userHeight = (EditText) findViewById(R.id.height);
-        userWeight = (EditText) findViewById(R.id.weight);
-        userBio = (EditText) findViewById(R.id.userBio);
-        progressBar = (ProgressBar) findViewById(R.id.progress);
-        button = (ImageButton) findViewById(R.id.profile);
-        textView1 = (TextView) findViewById(R.id.textView1);
-        textView2 = (TextView) findViewById(R.id.textView2);
-        textView3 = (TextView) findViewById(R.id.textView3);
-        textView4 = (TextView) findViewById(R.id.textView4);
-        yellowDot = (ImageView) findViewById(R.id.yellowDot);
-        acrbMale = (MyRadioButton) findViewById(R.id.acrb_male);
-        acrbFemale = (MyRadioButton) findViewById(R.id.acrb_female);
+        profileImageView = findViewById(R.id.profile_Image);
+        userName = findViewById(R.id.user_Name);
+        userEmail = findViewById(R.id.user_Email);
+        userPhone = findViewById(R.id.user_phone);
+        userLocation = findViewById(R.id.user_location);
+        userBirthday = findViewById(R.id.birthday);
+        userHeight = findViewById(R.id.height);
+        userWeight = findViewById(R.id.weight);
+        userBio = findViewById(R.id.userBio);
+        progressBar = findViewById(R.id.progress);
+        button = findViewById(R.id.profile);
+        textView1 = findViewById(R.id.textView1);
+        textView2 = findViewById(R.id.textView2);
+        textView3 = findViewById(R.id.textView3);
+        textView4 = findViewById(R.id.textView4);
+        yellowDot = findViewById(R.id.yellowDot);
+        acrbMale = findViewById(R.id.acrb_male);
+        acrbFemale = findViewById(R.id.acrb_female);
 
         fStore = FirebaseFirestore.getInstance();
         userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         documentReference = fStore.collection("users").document(userID);
-        storage  = FirebaseStorage.getInstance();
+        storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
         acct = GoogleSignIn.getLastSignedInAccount(this);
@@ -136,21 +132,22 @@ public class Profile_Activity extends AppCompatActivity {
         loadUserProfile();
 
         profileImageView.setOnClickListener(view -> {
-            if (checkSelfPermission("android.permission.CAMERA") == PackageManager.PERMISSION_DENIED
+            /*if (checkSelfPermission("android.permission.CAMERA") == PackageManager.PERMISSION_DENIED
                     || checkSelfPermission("android.permission.WRITE_EXTERNAL_STORAGE") == PackageManager.PERMISSION_DENIED) {
                 requestPermissions(new String[]{"android.permission.CAMERA", "android.permission.WRITE_EXTERNAL_STORAGE"}, 112);
-            } else { Select(); }
+            } else { */
+            Select(); //}
         });
 
         textView1.setOnClickListener(v -> {
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.showSoftInput(userBio, InputMethodManager.SHOW_IMPLICIT);
             userBio.setEnabled(true);
             userBio.setFocusable(true);
         });
 
         textView2.setOnClickListener(v -> {
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.showSoftInput(userPhone, InputMethodManager.SHOW_IMPLICIT);
             userPhone.setEnabled(true);
             userPhone.setFocusable(true);
@@ -158,28 +155,22 @@ public class Profile_Activity extends AppCompatActivity {
             userLocation.setEnabled(true);
         });
 
-        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, month);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateDate();
-            }
+        final DatePickerDialog.OnDateSetListener date = (view, year, month, dayOfMonth) -> {
+            myCalendar.set(Calendar.YEAR, year);
+            myCalendar.set(Calendar.MONTH, month);
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            updateDate();
         };
 
-        textView3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                datePickerDialog = new DatePickerDialog(Profile_Activity.this, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
-                datePickerDialog.show();
-                datePickerDialog.getButton(-2).setTextColor(ViewCompat.MEASURED_STATE_MASK);
-                datePickerDialog.getButton(-1).setTextColor(getResources().getColor(R.color.teal_200));
-            }
+        textView3.setOnClickListener(v -> {
+            datePickerDialog = new DatePickerDialog(Profile_Activity.this, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
+            datePickerDialog.show();
+            datePickerDialog.getButton(-2).setTextColor(ViewCompat.MEASURED_STATE_MASK);
+            datePickerDialog.getButton(-1).setTextColor(getResources().getColor(R.color.teal_200));
         });
 
         textView4.setOnClickListener(v -> {
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.showSoftInput(userHeight, InputMethodManager.SHOW_IMPLICIT);
             userHeight.setEnabled(true);
             userHeight.setFocusable(true);
@@ -219,27 +210,23 @@ public class Profile_Activity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             if (user.getPhotoUrl() != null) {
-                Glide.with((FragmentActivity) this)
+                Glide.with(this)
                         .load(user.getPhotoUrl())
                         .listener(new RequestListener<Drawable>() {
                             @Override
                             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                                Profile_Activity.this.progressBar.setVisibility(View.VISIBLE);
+                                progressBar.setVisibility(View.INVISIBLE);
                                 return false;
                             }
 
                             @Override
                             public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                                Profile_Activity.this.progressBar.setVisibility(View.VISIBLE);
+                                progressBar.setVisibility(View.VISIBLE);
                                 return false;
                             }
                         })
                         .into(profileImageView);
-            } else {
-                profileImageView.setBackgroundResource(R.drawable.ic_baseline_account_2);
-                progressBar.setVisibility(View.VISIBLE);
             }
-
             documentReference.get().addOnSuccessListener(value -> {
                 userBio.setText(value.getString("bio"));
                 userName.setText(value.getString("fullName"));
@@ -258,7 +245,7 @@ public class Profile_Activity extends AppCompatActivity {
                 userHeight.setText(value.getString("height"));
                 userWeight.setText(value.getString("weight"));
             })
-                    .addOnFailureListener(e -> Log.d("Failed","Failed retreiving document"));
+                    .addOnFailureListener(e -> Log.d("Failed", "Failed retreiving document"));
         }
     }
 
@@ -290,13 +277,8 @@ public class Profile_Activity extends AppCompatActivity {
         user.put("birthday", birthday);
         user.put("height", height);
         user.put("weight", weight);
-        documentReference.set(user).addOnSuccessListener(new OnSuccessListener() {
-            @Override
-            public final void onSuccess(Object obj) {
-                Toast.makeText(Profile_Activity.this, "Profile Updated", Toast.LENGTH_SHORT).show();
-            }
-        }).addOnFailureListener(e ->
-                Toast.makeText(Profile_Activity.this, "Error adding document" + e, Toast.LENGTH_SHORT).show());
+        documentReference.set(user).addOnSuccessListener((OnSuccessListener) obj -> Toast.makeText(Profile_Activity.this, "Profile Updated", Toast.LENGTH_SHORT).show()).addOnFailureListener(e ->
+                Toast.makeText(Profile_Activity.this, "Error updating profile" + e, Toast.LENGTH_SHORT).show());
     }
 
     private void deleteProfile() {
@@ -324,13 +306,13 @@ public class Profile_Activity extends AppCompatActivity {
         builder.setTitle("Add Photo!");
         builder.setItems(items, (dialog, which) -> {
             switch (which) {
-                case 0 :
+                case 0:
                     cameraIntent();
                     break;
-                case 1 :
+                case 1:
                     galleryIntent();
                     break;
-                case 2 :
+                case 2:
                     removePhoto();
                     break;
             }
@@ -339,29 +321,47 @@ public class Profile_Activity extends AppCompatActivity {
     }
 
     private void removePhoto() {
-        storage.getReferenceFromUrl(user.getPhotoUrl().toString())
-                .delete()
-                .addOnSuccessListener(aVoid -> {
-                    Map<String, Object> updates = new HashMap<>();
-                    updates.put("imageUrl", FieldValue.delete());
-                    documentReference.update(updates)
-                            .addOnCompleteListener((OnCompleteListener) task -> { });
-                    Toast.makeText(Profile_Activity.this, "Deleted", Toast.LENGTH_SHORT).show();
-                    replacePhoto();
-                }).addOnFailureListener(exception ->
-                    Toast.makeText(Profile_Activity.this, "Not Deleted", Toast.LENGTH_SHORT).show());
+        DocumentReference docRef = fStore.collection("users").document(userID);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot document = task.getResult();
+                if (task.isSuccessful()) {
+                    if (document.get("imageUrl") != null) {
+                        String imageUrl = document.getString("imageUrl");
+                        StorageReference strRef = FirebaseStorage.getInstance().getReferenceFromUrl(imageUrl);
+                        strRef.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(Profile_Activity.this, "Image deleted", Toast.LENGTH_LONG).show();
+                                    replacePhoto();
+                                } else {
+                                    Toast.makeText(Profile_Activity.this, "Error deleting image", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+                    } else {
+                        Log.d("Delete","No Image");
+                    }
+                } else {
+                    Toast.makeText(Profile_Activity.this, "Error deleting image", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private void replacePhoto() {
 
-        if (user.getPhotoUrl() == null) {
+        if (acct.getPhotoUrl() != null) {
             Uri personPhoto = acct.getPhotoUrl();
             Glide.with(getApplicationContext()).load(personPhoto).into(profileImageView);
             user.updateProfile(new UserProfileChangeRequest.Builder()
                     .setPhotoUri(personPhoto).build())
                     .addOnCompleteListener(task -> {
                     });
-        }  Glide.with(getApplicationContext()).load(R.drawable.accepting_circle).into(profileImageView);
+        }
+        Glide.with(getApplicationContext()).load(R.drawable.accepting_circle).into(profileImageView);
 
     }
 
@@ -386,14 +386,12 @@ public class Profile_Activity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK ) {
+        if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK) {
 
             Bitmap bitmap = uriToBitmap(uri);
             profileImageView.setImageBitmap(bitmap);
             uploadImage();
-        }
-
-        else if (requestCode == GALLERY_REQUEST_CODE && resultCode == RESULT_OK  && data != null
+        } else if (requestCode == GALLERY_REQUEST_CODE && resultCode == RESULT_OK && data != null
                 && data.getData() != null) {
             uri = data.getData();
             try {
@@ -405,8 +403,8 @@ public class Profile_Activity extends AppCompatActivity {
                 Toast.makeText(Profile_Activity.this, "Something went wrong", Toast.LENGTH_LONG).show();
             }
 
-        }else {
-            Toast.makeText(Profile_Activity.this, "You haven't picked Image",Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(Profile_Activity.this, "You haven't picked Image", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -427,6 +425,7 @@ public class Profile_Activity extends AppCompatActivity {
             ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
+            progressDialog.setCanceledOnTouchOutside(false);
 
             StorageReference ref = storageReference.child("profileImages/" + UUID.randomUUID().toString());
             ref.putFile(uri)
@@ -442,7 +441,7 @@ public class Profile_Activity extends AppCompatActivity {
                     })
                     .addOnProgressListener(taskSnapshot -> {
                         double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                        progressDialog.setMessage("Uploaded " + (int)progress + "%");
+                        progressDialog.setMessage("Uploaded " + (int) progress + "%");
                     });
         }
     }
@@ -451,7 +450,7 @@ public class Profile_Activity extends AppCompatActivity {
         reference.getDownloadUrl()
                 .addOnSuccessListener(uri -> {
                     imageUrl = uri.toString();
-                    documentReference.update("imageUrl",imageUrl);
+                    documentReference.update("imageUrl", imageUrl);
                     setUserProfileUrl(uri);
                 });
     }

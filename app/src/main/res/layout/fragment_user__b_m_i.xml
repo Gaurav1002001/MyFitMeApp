@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
-            android:text="Calculate your BMI for\10workout recommendation."
+            android:text="Calculate your BMI for\n workout recommendation."
             android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold" />

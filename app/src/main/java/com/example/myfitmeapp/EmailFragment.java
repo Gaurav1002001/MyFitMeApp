@@ -31,19 +31,22 @@ import java.util.concurrent.Executor;
 import java.util.regex.Pattern;
 
 public class EmailFragment extends Fragment {
-    private static final Pattern PASSWORD_PATTERN = Pattern.compile("" +
-            "^(?=" +
-            ".*[a-zA-Z])(?=" +
-            ".*[@#$%^&+=])(?=\\S+$)." +
-            "{4,}$");
-    private String email;
+    private static final Pattern PASSWORD_PATTERN =
+            Pattern.compile("^" +
+                    //"(?=.*[0-9])" +         //at least 1 digit
+                    //"(?=.*[a-z])" +         //at least 1 lower case letter
+                    //"(?=.*[A-Z])" +         //at least 1 upper case letter
+                    //"(?=.*[a-zA-Z])" +      //any letter
+                    //"(?=.*[@#$%^&+=])" +    //at least 1 special character
+                    //"(?=\\S+$)" +           //no white spaces
+                    //".{4,}" +               //at least 4 characters
+                    "$");
+
     private EditText emailAddress;
     private FirebaseAuth mAuth;
-    private String password;
     private ProgressDialog progressDialog;
-    private Button signupButton;
-    private TextInputLayout textInputLayout;
     private EditText userPassword;
+    private TextInputLayout emailTil,pwrdTil;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -52,29 +55,21 @@ public class EmailFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         emailAddress = view.findViewById(R.id.editTextEmailAddress);
         userPassword = view.findViewById(R.id.editTextPassword);
-        textInputLayout = view.findViewById(R.id.textInputLayout);
-        signupButton = view.findViewById(R.id.signupButton);
+
+        Button signupButton = view.findViewById(R.id.signupButton);
         progressDialog = new ProgressDialog(getActivity());
 
-        view.findViewById(R.id.closeButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                requireActivity().onBackPressed();
-            }
-        });
+        view.findViewById(R.id.closeButton).setOnClickListener(v -> requireActivity().onBackPressed());
 
         emailAddress.addTextChangedListener(textWatcher);
         userPassword.addTextChangedListener(textWatcher);
 
-        signupButton.setOnClickListener(view1 -> CreateNewAccount());
+        emailTil = view.findViewById(R.id.emailTextInputLayout);
+        pwrdTil = view.findViewById(R.id.pwrdTextInputLayout);
 
-        view.findViewById(R.id.text_link).setOnClickListener(v -> {
-            FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();;
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.replace(R.id.fragment_container, new EmailFragment2());
-            fragmentTransaction.commit();
-        });
+        signupButton.setOnClickListener(view1 ->
+                CreateNewAccount());
+
         return view;
     }
 
@@ -84,14 +79,14 @@ public class EmailFragment extends Fragment {
         }
 
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            String emailInput = emailAddress.getText().toString();
+
             String passwordInput = userPassword.getText().toString();
-            signupButton.setEnabled(!emailInput.isEmpty() && !passwordInput.isEmpty());
-            textInputLayout.setPasswordVisibilityToggleEnabled(!passwordInput.isEmpty());
+            pwrdTil.setPasswordVisibilityToggleEnabled(!passwordInput.isEmpty());
         }
 
         public void afterTextChanged(Editable editable) {
-            validateEmail();
+            emailTil.setError(null);
+            pwrdTil.setError(null);
         }
     };
 
@@ -99,55 +94,51 @@ public class EmailFragment extends Fragment {
         String emailInput = emailAddress.getText().toString().trim();
 
         if (emailInput.isEmpty()) {
-            emailAddress.setError("Field can't be empty");
             return false;
-        } else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
-            emailAddress.setError("Please enter a valid email address");
-            return false;
-        } else {
-            emailAddress.setError(null);
-            return true;
-        }
+        } else return Patterns.EMAIL_ADDRESS.matcher(emailInput).matches();
     }
 
-    private boolean validatePassword() {
+    /*private boolean validatePassword() {
         String passwordInput = userPassword.getText().toString().trim();
 
         if (passwordInput.isEmpty()) {
-            userPassword.setError("Field can't be empty");
             return false;
-        } else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
-            userPassword.setError("Password too weak");
-            return false;
-        } else {
-            userPassword.setError(null);
-            return true;
-        }
-    }
+        } //else return PASSWORD_PATTERN.matcher(passwordInput).matches();
+    }*/
 
     private void CreateNewAccount() {
-        email = emailAddress.getText().toString().trim();
-        password = userPassword.getText().toString();
+        String email = emailAddress.getText().toString().trim();
+        String password = userPassword.getText().toString();
 
-        if (validateEmail() && validatePassword()) {
+        if (!validateEmail()) {
+            emailTil.setError("Invalid email format");
+        }
+        if (!password.isEmpty()) {
+            pwrdTil.setError("Password must be between 5 and 60 characters");
+        }
+        if (!email.isEmpty() && !password.isEmpty() && validateEmail()) {
             progressDialog.setTitle("Creating new Account");
             progressDialog.setMessage("Please wait, while we are creating a new account for you...");
             progressDialog.setCanceledOnTouchOutside(true);
             progressDialog.show();
 
-            mAuth.createUserWithEmailAndPassword(email,password)
-                    .addOnCompleteListener(requireActivity(), new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
+            mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(requireActivity(), task -> {
+                        if(task.isSuccessful()){
+                            boolean isNew = task.getResult().getAdditionalUserInfo().isNewUser();
+                            //Log.d("MyTAG", "onComplete: " + (isNew ? "new user" : "old user"));
+                            if (isNew) {
+                                startActivity(new Intent(getActivity(), KnowUserActivity_B.class));
                                 requireActivity().finish();
-                                startActivity(new Intent(getActivity(), MainActivity.class));
-                            }else{
-                                //display some message here
-                                Toast.makeText(requireActivity(), "Error " + ((Exception) Objects.requireNonNull(task.getException())).toString(), Toast.LENGTH_SHORT).show();
+                                return;
                             }
-                            progressDialog.dismiss();
+                            startActivity(new Intent(getActivity(), MainActivity.class));
+                            requireActivity().finish();
+                        }else{
+                            //display some message here
+                            Toast.makeText(requireActivity(), "Error " + ((Exception) Objects.requireNonNull(task.getException())).toString(), Toast.LENGTH_SHORT).show();
                         }
+                        progressDialog.dismiss();
                     });
         }
     }

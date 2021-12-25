@@ -1,7 +1,6 @@
 package com.example.myfitmeapp;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,32 +28,25 @@ public class UserGenderFragment extends Fragment {
     private MyRadioButton acrbMale;
     private Button button;
     DatePickerDialog datePickerDialog;
-    DocumentReference documentReference;
     private EditText editText;
-    FirebaseFirestore fStore;
     final Calendar myCalendar = Calendar.getInstance();
     private StateProgressBar stateProgressBar;
-    String userID;
+
+    Bundle args;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_gender, container, false);
 
+        args = new Bundle();
+
         acrbMale = view.findViewById(R.id.acrb_male);
         acrbFemale = view.findViewById(R.id.acrb_female);
         button = view.findViewById(R.id.btnNext);
-        fStore = FirebaseFirestore.getInstance();
-        userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        documentReference = fStore.collection("users").document(this.userID);
         stateProgressBar = requireActivity().findViewById(R.id.your_state_progress_bar);
 
         ImageButton imageButton = requireActivity().findViewById(R.id.backButton);
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                requireActivity().onBackPressed();
-            }
-        });
+        imageButton.setOnClickListener(v -> requireActivity().onBackPressed());
 
         RadioGroup radioGroup = view.findViewById(R.id.radioGroup);
         radioGroup.setOnCheckedChangeListener((radioGroup1, i) -> {
@@ -64,7 +56,6 @@ public class UserGenderFragment extends Fragment {
                     button.setEnabled(true);
                     return;
                 default:
-                    return;
             }
         });
 
@@ -100,18 +91,27 @@ public class UserGenderFragment extends Fragment {
         String g2 = acrbFemale.getText().toString();
         String birthday = editText.getText().toString();
 
-        documentReference = fStore.collection("users").document(userID);
         if (acrbMale.isChecked()) {
-            documentReference.update("gender", g1);
+            if (editText.getText().toString().isEmpty()) {
+                args.putString("gender", g1);
+                args.putString("birthday", "08/07/1990");
+            } else {
+                args.putString("gender", g1);
+                args.putString("birthday", birthday);
+            }
         } else {
-            documentReference.update("gender", g2);
+            if (editText.getText().toString().isEmpty()) {
+                args.putString("gender", g2);
+                args.putString("birthday", "08/07/1990");
+            } else {
+                args.putString("gender", g2);
+                args.putString("birthday", birthday);
+            }
         }
-        if (editText.getText().toString().isEmpty()) {
-            documentReference.update("birthday", "08/07/1990");
-        } else {
-            documentReference.update("birthday", birthday);
-        }
-        getFragmentManager().beginTransaction().replace(R.id.container,new User_BMI1(),null).addToBackStack(null).commit();
+        User_BMI1 fragment = new User_BMI1();
+        fragment.setArguments(args);
+        getFragmentManager().beginTransaction()
+                .replace(R.id.container, fragment,null).addToBackStack(null).commit();
         stateProgressBar.setCurrentStateNumber(StateProgressBar.StateNumber.TWO);
     }
 }

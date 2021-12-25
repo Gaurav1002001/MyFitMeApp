@@ -1,21 +1,27 @@
 package com.example.myfitmeapp;
 
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.kofigyan.stateprogressbar.StateProgressBar;
 
 public class Know_UserActivity extends AppCompatActivity {
 
     public static FragmentManager fragmentManager;
-    public static StateProgressBar stateProgressBar;
+
+    private StateProgressBar stateProgressBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.know__user_activity);
 
+        String name = getIntent().getStringExtra("fullName");
         stateProgressBar = findViewById(R.id.your_state_progress_bar);
+
         fragmentManager = getSupportFragmentManager();
         if (findViewById(R.id.container) != null && savedInstanceState == null) {
             fragmentManager.beginTransaction().add(R.id.container, new UserGenderFragment(), null).commit();
@@ -43,7 +49,6 @@ public class Know_UserActivity extends AppCompatActivity {
                 return;
             default:
                 getSupportFragmentManager().popBackStack();
-                return;
         }
     }
 }

@@ -1,10 +1,9 @@
 package com.example.myfitmeapp;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageButton;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 public class Morning_Fragment extends AppCompatActivity {
 
@@ -13,6 +12,7 @@ public class Morning_Fragment extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_morning_);
 
-        findViewById(R.id.backButton).setOnClickListener(view -> onBackPressed());
+        Toolbar mToolbar = findViewById(R.id.backToolbar);
+        mToolbar.setOnClickListener(view -> onBackPressed());
     }
 }

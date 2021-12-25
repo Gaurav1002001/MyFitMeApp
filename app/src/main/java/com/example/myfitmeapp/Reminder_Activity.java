@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 import com.facebook.share.internal.ShareConstants;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -34,40 +36,31 @@ public class Reminder_Activity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminder);
 
+        fStore = FirebaseFirestore.getInstance();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        documentReference = fStore.collection("users").document(this.userID);
+
         Toolbar mToolbar = findViewById(R.id.toolbar3);
         mToolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
         mToolbar.setTitle("Reminder");
         mToolbar.setTitleTextColor(Color.WHITE);
         mToolbar.setNavigationOnClickListener(view -> onBackPressed());
 
-        /*findViewById(R.id.setBtn).setOnClickListener(this);
-        findViewById(R.id.cancelBtn).setOnClickListener(this);
-        this.textView = (TextView) findViewById(R.id.textView);
-        this.fStore = FirebaseFirestore.getInstance();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        this.userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DocumentReference document = this.fStore.collection("users").document(this.userID);
-        this.documentReference = document;
-        if (user != null && this.userID != null) {
-            document.addSnapshotListener(this, new EventListener() {
-
-                @Override // com.google.firebase.firestore.EventListener
-                public final void onEvent(Object obj, FirebaseFirestoreException firebaseFirestoreException) {
-                    Reminder_Activity.this.lambda$onCreate$1$Reminder_Activity((DocumentSnapshot) obj, firebaseFirestoreException);
-                }
-            });
-        }
-    }
-
-    public void lambda$onCreate$0$Reminder_Activity(View view) {
-        onBackPressed();
+        //findViewById(R.id.setBtn).setOnClickListener(this);
+        //findViewById(R.id.cancelBtn).setOnClickListener(this);
+        textView = (TextView) findViewById(R.id.textView);
+        documentReference.get().addOnSuccessListener(value -> {
+            textView.setText(value.getString("fullName"));
+        })
+                .addOnFailureListener(e -> Log.d("Failed","Failed retreiving document"));
     }
 
     public void lambda$onCreate$1$Reminder_Activity(DocumentSnapshot value, FirebaseFirestoreException error) {
         this.textView.setText(value.getString("fullName"));
     }
 
-    public void onClick(View view) {
+    /*public void onClick(View view) {
         TimePicker timePicker = (TimePicker) findViewById(R.id.timePicker);
         Intent intent = new Intent(this, AlarmReceiver.class);
         intent.putExtra("notificationId", 1);
@@ -92,5 +85,4 @@ public class Reminder_Activity extends AppCompatActivity  {
             default:
                 return;
         }*/
-    }
 }

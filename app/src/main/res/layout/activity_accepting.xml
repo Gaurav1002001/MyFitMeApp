@@ -5,45 +5,77 @@
     android:layout_height="match_parent"
     android:background="@drawable/bluebackground">
 
-    <ImageButton
-        android:id="@+id/backButton"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/back_arrow_white" />
+    <Toolbar
+        android:id="@+id/backToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:navigationIcon="@drawable/back_arrow_white"
+        android:layout_marginTop="24dp"/>
 
-    <ImageButton
-        android:id="@+id/playButton"
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="135dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="290dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/img_meditation_maingraphics" />
+
+        <ImageView
+            android:id="@+id/imagePlayPause"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_meditation_play" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativelayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="520dp"
-        android:background="#0000"
-        android:visibility="visible"
-        app:srcCompat="@drawable/play" />
+        android:layout_marginTop="490dp">
 
-    <ImageButton
-        android:id="@+id/pauseButton"
-        android:layout_width="wrap_content"
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="520dp"
-        android:background="#0000"
-        android:visibility="invisible"
-        app:srcCompat="@drawable/pause" />
+        android:layout_below="@+id/relativelayout"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textCurrentTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/pauseButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:text="@string/zero"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        <SeekBar
+            android:id="@+id/playerSeekbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible" />
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="110dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/ic_meditation_time" />
+
+            <TextView
+                android:id="@+id/textCurrentTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="16min"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>

@@ -1,64 +1,91 @@
 package com.example.myfitmeapp;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.myfitmeapp.BottomNav_Fragment.ExploreFragment;
+import com.example.myfitmeapp.BottomNav_Fragment.FeedFragment;
+import com.example.myfitmeapp.BottomNav_Fragment.HomeFragment;
+import com.example.myfitmeapp.BottomNav_Fragment.MeFragment;
+import com.example.myfitmeapp.BottomNav_Fragment.PlanFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnFragmentInteractionListener{
 
     boolean doubleBackToExitPressedOnce = false;
-    private BottomNavigationView bottomNav;
+
+    final Fragment fragment1 = new HomeFragment();
+    final Fragment fragment2 = new FeedFragment();
+    final Fragment fragment3 = new ExploreFragment();
+    final Fragment fragment4 = new PlanFragment();
+    final Fragment fragment5 = new MeFragment();
+    final FragmentManager fm = getSupportFragmentManager();
+    public Fragment active = fragment1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        bottomNav = findViewById(R.id.nav_view);
-        bottomNav.setOnNavigationItemSelectedListener(navListener);
+        //getWindow().getDecorView().setSystemUiVisibility(1280);
 
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, new HomeFragment()).commit();
-            bottomNav.getMenu().findItem(R.id.navigation_home).setChecked(true);
-        }
+        BottomNavigationView bottomNav = findViewById(R.id.nav_view);
+        bottomNav.setItemIconTintList(null);
+
+        fm.beginTransaction().add(R.id.nav_host_fragment, fragment5, "5").hide(fragment5).commit();
+        fm.beginTransaction().add(R.id.nav_host_fragment, fragment4, "4").hide(fragment4).commit();
+        fm.beginTransaction().add(R.id.nav_host_fragment, fragment3, "3").hide(fragment3).commit();
+        fm.beginTransaction().add(R.id.nav_host_fragment, fragment2, "2").hide(fragment2).commit();
+        fm.beginTransaction().add(R.id.nav_host_fragment,fragment1, "1").commit();
+        bottomNav.getMenu().findItem(R.id.navigation_home).setChecked(true);
+        bottomNav.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.navigation_feed:
+                    fm.beginTransaction().hide(active).show(fragment2).commit();
+                    active = fragment2;
+                    return true;
+
+                case R.id.navigation_home:
+                    fm.beginTransaction().hide(active).show(fragment1).commit();
+                    active = fragment1;
+                    return true;
+
+                case R.id.navigation_explore:
+                    fm.beginTransaction().hide(active).show(fragment3).commit();
+                    active = fragment3;
+                    return true;
+
+                case R.id.navigation_plan:
+                    fm.beginTransaction().hide(active).show(fragment4).commit();
+                    active = fragment4;
+                    return true;
+
+                case R.id.navigation_me:
+                    fm.beginTransaction().hide(active).show(fragment5).commit();
+                    active = fragment5;
+                    return true;
+            }
+            return false;
+        });
     }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
-            item -> {
-                Fragment selectedFragment = null;
-
-                switch (item.getItemId()) {
-                    case R.id.navigation_feed:
-                        selectedFragment = new FeedFragment();
-                        break;
-                    case R.id.navigation_home:
-                        selectedFragment = new HomeFragment();
-                        break;
-                    case R.id.navigation_explore:
-                        selectedFragment = new ExploreFragment();
-                        break;
-                    case R.id.navigation_plan:
-                        selectedFragment = new PlanFragment();
-                        break;
-                    case R.id.navigation_me:
-                        selectedFragment = new MeFragment();
-                        break;
-                }
-
-                getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, selectedFragment).commit();
-
-                return true;
-            };
+    @Override
+    public void changeFragment(int id){
+        if (id == 1) {
+            fm.beginTransaction().hide(active).show(fragment1).commit();
+            active = fragment1;
+        }
+        else if (id == 2) {
+            fm.beginTransaction().hide(active).show(fragment3).commit();
+            active = fragment3;
+        }
+    }
 
     @Override
     public void onBackPressed() {
@@ -70,12 +97,6 @@ public class MainActivity extends AppCompatActivity {
         this.doubleBackToExitPressedOnce = true;
         Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
 
-        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce=false;
-            }
-        }, 2000);
+        new Handler(Looper.getMainLooper()).postDelayed(() -> doubleBackToExitPressedOnce=false, 2000);
     }
 }
