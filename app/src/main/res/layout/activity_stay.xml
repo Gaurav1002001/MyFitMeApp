@@ -28,7 +28,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_centerInParent="true"
-            android:src="@drawable/ic_meditation_play" />
+            android:src="@drawable/exo_icon_play" />
 
     </RelativeLayout>
 

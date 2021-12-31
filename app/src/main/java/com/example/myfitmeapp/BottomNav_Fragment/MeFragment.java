@@ -4,14 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
-
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,27 +16,29 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+
 import com.bumptech.glide.Glide;
 import com.example.myfitmeapp.AboutUs_Activity;
 import com.example.myfitmeapp.Account_Activity1;
 import com.example.myfitmeapp.BuildConfig;
 import com.example.myfitmeapp.FriendsActivity;
-import com.example.myfitmeapp.Profile_Activity;
+import com.example.myfitmeapp.FriendsModel.User;
+import com.example.myfitmeapp.EditProfile_Activity;
+import com.example.myfitmeapp.Profile_PageInfoActivity;
 import com.example.myfitmeapp.R;
 import com.example.myfitmeapp.Reminder_Activity;
 import com.facebook.appevents.internal.ViewHierarchyConstants;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.DecimalFormat;
 
@@ -98,25 +93,39 @@ public class MeFragment extends Fragment {
         documentReference = fStore.collection("users").document(userID);
         user = FirebaseAuth.getInstance().getCurrentUser();
 
-        if (!(user == null || user.getPhotoUrl() == null)) {
-            Glide.with(this).load(user.getPhotoUrl()).into(profileImageView);
-            documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                @Override
-                public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException e) {
-                    if (e != null) {
-                        Log.w("TAG", "Listen failed.", e);
-                        return;
+        profileImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(requireActivity(), Profile_PageInfoActivity.class);
+                intent.putExtra("publisherId", user.getUid());
+                startActivity(intent);
+            }
+        });
+
+        FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        User user = snapshot.getValue(User.class);
+
+                        if (user.getImageurl() != null) {
+                            Glide.with(requireActivity()).load(user.getImageurl()).into(profileImageView);
+                        } else {
+                            profileImageView.setImageResource(R.drawable.ic_avatar_recent_login);
+                        }
+
+                            textView.setText(user.getFullname());
+                            //display_weight.setText(user.getWeight());
+                            //display_bmi.setText(user.getBmi());
+                            //getHeight_txt = user.getHeight();
                     }
-                    if (value != null && value.exists()) {
-                        textView.setText(value.getString("fullName"));
-                        display_weight.setText(value.getString("weight"));
-                        display_bmi.setText(value.getString("bmi"));
-                        getHeight_txt = value.getString(ViewHierarchyConstants.DIMENSION_HEIGHT_KEY);
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
                     }
-                }
-            });
-            textView.setText(email);
-        }
+                });
+
         if (display_weight.getText() != null) {
             view1.setVisibility(View.INVISIBLE);
             view2.setVisibility(View.INVISIBLE);
@@ -145,7 +154,7 @@ public class MeFragment extends Fragment {
                 showAlertDialog(R.layout.dialog_bmi));
 
         view.findViewById(R.id.buttonProfile).setOnClickListener(view5 ->
-                startActivity(new Intent(getActivity(), Profile_Activity.class)));
+                startActivity(new Intent(getActivity(), EditProfile_Activity.class)));
 
         view.findViewById(R.id.buttonFriends).setOnClickListener(view53 ->
                 startActivity(new Intent(getActivity(), FriendsActivity.class)));

@@ -11,81 +11,90 @@
         android:layout_height="wrap_content"
         app:title="Training Plan" />
 
-    <LinearLayout
-        android:layout_below="@+id/backToolbar"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_below="@+id/backToolbar">
 
-        <View
-            android:id="@+id/view"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="2.5dp"
-            android:alpha="0.08"
-            android:background="@color/pin_normal" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="2.5dp"
+                android:alpha="0.08"
+                android:background="@color/pin_normal" />
 
-            <ImageView
-                android:layout_width="318dp"
-                android:layout_height="213dp"
-                android:layout_marginTop="18dp"
-                android:src="@drawable/med_" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
 
-            <Button
-                android:id="@+id/meditationButton"
-                android:layout_width="318dp"
-                android:layout_height="213dp"
-                android:layout_marginTop="18dp"
-                android:alpha="0" />
+                <ImageView
+                    android:id="@+id/med_"
+                    android:layout_width="318dp"
+                    android:layout_height="213dp"
+                    android:layout_marginTop="18dp"
+                    android:src="@drawable/med_"/>
 
-        </RelativeLayout>
+                <Button
+                    android:id="@+id/meditationButton"
+                    android:layout_width="318dp"
+                    android:layout_height="213dp"
+                    android:layout_marginTop="18dp"
+                    android:alpha="0" />
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
+            </RelativeLayout>
 
-            <ImageView
-                android:layout_width="322dp"
-                android:layout_height="210dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/yoga_" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
 
-            <Button
-                android:id="@+id/yogaButton"
-                android:layout_width="322dp"
-                android:layout_height="199dp"
-                android:layout_marginTop="9.5dp"
-                android:alpha="0" />
+                <ImageView
+                    android:id="@+id/yoga_"
+                    android:layout_width="322dp"
+                    android:layout_height="210dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/yoga_"/>
 
-        </RelativeLayout>
+                <Button
+                    android:id="@+id/yogaButton"
+                    android:layout_width="322dp"
+                    android:layout_height="199dp"
+                    android:layout_marginTop="9.5dp"
+                    android:alpha="0" />
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
+            </RelativeLayout>
 
-            <ImageView
-                android:layout_width="330dp"
-                android:layout_height="165dp"
-                android:layout_marginTop="5dp"
-                android:src="@drawable/gym_" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
 
-            <Button
-                android:id="@+id/gymButton"
-                android:layout_width="330dp"
-                android:layout_height="165dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="4dp"
-                android:alpha="0" />
+                <ImageView
+                    android:id="@+id/gym_"
+                    android:layout_width="330dp"
+                    android:layout_height="165dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/gym_"/>
 
-        </RelativeLayout>
+                <Button
+                    android:id="@+id/gymButton"
+                    android:layout_width="330dp"
+                    android:layout_height="165dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="4dp"
+                    android:alpha="0" />
 
-    </LinearLayout>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </RelativeLayout>
 

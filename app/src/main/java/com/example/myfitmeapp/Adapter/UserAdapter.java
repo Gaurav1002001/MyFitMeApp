@@ -2,60 +2,58 @@ package com.example.myfitmeapp.Adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.util.Log;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.internal.view.SupportMenu;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.example.myfitmeapp.FriendsModel.User;
+import com.example.myfitmeapp.Profile_PageInfoActivity;
 import com.example.myfitmeapp.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.squareup.picasso.Picasso;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
+public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     private final Context mContext;
     private final List<User> mUsers;
-    private boolean isFragment;
 
     private FirebaseUser firebaseUser;
-    private DocumentReference reference , reference1;
 
-    public UserAdapter(Context mContext, List<User> mUsers, boolean isFragment) {
+    public UserAdapter(Context mContext, List<User> mUsers) {
         this.mContext = mContext;
         this.mUsers = mUsers;
-        this.isFragment = isFragment;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.user_item , parent , false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.user_item, parent, false);
         return new UserAdapter.ViewHolder(view);
     }
 
@@ -66,15 +64,31 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
 
         final User user = mUsers.get(position);
         holder.btnFollow.setVisibility(View.VISIBLE);
+        holder.fullName.setText(user.getFullname());
+        if (user.getImageurl() != null) {
+            Glide.with(mContext)
+                    .load(user.getImageurl())
+                    .listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                            holder.imageProfile.setImageResource(R.drawable.ic_avatar_recent_login);
+                            return false;
+                        }
 
-        holder.userName.setText(user.getUserName());
-        holder.fullName.setText(user.getFullName());
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                            holder.imageProfile.setImageResource(R.drawable.ic_avatar_recent_login);
+                            return false;
+                        }
+                    })
+                    .into(holder.imageProfile);
+        } else {
+            holder.imageProfile.setImageResource(R.drawable.ic_avatar_recent_login);
+        }
 
-        Picasso.get().load(user.getImageUrl()).placeholder(R.drawable.person_45_45).into(holder.imageProfile);
+        isFollowed(user.getUserid(), holder.btnFollow);
 
-        isFollowed(user.getUserId() , holder.btnFollow);
-
-        if (user.getUserId() != null && user.getUserId().equals(firebaseUser.getUid())){
+        if (user.getUserid() != null && user.getUserid().equals(firebaseUser.getUid())) {
             holder.btnFollow.setVisibility(View.GONE);
         }
 
@@ -82,122 +96,82 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
             @Override
             public void onClick(View v) {
 
-                reference = FirebaseFirestore.getInstance()
-                        .collection("users").document(firebaseUser.getUid())
-                        .collection("Following").document(user.getUserId());
-
-                reference1 = FirebaseFirestore.getInstance()
-                        .collection("users").document(user.getUserId())
-                        .collection("Followers").document(firebaseUser.getUid());
-
-                if (holder.btnFollow.getText().toString().equals(("follow"))){
-
-                    Map<String, Object> user1 = new HashMap<>();
-                    reference.set(user1).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            Toast.makeText(mContext,"You started following "+ user.getUserName(),Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                            .addOnFailureListener(new OnFailureListener() {
+                if (holder.btnFollow.getText().toString().equals(("follow"))) {
+                    FirebaseDatabase.getInstance().getReference().child("Follow").
+                            child((firebaseUser.getUid())).child("following").child(user.getUserid()).setValue(true)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.d("Failure","Failed");
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(mContext, "You started following " + user.getUsername(), Toast.LENGTH_SHORT).show();
                                 }
                             });
 
-                    Map<String, Object> user2 = new HashMap<>();
-                    reference1.set(user2).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            Log.d("Success", "DocumentSnapshot added with ID: " + reference.getId());
-                        }
-                    })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.d("Failure","Failed");
-                                }
-                            });
+                    FirebaseDatabase.getInstance().getReference().child("Follow").
+                            child(user.getUserid()).child("followers").child(firebaseUser.getUid()).setValue(true);
 
-                    //addNotification(user.getUserId());
+                    //addNotification(user.getId());
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                    builder.setTitle("Do you want to unfollow");
-                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    builder.setTitle("Are you sure you want to unfollow this user?");
+                    builder.setPositiveButton("confirm", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            reference.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()){
-                                        Log.d("TAG", "DocumentSnapshot successfully deleted!");
-                                    } else {
-                                        Log.w("TAG", "Error deleting document");
-                                    }
-                                }
-                            });
-                            reference1.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()){
-                                        Log.d("TAG", "DocumentSnapshot successfully deleted!");
-                                    } else {
-                                        Log.w("TAG", "Error deleting document");
-                                    }
-                                }
-                            });
+                            FirebaseDatabase.getInstance().getReference().child("Follow").
+                                    child((firebaseUser.getUid())).child("following").child(user.getUserid()).removeValue();
+
+                            FirebaseDatabase.getInstance().getReference().child("Follow").
+                                    child(user.getUserid()).child("followers").child(firebaseUser.getUid()).removeValue();
 
                             removeItem(holder.getAdapterPosition());
                         }
                     });
-                    builder.setNegativeButton("No", (dialog, which) -> dialog.dismiss());
+                    builder.setNegativeButton("cancel", (dialog, which) -> dialog.dismiss());
                     AlertDialog dialog = builder.create();
                     dialog.show();
                     Button nbutton = dialog.getButton(-2);
                     nbutton.setBackgroundColor(-1);
-                    nbutton.setTextColor(-7829368);
+                    nbutton.setTextColor(mContext.getResources().getColor(R.color.yoga_green));
                     nbutton.setAllCaps(false);
                     Button pbutton = dialog.getButton(-1);
                     pbutton.setBackgroundColor(-1);
-                    pbutton.setTextColor(SupportMenu.CATEGORY_MASK);
+                    pbutton.setTextColor(mContext.getResources().getColor(R.color.yoga_green));
                     pbutton.setAllCaps(false);
                 }
             }
         });
 
-        /*holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.imageProfile.setOnClickListener(v -> {
+            Intent intent = new Intent(mContext, Profile_PageInfoActivity.class);
+            intent.putExtra("publisherId", user.getUserid());
+            mContext.startActivity(intent);
+        });
+
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isFargment) {
-                    mContext.getSharedPreferences("PROFILE", Context.MODE_PRIVATE).edit().putString("profileId", user.getUserId()).apply();
-
-                    ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
-                } else {
-                    Intent intent = new Intent(mContext, MainActivity.class);
-                    intent.putExtra("publisherId", user.getUserId());
-                    mContext.startActivity(intent);
-                }
+                Intent intent = new Intent(mContext, Profile_PageInfoActivity.class);
+                intent.putExtra("publisherId", user.getUserid());
+                mContext.startActivity(intent);
             }
-        });*/
+        });
+
     }
 
     private void isFollowed(final String userId, final Button btnFollow) {
-        DocumentReference reference = FirebaseFirestore.getInstance()
-                .collection("users").document(firebaseUser.getUid())
-                .collection("Following").document(userId);
-        reference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Follow")
+                .child(firebaseUser.getUid()).child("following");
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException e) {
-                if (e != null) {
-                    Log.w("TAG", "Listen failed.", e);
-                    return;
-                }
-                if (value != null && value.exists()) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.child(userId).exists())
                     btnFollow.setText("following");
-                } else {
+                else
                     btnFollow.setText("follow");
-                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
     }
@@ -207,20 +181,20 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
         return mUsers.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public CircleImageView imageProfile;
-        public TextView userName;
         public TextView fullName;
         public Button btnFollow;
+        public LinearLayout linearLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             imageProfile = itemView.findViewById(R.id.image_profile);
-            userName = itemView.findViewById(R.id.username);
             fullName = itemView.findViewById(R.id.fullname);
             btnFollow = itemView.findViewById(R.id.btn_follow);
+            linearLayout = itemView.findViewById(R.id.linearLayout);
         }
     }
 

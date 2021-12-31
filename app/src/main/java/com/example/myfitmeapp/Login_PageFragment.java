@@ -23,10 +23,6 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.HttpMethod;
-import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
@@ -35,16 +31,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.firebase.auth.AdditionalUserInfo;
 import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 
-import org.json.JSONException;
-
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -53,7 +46,6 @@ public class Login_PageFragment extends Fragment {
 
     private static final int RC_SIGN_IN = 9001;
     private static final String TAG = "FACEBOOK";
-    String email;
     private FirebaseAuth mAuth;
     private CallbackManager mCallbackManager;
     private GoogleSignInClient mGoogleSignInClient;
@@ -82,7 +74,7 @@ public class Login_PageFragment extends Fragment {
         fragmentTransaction = fragmentManager.beginTransaction();
         viewPager = view.findViewById(R.id.viewPager1);
         dotsIndicator = view.findViewById(R.id.dots_indicator);
-        adapter = new ViewPagerAdapter(getActivity(),images);
+        adapter = new ViewPagerAdapter(requireActivity(),images);
         viewPager.setAdapter(adapter);
         dotsIndicator.setViewPager(viewPager);
 
@@ -104,7 +96,8 @@ public class Login_PageFragment extends Fragment {
 
         mCallbackManager = CallbackManager.Factory.create();
         LoginButton loginButton = view.findViewById(R.id.facebookButton);
-        loginButton.setReadPermissions("email", "public_profile");
+        loginButton.setReadPermissions(Arrays.asList(
+                "email", "public_profile"));
         loginButton.setFragment(this);
         loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -130,7 +123,7 @@ public class Login_PageFragment extends Fragment {
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
+        mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso);
 
         view.findViewById(R.id.emailButton).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,8 +153,7 @@ public class Login_PageFragment extends Fragment {
 
     private void handleFacebookAccessToken(AccessToken token) {
         Log.d(TAG, "handleFacebookAccessToken:" + token);
-        mProgress.setTitle("Processing...");
-        mProgress.setMessage("Please wait...");
+        mProgress.setMessage("Loading...");
         mProgress.setCancelable(false);
         mProgress.setIndeterminate(true);
         mProgress.show();
@@ -170,74 +162,17 @@ public class Login_PageFragment extends Fragment {
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(requireActivity(), task -> {
                     if (task.isSuccessful()) {
-                        Log.d(TAG, "signInWithCredential:success");
-                        if (((AdditionalUserInfo) Objects.requireNonNull(((AuthResult) task.getResult()).getAdditionalUserInfo())).isNewUser()) {
-                            startActivity(new Intent(getActivity(), KnowUserActivity_B.class));
-                            requireActivity().finish();
+                        if (Objects.requireNonNull(task.getResult().getAdditionalUserInfo()).isNewUser()) {
+                            gotoUserInfo();
                         } else {
-                            startActivity(new Intent(getActivity(), MainActivity.class));
-                            requireActivity().finish();
+                            gotoMainActivity();
                         }
-                        GraphRequest request = GraphRequest.newMeRequest(token, (object, response) -> {
-                            Log.v("LoginActivity", response.toString());
-                                    if (object != null) {
-                                        try {
-                                            String name = object.getString("name");
-                                            String email = object.getString("email");
-                                            String fbUserID = object.getString("id");
-
-                                            disconnectFromFacebook();
-
-                                            // do action after Facebook login success
-                                            // or call your API
-                                        } catch (JSONException | NullPointerException e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
-                        });
-                        Bundle parameters = new Bundle();
-                        parameters.putString(
-                                "fields",
-                                "id, name, email, gender, birthday");
-                        request.setParameters(parameters);
-                        request.executeAsync();
-                        //updateUI();
                         return;
-                    }
-                    Log.w(TAG, "signInWithCredential:failure", task.getException());
+                    } else
+                        Toast.makeText(getActivity(), "Authentication failed. "+task.getException(), Toast.LENGTH_SHORT).show();
                     mProgress.dismiss();
-                    Toast.makeText(getActivity(), "Authentication failed.", Toast.LENGTH_SHORT).show();
+
                 });
-    }
-
-    public void disconnectFromFacebook()
-    {
-        if (AccessToken.getCurrentAccessToken() == null) {
-            return; // already logged out
-        }
-
-        new GraphRequest(
-                AccessToken.getCurrentAccessToken(),
-                "/me/permissions/",
-                null,
-                HttpMethod.DELETE,
-                new GraphRequest
-                        .Callback() {
-                    @Override
-                    public void onCompleted(GraphResponse graphResponse)
-                    {
-                        LoginManager.getInstance().logOut();
-                    }
-                })
-                .executeAsync();
-    }
-
-
-    private void updateUI() {
-        Intent intent = new Intent(getActivity(), MainActivity.class);
-        intent.putExtra("email", this.email);
-        startActivity(intent);
-        requireActivity().finish();
     }
 
     private void signIn() {
@@ -264,8 +199,7 @@ public class Login_PageFragment extends Fragment {
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
-        mProgress.setTitle("Processing...");
-        mProgress.setMessage("Please wait...");
+        mProgress.setMessage("Loading...");
         mProgress.setCancelable(false);
         mProgress.setIndeterminate(true);
         mProgress.show();
@@ -274,23 +208,27 @@ public class Login_PageFragment extends Fragment {
                 Log.d(TAG, "signInWithCredential:success");
                 mAuth.getCurrentUser();
                 boolean isNew = task.getResult().getAdditionalUserInfo().isNewUser();
-                //Log.d("MyTAG", "onComplete: " + (isNew ? "new user" : "old user"));
                 if (isNew) {
-                    startActivity(new Intent(getActivity(), KnowUserActivity_B.class));
-                    requireActivity().finish();
+                    gotoUserInfo();
                     return;
                 }
-                startActivity(new Intent(getActivity(), MainActivity.class));
-                requireActivity().finish();
+                gotoMainActivity();
                 return;
-            }
-            Log.w(TAG, "signInWithCredential:failure", task.getException());
+            } else
+                Toast.makeText(getActivity(), "Authentication failed.", Toast.LENGTH_SHORT).show();
             mProgress.dismiss();
-            Toast.makeText(getActivity(), "Authentication failed.", Toast.LENGTH_SHORT).show();
+
         });
     }
 
-    public void onBackPressed() {
-        //handle back press event
+    private void gotoUserInfo() {
+        Intent intent = new Intent(getActivity(), KnowUserActivity_B.class);
+        startActivity(intent);
+        requireActivity().finish();
+    }
+
+    private void gotoMainActivity() {
+        startActivity(new Intent(getActivity(), MainActivity.class));
+        requireActivity().finish();
     }
 }

@@ -2,6 +2,7 @@ package com.example.myfitmeapp.BottomNav_Fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -9,13 +10,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.example.myfitmeapp.Breathing_Fragment;
 import com.example.myfitmeapp.Delta_Activity;
 import com.example.myfitmeapp.EchoActivity;
@@ -37,6 +47,11 @@ import com.example.myfitmeapp.Payment_PageActivity;
 import com.example.myfitmeapp.R;
 import com.example.myfitmeapp.Soothing_Fragment;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -52,6 +67,9 @@ public class ExploreFragment extends Fragment {
     private RelativeLayout internetLayout;
     private RelativeLayout noInternetLayout;
 
+    private ImageView revive,india,delta,echo,golf,mother,menstrual,soothing,breathing,morning,nutrition;
+    private ProgressBar progressBar,progressBar2;
+
     public ExploreFragment() {
         // Required empty public constructor
     }
@@ -63,12 +81,27 @@ public class ExploreFragment extends Fragment {
         internetLayout = view.findViewById(R.id.internetLayout);
         noInternetLayout = view.findViewById(R.id.noInternetLayout);
         Button tryAgainButton = view.findViewById(R.id.try_again_button);
+
         fStore = FirebaseFirestore.getInstance();
         userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         documentReference = fStore.collection("users").document(userID);
         userName = view.findViewById(R.id.userName);
-        documentReference.get().addOnSuccessListener(documentSnapshot ->
-                userName.setText(documentSnapshot.getString("fullName")));
+        progressBar = view.findViewById(R.id.progress_bar);
+        progressBar2 = view.findViewById(R.id.progress_bar2);
+
+        FirebaseDatabase.getInstance().getReference().child("users")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("fullname")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        userName.setText(snapshot.getValue().toString());
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
 
         drawLayout();
 
@@ -89,7 +122,7 @@ public class ExploreFragment extends Fragment {
             textView.setText("GOOD EVENING, ");
         }
 
-        view.findViewById(R.id.imageView5).setOnClickListener(v ->
+        view.findViewById(R.id.revive).setOnClickListener(v ->
                 startActivity(new Intent(getActivity(), Payment_PageActivity.class)));
 
         view.findViewById(R.id.indiaButton).setOnClickListener(view1 ->
@@ -146,7 +179,75 @@ public class ExploreFragment extends Fragment {
         view.findViewById(R.id.connect_circle).setOnClickListener(view116 ->
                 startActivity(new Intent(getActivity(), Connect_Activity.class)));
 
+        revive = view.findViewById(R.id.revive);
+        india = view.findViewById(R.id.india);
+        delta = view.findViewById(R.id.delta);
+        echo = view.findViewById(R.id.echo);
+        golf = view.findViewById(R.id.golf);
+        mother = view.findViewById(R.id.mother);
+        menstrual = view.findViewById(R.id.menstrual);
+        soothing = view.findViewById(R.id.soothing);
+        breathing = view.findViewById(R.id.breathing);
+        morning = view.findViewById(R.id.morning);
+        nutrition = view.findViewById(R.id.nutritionButton);
+
+        //loadContent();
+
         return view;
+    }
+
+    private void loadContent() {
+        DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("drawables");
+        mDatabaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Glide.with(requireActivity())
+                        .load(snapshot.child("revive").getValue().toString())
+                        .listener(new RequestListener<Drawable>() {
+                            @Override
+                            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                progressBar.setVisibility(View.GONE);
+                                return false;
+                            }
+
+                            @Override
+                            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                progressBar.setVisibility(View.GONE);
+                                return false;
+                            }
+                        })
+                        .into(revive);
+                Glide.with(requireActivity()).load(snapshot.child("india").getValue().toString()).into(india);
+                Glide.with(requireActivity()).load(snapshot.child("delta").getValue().toString()).into(delta);
+                Glide.with(requireActivity()).load(snapshot.child("echo").getValue().toString()).into(echo);
+                Glide.with(requireActivity()).load(snapshot.child("golf").getValue().toString()).into(golf);
+                Glide.with(requireActivity()).load(snapshot.child("mother").getValue().toString()).into(mother);
+                Glide.with(requireActivity()).load(snapshot.child("menstrual").getValue().toString()).into(menstrual);
+                Glide.with(requireActivity()).load(snapshot.child("soothing").getValue().toString()).into(soothing);
+                Glide.with(requireActivity()).load(snapshot.child("breathing_circulation").getValue().toString()).into(breathing);
+                Glide.with(requireActivity()).load(snapshot.child("morning").getValue().toString()).into(morning);
+                Glide.with(requireActivity())
+                        .load(snapshot.child("nutrition").getValue().toString())
+                        .listener(new RequestListener<Drawable>() {
+                            @Override
+                            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                progressBar2.setVisibility(View.GONE);
+                                return false;
+                            }
+
+                            @Override
+                            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                progressBar2.setVisibility(View.GONE);
+                                return false;
+                            }
+                        })
+                        .into(nutrition);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 
     private void drawLayout() {
@@ -165,4 +266,5 @@ public class ExploreFragment extends Fragment {
 
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
+
 }

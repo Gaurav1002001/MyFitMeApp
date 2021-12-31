@@ -48,13 +48,13 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0 :
-                return "Day";
+                return "Workout";
             case 1 :
-                return "Week";
+                return "Program";
             case 2 :
-                return "Month";
+                return "Graphs";
             case 3 :
-                return "All";
+                return "History";
         }
         return null;
     }

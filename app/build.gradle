@@ -74,4 +74,5 @@ dependencies {
     api 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
     implementation "com.hendraanggrian.appcompat:socialview:0.2"
     implementation "com.hendraanggrian.appcompat:socialview-commons:0.2"
+    implementation "com.ms-square:expandableTextView:0.1.4"
 }

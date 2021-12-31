@@ -14,11 +14,18 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
 
+import com.example.myfitmeapp.FriendsModel.User;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,9 +35,9 @@ public class ThankYou extends AppCompatActivity {
     AnimatedVectorDrawable avd2;
     private ImageView done;
 
-    FirebaseFirestore fStore;
-    DocumentReference documentReference;
-    String userID,subString;
+    FirebaseUser fUser;
+    DatabaseReference databaseReference;
+    String subString;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,36 +55,40 @@ public class ThankYou extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
         );
 
-        String userName = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        fUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        String userName = fUser.getEmail();
         int iend = userName.indexOf("@");
         if (iend != -1)
         {
             subString= userName.substring(0 , iend);
         }
-        String name = extras.getString("fullName");
+        String name = extras.getString("fullname");
         String gender = extras.getString("gender");
         String birthday = extras.getString("birthday");
         String height = extras.getString("height");
         String weight = extras.getString("weight");
         String bmi = extras.getString("bmi");
 
-        fStore = FirebaseFirestore.getInstance();
-        userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        Calendar calendar = Calendar.getInstance();
+        String currentDate = DateFormat.getDateInstance(DateFormat.MONTH_FIELD).format(calendar.getTime());
 
         done = findViewById(R.id.done);
         Drawable drawable = done.getDrawable();
 
-        documentReference = fStore.collection("users").document(userID);
-        Map<String, Object> user = new HashMap<>();
-        user.put("userId",userID);
-        user.put("userName",subString);
-        user.put("fullName", name);
-        user.put("gender", gender);
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(fUser.getUid());
+        HashMap<String, Object> user = new HashMap<>();
         user.put("birthday", birthday);
+        user.put("bmi",bmi);
+        user.put("email",fUser.getEmail());
+        user.put("fullname", name);
+        user.put("gender", gender);
         user.put("height", height);
+        user.put("userid",fUser.getUid());
+        user.put("username",subString);
         user.put("weight", weight);
-        user.put("bmi", bmi);
-        documentReference.set(user).addOnSuccessListener(new OnSuccessListener() {
+        user.put("joindate", currentDate);
+        databaseReference.setValue(user).addOnSuccessListener(new OnSuccessListener() {
             @Override
             public final void onSuccess(Object obj) {
                 if (drawable instanceof AnimatedVectorDrawableCompat) {
@@ -93,9 +104,14 @@ public class ThankYou extends AppCompatActivity {
                     startActivity(new Intent(ThankYou.this, MainActivity.class));
                     finish();
                 }, 3000);
-                Log.d("Success", "DocumentSnapshot added with ID: " + documentReference.getId());
             }
         }).addOnFailureListener(e ->
                 Log.d("Failure","Failed"));
+
+        FirebaseDatabase.getInstance().getReference().child("Follow").
+                child((fUser.getUid())).child("following").child("Kgom6JB67RNyAw9gYN7DN40E81q1").setValue(true);
+
+        FirebaseDatabase.getInstance().getReference().child("Follow").
+                child("Kgom6JB67RNyAw9gYN7DN40E81q1").child("followers").child(fUser.getUid()).setValue(true);
     }
 }

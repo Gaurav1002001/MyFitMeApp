@@ -8,17 +8,21 @@ public class Post {
     String time;
     String calorie;
     String postDate;
+    String postid;
+    String publisher;
 
     public Post() {
     }
 
-    public Post(String imageUrl, String description, String title, String time, String calorie, String postDate) {
+    public Post(String imageUrl, String description, String title, String time, String calorie, String postDate, String postid, String publisher) {
         this.imageUrl = imageUrl;
         this.description = description;
         this.title = title;
         this.time = time;
         this.calorie = calorie;
         this.postDate = postDate;
+        this.postid = postid;
+        this.publisher = publisher;
     }
 
     public String getImageUrl() {
@@ -67,5 +71,21 @@ public class Post {
 
     public void setPostDate(String postDate) {
         this.postDate = postDate;
+    }
+
+    public String getPostid() {
+        return postid;
+    }
+
+    public void setPostid(String postid) {
+        this.postid = postid;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
     }
 }

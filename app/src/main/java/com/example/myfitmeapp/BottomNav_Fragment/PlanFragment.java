@@ -43,6 +43,7 @@ public class PlanFragment extends Fragment {
                 startActivity(new Intent(getActivity(), Gym_PageActivity.class));
             }
         });
+
         return view;
     }
 }

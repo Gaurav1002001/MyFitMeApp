@@ -4,7 +4,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,15 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myfitmeapp.Adapter.UserAdapter;
 import com.example.myfitmeapp.FriendsModel.User;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.Query;
 import com.hendraanggrian.appcompat.widget.SocialAutoCompleteTextView;
 
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ public class AddFriend extends AppCompatActivity {
     private UserAdapter userAdapter;
     private SocialAutoCompleteTextView search_bar;
     private FirebaseUser firebaseUser;
-    private boolean isPresent;
+    private ProgressBar mProgressCircle;
 
     public AddFriend() {
         // Required empty public constructor
@@ -45,13 +45,14 @@ public class AddFriend extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friend);
 
+        mProgressCircle = findViewById(R.id.progress_circle);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         recyclerView = findViewById(R.id.recycler_view_users);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         mUsers = new ArrayList<>();
-        userAdapter = new UserAdapter(this, mUsers ,false);
+        userAdapter = new UserAdapter(this, mUsers);
         recyclerView.setAdapter(userAdapter);
 
         search_bar = findViewById(R.id.search_bar);
@@ -101,54 +102,51 @@ public class AddFriend extends AppCompatActivity {
     }*/
 
     private void readUsers() {
-        CollectionReference reference = FirebaseFirestore.getInstance().collection("users");
-        reference.get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful() && TextUtils.isEmpty(search_bar.getText().toString())) {
-                            mUsers.clear();
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                if (document.getId().equals(firebaseUser.getUid())){
-                                    continue;
-                                }
-                                User user = document.toObject(User.class);
-                                mUsers.add(user);
-                            }
-
-                            userAdapter.notifyDataSetChanged();
-                        } else {
-                            Log.d("TAG", "Error getting documents: ", task.getException());
-                        }
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (TextUtils.isEmpty(search_bar.getText().toString())){
+                    mUsers.clear();
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                        User user = snapshot.getValue(User.class);
+                        mUsers.add(user);
                     }
-                });
+                    mProgressCircle.setVisibility(View.INVISIBLE);
+                    userAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                mProgressCircle.setVisibility(View.INVISIBLE);
+            }
+        });
     }
 
     private void searchUser(String s) {
-        CollectionReference reference = FirebaseFirestore.getInstance().collection("users");
-        Query query = reference.orderBy("userName").startAt(s).endAt(s + "\uf8ff");
+        Query query = FirebaseDatabase.getInstance().getReference().child("users")
+                .orderByChild("username").startAt(s).endAt(s + "\uf8ff");
 
-        query.get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            mUsers.clear();
-                            if (!TextUtils.isEmpty(search_bar.getText().toString())){
-                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                    User user = document.toObject(User.class);
-                                    mUsers.add(user);
-                                }
-                            } else {
-                                readUsers();
-                            }
-
-                            userAdapter.notifyDataSetChanged();
-                        } else {
-                            Log.d("TAG", "Error getting documents: ", task.getException());
-                        }
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mUsers.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    if (snapshot.getValue().toString().equals(firebaseUser.getUid())) {
+                        continue;
                     }
-                });
+                    User user = snapshot.getValue(User.class);
+                    mUsers.add(user);
+                }
+                userAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     /*private void filter (String text) {

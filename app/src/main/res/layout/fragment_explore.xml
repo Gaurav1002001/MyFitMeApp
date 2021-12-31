@@ -73,14 +73,26 @@
                     android:text="Great job showing commitment to your goal."
                     android:textColor="@color/black" />
 
-                <ImageView
-                    android:id="@+id/imageView5"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="245dp"
                     android:layout_marginStart="13dp"
                     android:layout_marginTop="15dp"
-                    android:layout_marginEnd="10dp"
-                    android:src="@drawable/revive" />
+                    android:layout_marginEnd="10dp">
+
+                    <ImageView
+                        android:id="@+id/revive"
+                        android:layout_width="wrap_content"
+                        android:layout_height="245dp"/>
+
+                    <ProgressBar
+                        android:id="@+id/progress_bar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:visibility="visible" />
+
+                </RelativeLayout>
 
                 <View
                     android:layout_width="match_parent"
@@ -117,9 +129,9 @@
                             android:layout_height="match_parent">
 
                             <ImageView
+                                android:id="@+id/india"
                                 android:layout_width="250dp"
-                                android:layout_height="305dp"
-                                android:src="@drawable/india" />
+                                android:layout_height="305dp" />
 
                             <Button
                                 android:id="@+id/indiaButton"
@@ -136,9 +148,9 @@
                             android:layout_marginStart="12dp">
 
                             <ImageView
+                                android:id="@+id/golf"
                                 android:layout_width="250dp"
-                                android:layout_height="305dp"
-                                android:src="@drawable/golf" />
+                                android:layout_height="305dp" />
 
                             <Button
                                 android:id="@+id/golfButton"
@@ -155,9 +167,9 @@
                             android:layout_marginStart="12dp">
 
                             <ImageView
+                                android:id="@+id/delta"
                                 android:layout_width="250dp"
-                                android:layout_height="305dp"
-                                android:src="@drawable/delta" />
+                                android:layout_height="305dp" />
 
                             <Button
                                 android:id="@+id/deltaButton"
@@ -174,9 +186,9 @@
                             android:layout_marginStart="12dp">
 
                             <ImageView
+                                android:id="@+id/echo"
                                 android:layout_width="250dp"
-                                android:layout_height="305dp"
-                                android:src="@drawable/echo" />
+                                android:layout_height="305dp" />
 
                             <Button
                                 android:id="@+id/echoButton"
@@ -225,9 +237,9 @@
                             android:layout_height="match_parent">
 
                             <ImageView
+                                android:id="@+id/mother"
                                 android:layout_width="250dp"
-                                android:layout_height="150dp"
-                                android:src="@drawable/mother" />
+                                android:layout_height="150dp" />
 
                             <Button
                                 android:id="@+id/motherhoodButton"
@@ -243,9 +255,9 @@
                             android:layout_marginStart="12dp">
 
                             <ImageView
+                                android:id="@+id/menstrual"
                                 android:layout_width="250dp"
-                                android:layout_height="150dp"
-                                android:src="@drawable/menstrual" />
+                                android:layout_height="150dp" />
 
                             <Button
                                 android:id="@+id/menstrualButton"
@@ -295,9 +307,9 @@
                             android:layout_height="match_parent">
 
                             <ImageView
+                                android:id="@+id/soothing"
                                 android:layout_width="250dp"
-                                android:layout_height="150dp"
-                                android:src="@drawable/soothing" />
+                                android:layout_height="150dp" />
 
                             <Button
                                 android:id="@+id/soothingButton"
@@ -313,9 +325,9 @@
                             android:layout_marginStart="12dp">
 
                             <ImageView
+                                android:id="@+id/breathing"
                                 android:layout_width="250dp"
-                                android:layout_height="150dp"
-                                android:src="@drawable/breathing_circulation" />
+                                android:layout_height="150dp" />
 
                             <Button
                                 android:id="@+id/breathingButton"
@@ -331,9 +343,9 @@
                             android:layout_marginStart="12dp">
 
                             <ImageView
+                                android:id="@+id/morning"
                                 android:layout_width="250dp"
-                                android:layout_height="150dp"
-                                android:src="@drawable/morning" />
+                                android:layout_height="150dp" />
 
                             <Button
                                 android:id="@+id/morningButton"
@@ -368,11 +380,25 @@
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
-                        <ImageView
-                            android:id="@+id/nutritionButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="170dp"
-                            android:src="@drawable/nutrition" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="170dp">
+
+                            <ImageView
+                                android:id="@+id/nutritionButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent" />
+
+                            <ProgressBar
+                                android:id="@+id/progress_bar2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:visibility="visible" />
+
+                        </RelativeLayout>
+
+
 
                         <TextView
                             android:layout_width="match_parent"

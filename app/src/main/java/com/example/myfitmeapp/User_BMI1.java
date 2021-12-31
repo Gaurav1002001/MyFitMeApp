@@ -63,15 +63,11 @@ public class User_BMI1 extends Fragment {
 
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             try {
-                if (editHeight.getText().toString() != null) {
-                    heightValue = Integer.parseInt(editHeight.getText().toString());
-                }
-                if (editWeight.getText().toString() != null) {
-                    weightValue = Integer.parseInt(editWeight.getText().toString());
-                }
-                if (editHeight.getText().toString() == null && editWeight.getText().toString() != null) {
-                    weightValue = 0;
-                }
+                editHeight.getText().toString();
+                heightValue = Integer.parseInt(editHeight.getText().toString());
+                editWeight.getText().toString();
+                weightValue = Integer.parseInt(editWeight.getText().toString());
+                editHeight.getText().toString();
             } catch (NumberFormatException e) {
                 heightValue = 175;
                 weightValue = 0;

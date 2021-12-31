@@ -14,10 +14,12 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.myfitmeapp.Adapter.Adapter;
 import com.example.myfitmeapp.Adapter.PostAdapter;
 import com.example.myfitmeapp.CoronaPageActivity;
@@ -26,6 +28,7 @@ import com.example.myfitmeapp.Model.Headlines;
 import com.example.myfitmeapp.Model.Post;
 import com.example.myfitmeapp.R;
 import com.example.myfitmeapp.api.ApiClient;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -46,6 +49,7 @@ public class FeedFragment extends Fragment {
     private PostAdapter postAdapter;
     private Adapter adapter;
     private ProgressBar mProgressCircle;
+    private List<String> followingList;
     private List<Post> mPosts;
     private DatabaseReference mDatabaseRef;
     List<Articles> articles = new ArrayList<>();
@@ -53,7 +57,7 @@ public class FeedFragment extends Fragment {
     final String API_KEY = "0eed3cbb09f346d7a8a86cf7e77c38c8";
     String category = "health";
 
-    private LinearLayout internetLayout;
+    private RelativeLayout internetLayout;
     private RelativeLayout noInternetLayout;
 
     public FeedFragment() {
@@ -67,6 +71,7 @@ public class FeedFragment extends Fragment {
         internetLayout = view.findViewById(R.id.internetLayout);
         noInternetLayout = view.findViewById(R.id.noInternetLayout);
         Button tryAgainButton = view.findViewById(R.id.try_again_button);
+
         view.findViewById(R.id.toolbar);
         view.findViewById(R.id.coronaButton).setOnClickListener(view1 ->
                 startActivity(new Intent(getActivity(), CoronaPageActivity.class)));
@@ -110,27 +115,46 @@ public class FeedFragment extends Fragment {
             }
         });
 
+        followingList = new ArrayList<>();
+        checkFollowingUsers();
+
         return view;
     }
 
-    private void readPosts() {
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("posts");
-
-        mDatabaseRef.addValueEventListener(new ValueEventListener() {
+    private void checkFollowingUsers() {
+        FirebaseDatabase.getInstance().getReference().child("Follow").child(FirebaseAuth.getInstance()
+                .getCurrentUser().getUid()).child("following").addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                followingList.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    followingList.add(snapshot.getKey());
+                }
+                followingList.add(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                readPosts();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    private void readPosts() {
+        FirebaseDatabase.getInstance().getReference().child("posts").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 mPosts.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Post post = new Post();
+                    Post post = snapshot.getValue(Post.class);
 
-                    post.setImageUrl(snapshot.child("imageUrl").getValue().toString());
-                    post.setDescription(snapshot.child("description").getValue().toString());
-                    post.setTitle(snapshot.child("title").getValue().toString());
-                    post.setTime(snapshot.child("time").getValue().toString());
-                    post.setCalorie(snapshot.child("calorie").getValue().toString());
-                    post.setPostDate(snapshot.child("postDate").getValue().toString());
-
-                    mPosts.add(post);
+                    for (String id : followingList) {
+                        if (post.getPublisher().equals(id)){
+                            mPosts.add(post);
+                        }
+                    }
                 }
 
                 postAdapter = new PostAdapter(getActivity(), mPosts);
@@ -140,7 +164,7 @@ public class FeedFragment extends Fragment {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(getActivity(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                 mProgressCircle.setVisibility(View.INVISIBLE);
             }

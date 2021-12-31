@@ -1,20 +1,13 @@
 package com.example.myfitmeapp;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
-import com.facebook.login.Login;
-
 public class Main_PageActivity extends AppCompatActivity {
 
     public static FragmentManager fragmentManager;
-    boolean doubleBackToExitPressedOnce = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,19 +26,8 @@ public class Main_PageActivity extends AppCompatActivity {
 
         if (count != 0) {
             getSupportFragmentManager().popBackStack();
+        } else {
+            super.onBackPressed();
         }
     }
-
-    /*@Override
-    public void onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
-            return;
-        }
-
-        this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
-
-        new Handler(Looper.getMainLooper()).postDelayed(() -> doubleBackToExitPressedOnce=false, 2000);
-    }*/
 }

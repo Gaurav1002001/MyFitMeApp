@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -18,6 +19,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -35,76 +40,88 @@ public class Fragment_followers extends Fragment {
     private LinearLayout linearLayout;
 
     private FirebaseUser firebaseUser;
+    private ProgressBar mProgressCircle;
+    Bundle args;
+    String id;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_followers, container, false);
 
-        linearLayout = view.findViewById(R.id.linearLayout);
+        args = this.getArguments();
+        if (args != null){
+            id = args.getString("id");
+        }
 
+        linearLayout = view.findViewById(R.id.linearLayout);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         mUsers = new ArrayList<>();
-        userAdapter = new UserAdapter(getContext(), mUsers , true);
+        userAdapter = new UserAdapter(getContext(), mUsers);
         recyclerView.setAdapter(userAdapter);
 
         idList = new ArrayList<>();
+        mProgressCircle = view.findViewById(R.id.progress_circle);
 
-        readUsers();
+        if (id != null) {
+            readUsers(id);
+        } else {
+            readUsers(firebaseUser.getUid());
+        }
 
         return view;
     }
 
-    private void readUsers() {
-        CollectionReference reference = FirebaseFirestore.getInstance()
-                .collection("users").document(firebaseUser.getUid()).collection("Followers");
-        reference.get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            idList.clear();
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                idList.add(document.getId());
-                            }
+    private void readUsers(String id) {
+        FirebaseDatabase.getInstance().getReference().child("Follow").child(id).child("followers").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                idList.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    idList.add((snapshot.getKey()));
+                }
+                showUsers();
+            }
 
-                            if (idList.size() == 0) {
-                                linearLayout.setVisibility(View.VISIBLE);
-                            }
-                            showUsers();
-                        } else {
-                            Log.d("TAG", "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
     }
 
     private void showUsers() {
-        CollectionReference reference = FirebaseFirestore.getInstance().collection("users");
-        reference.get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            mUsers.clear();
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                User user = document.toObject(User.class);
+        FirebaseDatabase.getInstance().getReference().child("users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mUsers.clear();
+                if (idList.isEmpty()) {
+                    linearLayout.setVisibility(View.VISIBLE);
+                } else {
+                    linearLayout.setVisibility(View.INVISIBLE);
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        User user = snapshot.getValue(User.class);
 
-                                for (String id : idList) {
-                                    if (user.getUserId().equals(id)) {
-                                        mUsers.add(user);
-                                    }
-                                }
+                        for (String id : idList) {
+                            if (user.getUserid().equals(id)) {
+                                mUsers.add(user);
                             }
-                            Log.d("list f", mUsers.toString());
-                            userAdapter.notifyDataSetChanged();
                         }
                     }
-                });
+                }
+                Log.d("list f", mUsers.toString());
+                mProgressCircle.setVisibility(View.INVISIBLE);
+                userAdapter.notifyDataSetChanged();
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                mProgressCircle.setVisibility(View.INVISIBLE);
+                linearLayout.setVisibility(View.VISIBLE);
+            }
+        });
     }
 }

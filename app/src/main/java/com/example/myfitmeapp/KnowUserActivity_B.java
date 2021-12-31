@@ -23,9 +23,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class KnowUserActivity_B extends AppCompatActivity {
 
     private EditText firstName;
-    String personEmail;
-    String personFamilyName;
-    String personGivenName;
     FirebaseUser mUser;
 
     @Override
@@ -33,28 +30,21 @@ public class KnowUserActivity_B extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_know_user_b);
 
-        firstName = findViewById(R.id.name);
-        EditText lastName = findViewById(R.id.sirName);
+        firstName = findViewById(R.id.firstName);
+        EditText lastName = findViewById(R.id.lastName);
         Button signIn = findViewById(R.id.signIn);
         CircleImageView profileImage = findViewById(R.id.profile_Image);
         mUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-        if (acct != null) {
-            personGivenName = acct.getGivenName();
-            personFamilyName = acct.getFamilyName();
-            personEmail = acct.getEmail();
-            Uri personPhoto = acct.getPhotoUrl();
-            firstName.setText(personGivenName);
-            lastName.setText(personFamilyName);
-            Glide.with(this).load(personPhoto).into(profileImage);
-        }
 
+        firstName.setText(mUser.getDisplayName());
+        if (mUser.getPhotoUrl() != null){
+            Glide.with(this).load(mUser.getPhotoUrl()).into(profileImage);
+        }
         signIn.setOnClickListener(view -> saveProfile());
     }
 
     private void saveProfile() {
-
         String name = firstName.getText().toString();
         Intent intent = new Intent(KnowUserActivity_B.this,Know_UserActivity.class);
         intent.putExtra("fullName",name);
@@ -64,5 +54,4 @@ public class KnowUserActivity_B extends AppCompatActivity {
     @Override
     public void onBackPressed() {
     }
-
 }

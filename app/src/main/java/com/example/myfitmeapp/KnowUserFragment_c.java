@@ -58,7 +58,7 @@ public class KnowUserFragment_c extends Fragment {
         view.findViewById(R.id.buttonContinue).setOnClickListener(view1 -> {
             Intent intent = new Intent(getActivity(),ThankYou.class);
             Bundle bundle = new Bundle();
-            bundle.putString("fullName",name);
+            bundle.putString("fullname",name);
             bundle.putString("gender",gender);
             bundle.putString("birthday",birthday);
             bundle.putString("height",height);
