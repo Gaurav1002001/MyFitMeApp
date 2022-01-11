@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".TrainingStatus.Fragment_Program"
+    android:orientation="vertical"
+    android:background="@color/grey">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        app:cardCornerRadius="6dp"
+        android:layout_margin="5dp"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="5dp">
+
+            <RelativeLayout
+                android:layout_width="210dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                android:layout_marginStart="5dp">
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Programs"
+                    android:layout_centerVertical="true"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="1.5dp"
+                android:layout_height="30dp"
+                android:background="@color/pin_normal"
+                android:layout_marginEnd="5dp"
+                android:alpha="0.2"
+                android:layout_gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="NEW"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="0.6"
+                android:fontFamily="@font/my_nunito_bold"/>
+
+            <View
+                android:layout_width="1.5dp"
+                android:layout_height="30dp"
+                android:background="@color/pin_normal"
+                android:layout_marginEnd="5dp"
+                android:alpha="0.2"
+                android:layout_gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="EDIT"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:layout_weight="0.6"
+                android:layout_marginEnd="5dp"
+                android:fontFamily="@font/my_nunito_bold"/>
+
+            <View
+                android:layout_width="1.5dp"
+                android:layout_height="30dp"
+                android:background="@color/pin_normal"
+                android:layout_marginEnd="5dp"
+                android:alpha="0.2"
+                android:layout_gravity="center_vertical"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:cardCornerRadius="6dp"
+        android:layout_margin="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="START PROGRAM"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

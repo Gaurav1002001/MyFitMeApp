@@ -9,13 +9,13 @@
         android:layout_width="match_parent"
         android:layout_height="375dp"
         android:layout_alignParentTop="true"
-        android:src="@drawable/bg_register_home_top_yoga" />
+        android:src="@drawable/bg_register_home_top_yoga"/>
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="?actionBarSize"
+        android:layout_marginTop="95dp"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 

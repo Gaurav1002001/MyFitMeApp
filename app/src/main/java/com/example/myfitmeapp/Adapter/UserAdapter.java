@@ -3,7 +3,6 @@ package com.example.myfitmeapp.Adapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,17 +12,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
-import com.example.myfitmeapp.FriendsModel.User;
-import com.example.myfitmeapp.Profile_PageInfoActivity;
+import com.example.myfitmeapp.Model.User;
+import com.example.myfitmeapp.MeFragment_Items.Profile_PageInfoActivity;
 import com.example.myfitmeapp.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -66,22 +60,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         holder.btnFollow.setVisibility(View.VISIBLE);
         holder.fullName.setText(user.getFullname());
         if (user.getImageurl() != null) {
-            Glide.with(mContext)
-                    .load(user.getImageurl())
-                    .listener(new RequestListener<Drawable>() {
-                        @Override
-                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                            holder.imageProfile.setImageResource(R.drawable.ic_avatar_recent_login);
-                            return false;
-                        }
-
-                        @Override
-                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                            holder.imageProfile.setImageResource(R.drawable.ic_avatar_recent_login);
-                            return false;
-                        }
-                    })
-                    .into(holder.imageProfile);
+            Glide.with(mContext).load(user.getImageurl()).into(holder.imageProfile);
         } else {
             holder.imageProfile.setImageResource(R.drawable.ic_avatar_recent_login);
         }

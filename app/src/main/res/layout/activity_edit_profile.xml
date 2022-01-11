@@ -110,10 +110,17 @@
                     android:layout_height="wrap_content"
                     android:gravity="center">
 
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/ic_avatar_recent_login"
+                        android:scaleType="centerCrop" />
+
                     <ProgressBar
                         android:id="@+id/progress"
-                        android:layout_width="65dp"
-                        android:layout_height="65dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:visibility="visible"
                         android:layout_centerInParent="true"/>
 
@@ -547,9 +554,9 @@
 
                         <EditText
                             android:id="@+id/height"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
+                            android:layout_marginStart="20dp"
                             android:background="@android:color/transparent"
                             android:enabled="false"
                             android:fontFamily="@font/proximanovaregular"
@@ -585,7 +592,7 @@
                             android:fontFamily="@font/proximanovaregular"
                             android:hint="weight (in kg)"
                             android:inputType="number"
-                            android:maxLength="3"
+                            android:maxLength="5"
                             android:textColor="@color/goodgrey"
                             android:textSize="16sp"
                             android:textStyle="bold" />

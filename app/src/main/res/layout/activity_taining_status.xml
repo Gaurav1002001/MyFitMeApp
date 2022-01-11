@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TrainingStatusActivity"
+    tools:context=".TrainingStatus.TrainingStatusActivity"
     android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -13,25 +13,40 @@
         android:layout_width="match_parent"
         android:theme="@style/Theme.MyFitMeApp.AppBarOverlay">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_top"
-            android:layout_height="wrap_content"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:minHeight="?android:attr/actionBarSize"
-            android:background="@drawable/bg_splash_yoga_gradient"
-            app:navigationIcon="@drawable/ic_baseline_arrow_back_24">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_top"
                 android:layout_height="wrap_content"
-                android:text="All"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_gravity="center"
-                android:id="@+id/toolbar_title" />
+                android:layout_width="match_parent"
+                android:minHeight="?android:attr/actionBarSize"
+                android:background="@drawable/bg_splash_yoga_gradient"
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_24">
 
-        </androidx.appcompat.widget.Toolbar>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="All"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:id="@+id/toolbar_title" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <ImageView
+                android:id="@+id/stopwatch"
+                android:layout_width="21dp"
+                android:layout_height="21dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/icons8_stopwatch_50" />
+
+        </RelativeLayout>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
@@ -40,6 +55,7 @@
             android:background="@drawable/bg_splash_yoga_gradient"
             app:tabIndicatorColor="@color/white"
             app:tabIndicatorHeight="3dp"/>
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager

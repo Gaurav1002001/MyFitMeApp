@@ -109,4 +109,5 @@
     <color name="colorPrimary">#607d8b</color>
     <color name="colorPrimaryDark">#455a64</color>
     <color name="dark_green">#278056</color>
+    <color name="transparent">@android:color/transparent</color>
 </resources>

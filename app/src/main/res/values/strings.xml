@@ -33,4 +33,5 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_training_status">TrainingStatusActivity</string>
     <string name="title_activity_taining_status">TainingStatusActivity</string>
+
 </resources>

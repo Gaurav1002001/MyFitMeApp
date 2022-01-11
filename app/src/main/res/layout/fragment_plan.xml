@@ -61,6 +61,12 @@
                     android:layout_marginTop="10dp"
                     android:src="@drawable/yoga_"/>
 
+                <ImageView
+                    android:layout_width="322dp"
+                    android:layout_height="210dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/gradient_very_light"/>
+
                 <Button
                     android:id="@+id/yogaButton"
                     android:layout_width="322dp"

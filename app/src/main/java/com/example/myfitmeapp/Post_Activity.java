@@ -9,6 +9,7 @@ import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -35,6 +37,8 @@ import com.hendraanggrian.appcompat.widget.HashtagArrayAdapter;
 import com.hendraanggrian.appcompat.widget.SocialAutoCompleteTextView;
 import com.theartofdev.edmodo.cropper.CropImage;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -45,13 +49,15 @@ public class Post_Activity extends AppCompatActivity {
 
     private ImageView close;
     private TextView post;
-    private EditText postDate;
     private ImageView postImage;
     private EditText postTitle;
     private EditText postTime;
     private EditText postCalorie;
     SocialAutoCompleteTextView description;
     private FirebaseUser fUser;
+    private ProgressBar progressBar;
+
+    private String dateTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +65,6 @@ public class Post_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_post);
 
         close = findViewById(R.id.close);
-        postDate = findViewById(R.id.postDate);
         postImage = findViewById(R.id.post_image);
         postTitle = findViewById(R.id.title);
         postTime = findViewById(R.id.time);
@@ -67,6 +72,7 @@ public class Post_Activity extends AppCompatActivity {
         description = findViewById(R.id.description);
         post = findViewById(R.id.post);
         fUser = FirebaseAuth.getInstance().getCurrentUser();
+        progressBar = findViewById(R.id.progress_bar);
 
         close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +87,8 @@ public class Post_Activity extends AppCompatActivity {
                 upload();
             }
         });
+
+
 
         CropImage.activity().start(Post_Activity.this);
     }
@@ -110,20 +118,20 @@ public class Post_Activity extends AppCompatActivity {
                     Uri downloadUri = task.getResult();
                     imageUrl = downloadUri.toString();
 
-                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("posts");
-                    String postId = ref.push().getKey();
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("posts");
+                    String postId = reference.push().getKey();
 
                     HashMap<String , Object> map = new HashMap<>();
-                    map.put("postDate",postDate.getText().toString());
+                    map.put("postDate", dateTime);
                     map.put("imageUrl" , imageUrl);
                     map.put("title",postTitle.getText().toString());
                     map.put("time",postTime.getText().toString());
                     map.put("calorie",postCalorie.getText().toString());
                     map.put("description" , description.getText().toString());
                     map.put("postid" , postId);
-                    map.put("publisher" , FirebaseAuth.getInstance().getCurrentUser().getUid());
+                    map.put("publisher" , fUser.getUid());
 
-                    ref.child(postId).setValue(map);
+                    reference.child(postId).setValue(map);
 
                     pd.dismiss();
                     finish();
@@ -148,6 +156,7 @@ public class Post_Activity extends AppCompatActivity {
             imageUri = result.getUri();
 
             postImage.setImageURI(imageUri);
+            progressBar.setVisibility(View.GONE);
         } else {
             finish();
         }

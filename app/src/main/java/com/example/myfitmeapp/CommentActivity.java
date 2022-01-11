@@ -40,6 +40,7 @@ public class CommentActivity extends AppCompatActivity {
     private ImageView post;
 
     private String postId;
+    private String comment;
 
     FirebaseUser fUser;
     private LinearLayout linearLayout;
@@ -141,16 +142,41 @@ public class CommentActivity extends AppCompatActivity {
     }
 
     private void putComment() {
+        comment = addComment.getText().toString();
         HashMap<String, Object> map = new HashMap<>();
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("comments").child(postId);
         String id = ref.push().getKey();
         map.put("id", id);
-        map.put("comment", addComment.getText().toString());
+        map.put("comment", comment);
         map.put("publisher", fUser.getUid());
         map.put("commentTime", ServerValue.TIMESTAMP);
 
         addComment.setText("");
         ref.child(id).updateChildren(map);
+
+        updateInPost();
+    }
+
+    private void updateInPost() {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        ref.child("users").child(fUser.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String username = snapshot.child("username").getValue().toString();
+
+                HashMap<String, Object> map = new HashMap<>();
+                ref.child("posts").child(postId);
+                map.put("lcomment", comment);
+                map.put("lusername", username);
+
+                ref.child("posts").child(postId).updateChildren(map);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

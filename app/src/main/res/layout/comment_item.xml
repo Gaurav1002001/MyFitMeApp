@@ -8,6 +8,12 @@
     android:paddingEnd="10dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="37dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/ic_avatar_recent_login"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/image_profile"
         android:layout_width="37dp"
         android:layout_height="37dp"
@@ -26,8 +32,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimaryDark"
-            android:textStyle="bold"
-            android:textSize="15sp"/>
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/comment"

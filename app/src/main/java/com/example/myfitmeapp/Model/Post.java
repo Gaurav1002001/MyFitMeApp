@@ -10,11 +10,13 @@ public class Post {
     String postDate;
     String postid;
     String publisher;
+    String lusername;
+    String lcomment;
 
     public Post() {
     }
 
-    public Post(String imageUrl, String description, String title, String time, String calorie, String postDate, String postid, String publisher) {
+    public Post(String imageUrl, String description, String title, String time, String calorie, String postDate, String postid, String publisher, String lusername, String lcomment) {
         this.imageUrl = imageUrl;
         this.description = description;
         this.title = title;
@@ -23,6 +25,8 @@ public class Post {
         this.postDate = postDate;
         this.postid = postid;
         this.publisher = publisher;
+        this.lcomment = lcomment;
+        this.lusername = lusername;
     }
 
     public String getImageUrl() {
@@ -87,5 +91,21 @@ public class Post {
 
     public void setPublisher(String publisher) {
         this.publisher = publisher;
+    }
+
+    public String getLusername() {
+        return lusername;
+    }
+
+    public void setLusername(String lusername) {
+        this.lusername = lusername;
+    }
+
+    public String getLcomment() {
+        return lcomment;
+    }
+
+    public void setLcomment(String lcomment) {
+        this.lcomment = lcomment;
     }
 }

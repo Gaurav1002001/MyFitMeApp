@@ -7,6 +7,8 @@
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable-v24/circleyellowfil.xml" value="0.2625" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable-v24/circular_grey_bordersolid.xml" value="0.2625" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable-v24/circularbordersolid.xml" value="0.2625" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable-v24/gradient_light.xml" value="0.21837606837606838" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable-v24/gradient_very_light.xml" value="0.21837606837606838" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable-v24/ic_baseline_arrow_back_black24.xml" value="0.21837606837606838" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable-v24/ic_baseline_more_horiz_24.xml" value="0.14114583333333333" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable-v24/ic_call_24dp.xml" value="0.2625" />
@@ -21,15 +23,20 @@
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable-v24/selectable_text_color_checked_state.xml" value="0.10277777777777777" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable/avd_done.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable/back_arrow_white.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable/bg_meditation_detail_gradual_layer.xml" value="0.21837606837606838" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable/bg_purple_gradient.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable/bg_register_gradient.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable/bg_splash_yoga.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable/bg_splash_yoga_gradient.xml" value="0.14375" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable/black_background.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable/bottom_navigation_selector.xml" value="0.2625" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable/bottom_sheetback.xml" value="0.21837606837606838" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable/button_background.xml" value="0.21837606837606838" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable/button_border.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable/button_border_selected.xml" value="0.21837606837606838" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable/button_state_color.xml" value="0.21837606837606838" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable/checkbox_custom_background.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable/chip_back.xml" value="0.21837606837606838" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable/circle.xml" value="0.21837606837606838" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable/circle_shape.xml" value="0.21837606837606838" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable/circular_progress_bar.xml" value="0.21837606837606838" />
@@ -51,6 +58,7 @@
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.2625" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable/ic_baseline_lock_24.xml" value="0.14114583333333333" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable/ic_baseline_mail_outline_24.xml" value="0.14114583333333333" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable/ic_baseline_more_vert_24.xml" value="0.21837606837606838" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable/ic_baseline_people_24.xml" value="0.2625" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.2625" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable/ic_baseline_person_add_alt_1_24.xml" value="0.26614583333333336" />
@@ -71,6 +79,7 @@
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable/rounded_button_3.xml" value="0.2625" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable/rounded_button_4.xml" value="0.2625" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable/rounded_buttons2.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable/rounded_dialog.xml" value="0.21837606837606838" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable/selectable_text_bg_color_checked_state.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/drawable/view_backgorund.xml" value="0.21837606837606838" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/font/my_nunito.xml" value="0.28020833333333334" />
@@ -78,6 +87,7 @@
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_about_us.xml" value="0.25" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_accepting.xml" value="0.2368659420289855" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_account1.xml" value="0.25" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_account_container.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_add_friend.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_affected_countries.xml" value="0.2368659420289855" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_body.xml" value="0.2368659420289855" />
@@ -91,14 +101,17 @@
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_detail.xml" value="0.2368659420289855" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_detailed.xml" value="0.24635416666666668" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_echo2.xml" value="0.24635416666666668" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_edit_profile.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_explore.xml" value="0.24635416666666668" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_frien.xml" value="0.2368659420289855" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_friends.xml" value="0.2368659420289855" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_golf.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_gym__page.xml" value="0.24635416666666668" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_gym_page.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_health_nutrition.xml" value="0.4" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_india.xml" value="0.24635416666666668" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_know_user_b.xml" value="0.21739130434782608" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_kua_name_photo.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_login.xml" value="0.23233695652173914" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_login_page.xml" value="0.25" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_main.xml" value="0.24635416666666668" />
@@ -106,17 +119,20 @@
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_main2.xml" value="0.24592391304347827" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_main_page.xml" value="0.17300724637681159" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_meditation__page.xml" value="0.264" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_meditation_content.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_new.xml" value="0.2368659420289855" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_no_internet.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_payment_page.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_post.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_profile.xml" value="0.264" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_profile_page_info.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_profile_page_info_acitivity.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_profile_page_info_activity.xml" value="0.19067028985507245" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_reminder.xml" value="0.19202898550724637" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_splash.xml" value="0.23233695652173914" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_splash_page.xml" value="0.25" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_stay.xml" value="0.264" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_stopwatch.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_taining_status.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_thank_you.xml" value="0.2115036231884058" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_to_bedeleted.xml" value="0.20512820512820512" />
@@ -125,39 +141,57 @@
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_training_days.xml" value="0.24635416666666668" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_training_status.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_training_status_actiivty.xml" value="0.20512820512820512" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_try.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_verify_page.xml" value="0.25" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_yoga_content.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_yoga_page.xml" value="0.24635416666666668" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_yogaadvanced.xml" value="0.3511338697878566" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_yogabeginner.xml" value="0.1935897435897436" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/activity_yogaintermediate.xml" value="0.4" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/another.xml" value="0.2368659420289855" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/breathing_breathing.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/comment_item.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/custom_layout.xml" value="0.24635416666666668" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/deleteit.xml" value="0.20512820512820512" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/deleteit_.xml" value="0.20512820512820512" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/deletit.xml" value="0.20512820512820512" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/delteit.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/dialog_bmi.xml" value="0.24635416666666668" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/dialog_weight.xml" value="0.24635416666666668" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_about.xml" value="0.20512820512820512" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_accepting.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_add_friend.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_add_friend2.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_all.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_blank.xml" value="0.20833333333333334" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_body.xml" value="0.20512820512820512" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_breathing.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_breathing_.xml" value="0.24635416666666668" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_camera.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_comment_list.xml" value="0.20512820512820512" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_connect.xml" value="0.20512820512820512" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_cultivative.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_dashboard.xml" value="0.2368659420289855" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_day.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_email.xml" value="0.24635416666666668" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_email2.xml" value="0.264" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_entry_detail.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_explore.xml" value="0.24635416666666668" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_explore2.xml" value="0.24635416666666668" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_feed.xml" value="0.24635416666666668" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_followers.xml" value="0.2368659420289855" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_following.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_forgot__password.xml" value="0.20512820512820512" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_forgot_password.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_friends.xml" value="0.2359375" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_graphs.xml" value="0.16757246376811594" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_history.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_home.xml" value="0.19764957264957264" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_join__now.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_know_user1.xml" value="0.21693840579710144" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_know_user3.xml" value="0.21693840579710144" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_know_user_a.xml" value="0.21195652173913043" />
-        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_know_user_b.xml" value="0.16" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_know_user_b.xml" value="0.2" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_know_user_c.xml" value="0.21195652173913043" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_knowuser2.xml" value="0.21693840579710144" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_login__page.xml" value="0.25" />
@@ -167,30 +201,46 @@
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_main.xml" value="0.2359375" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_main_page.xml" value="0.2006340579710145" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_me.xml" value="0.264" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_meditation_detail.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_menstrual_.xml" value="0.24635416666666668" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_morning_.xml" value="0.24635416666666668" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_motherhood_.xml" value="0.24635416666666668" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_notifications.xml" value="0.10427350427350428" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_phone_verify.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_plan.xml" value="0.24635416666666668" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_plan2.xml" value="0.24635416666666668" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_profile.xml" value="0.20512820512820512" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_program.xml" value="0.4" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_signIn_email.xml" value="0.2" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_signin_email.xml" value="0.20512820512820512" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_signup_email.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_soothing_.xml" value="0.24635416666666668" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_stay.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_taining_status.xml" value="0.1935897435897436" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_third.xml" value="0.20512820512820512" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_training.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_training_status.xml" value="0.1935897435897436" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_user__b_m_i.xml" value="0.21739130434782608" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_user_bmi.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_user_gender.xml" value="0.21739130434782608" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_week.xml" value="0.20512820512820512" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/fragment_workout.xml" value="0.264" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/gym_advanced_page.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/gym_beginner_page.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/gym_intermediate_page.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/ic_launcher_foreground.xml" value="0.24635416666666668" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/items.xml" value="0.24635416666666668" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/know__user_activity.xml" value="0.21739130434782608" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/know_user_container.xml" value="0.20512820512820512" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/layout_meditation_complete.xml" value="0.20512820512820512" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/layout_meditation_view.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/list_custom_item.xml" value="0.2368659420289855" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/meditation_item.xml" value="0.20512820512820512" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/new_layout.xml" value="0.16757246376811594" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/post_item.xml" value="0.20512820512820512" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/remove_post.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/user_item.xml" value="0.20512820512820512" />
+        <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/layout/view_user_profile_avatar_layout.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/menu/add_friend.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.24635416666666668" />
         <entry key="..\:/Users/gaura/AndroidStudioProjects/MyFitMeApp/app/src/main/res/menu/feed_menu.xml" value="0.24635416666666668" />

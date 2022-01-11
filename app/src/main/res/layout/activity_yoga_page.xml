@@ -3,45 +3,201 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backyoga"
     android:fitsSystemWindows="true">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="Yoga"
+        app:titleTextColor="@color/cardview_dark_background"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
         android:layout_centerInParent="true"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingTop="25dp">
 
-        <Button
-            android:id="@+id/button4"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView1"
             android:layout_width="317dp"
-            android:layout_height="198dp"
-            android:alpha="0"
-            android:text="Button" />
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="5dp">
 
-        <Button
-            android:id="@+id/button5"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="125dp">
+
+                    <ImageView
+                        android:id="@+id/stress"
+                        android:layout_width="match_parent"
+                        android:layout_height="125dp"/>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="125dp"
+                        android:background="@drawable/gradient_very_light" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="7dp"
+                    android:text="Stress Relief"
+                    android:textColor="@color/black_80"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="12dp"
+                    android:text="1 Weeks - Begineer"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/progress_bar1"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:visibility="visible"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView2"
             android:layout_width="317dp"
-            android:layout_height="198dp"
-            android:alpha="0"
-            android:text="Button" />
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="5dp">
 
-        <Button
-            android:id="@+id/button6"
-            android:layout_width="match_parent"
-            android:layout_height="198dp"
-            android:layout_gravity="center"
-            android:alpha="0"
-            android:text="Button" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="125dp">
+
+                    <ImageView
+                        android:id="@+id/tone"
+                        android:layout_width="match_parent"
+                        android:layout_height="125dp"/>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="125dp"
+                        android:background="@drawable/gradient_very_light" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="7dp"
+                    android:text="Tone up your Body"
+                    android:textColor="@color/black_80"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="12dp"
+                    android:text="1 Weeks - Intermediate"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/progress_bar2"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:visibility="visible"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView3"
+            android:layout_width="317dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="125dp">
+
+                    <ImageView
+                        android:id="@+id/posture"
+                        android:layout_width="match_parent"
+                        android:layout_height="125dp"/>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="125dp"
+                        android:background="@drawable/gradient_very_light"/>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="7dp"
+                    android:text="Posture Correction"
+                    android:textColor="@color/black_80"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="12dp"
+                    android:text="1 Weeks - Beginner"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/progress_bar3"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:visibility="visible"/>
+
+        </androidx.cardview.widget.CardView>
+
     </LinearLayout>
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/dot_background"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:title="Yoga "
-        app:titleTextColor="@color/cardview_dark_background" />
 </RelativeLayout>

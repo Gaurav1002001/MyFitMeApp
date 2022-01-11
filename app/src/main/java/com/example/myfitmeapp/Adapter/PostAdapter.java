@@ -1,5 +1,7 @@
 package com.example.myfitmeapp.Adapter;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -21,9 +24,10 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.myfitmeapp.BuildConfig;
 import com.example.myfitmeapp.CommentActivity;
-import com.example.myfitmeapp.Model.Comment;
 import com.example.myfitmeapp.Model.Post;
 import com.example.myfitmeapp.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -31,21 +35,26 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
 
 import java.util.List;
 
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
-    private Context mContext;
-    private List<Post> mPosts;
-    private List<Comment> mComments;
+import de.hdodenhof.circleimageview.CircleImageView;
 
-    private FirebaseUser firebaseUser;
+public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
+    private final Context mContext;
+    private final List<Post> mPosts;
+
+    private final FirebaseUser firebaseUser;
+    private final ProgressDialog progressDialog;
 
     public PostAdapter(Context context, List<Post> uploads) {
         mContext = context;
         mPosts = uploads;
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        progressDialog = new ProgressDialog(mContext);
     }
 
     @Override
@@ -59,7 +68,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     public void onBindViewHolder(PostViewHolder holder, int position) {
         Post post = mPosts.get(position);
 
-        holder.viewMore.setText(post.getDescription());
+        getPublisherName_Image(post.getPublisher(), holder.profileImage, holder.username);
+        holder.postDate.setText(post.getPostDate());
         Glide.with(mContext)
                 .load(post.getImageUrl())
                 .listener(new RequestListener<Drawable>() {
@@ -80,63 +90,59 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         holder.time.setText(post.getTime());
         holder.calorie.setText(post.getCalorie());
         holder.postDate.setText(post.getPostDate());
+        holder.viewMore.setText(post.getDescription());
+        holder.lusername.setText(post.getLusername());
+        holder.latestComment.setText(post.getLcomment());
 
         isLiked(post.getPostid(), holder.like);
         noOfLikes(post.getPostid(), holder.noOfLikes);
         getComments(post.getPostid(), holder.commentList);
         noOfComments(post.getPostid(), holder.noOfComments);
-        getLatestComments(post.getPostid(), holder.latestComment);
 
-        holder.like.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (holder.like.getTag().equals("like")) {
-                    FirebaseDatabase.getInstance().getReference().child("likes")
-                            .child(post.getPostid()).child(firebaseUser.getUid()).setValue(true);
+        holder.like.setOnClickListener(v -> {
+            if (holder.like.getTag().equals("like")) {
+                FirebaseDatabase.getInstance().getReference().child("likes")
+                        .child(post.getPostid()).child(firebaseUser.getUid()).setValue(true);
 
-                    //addNotification(post.getPostid(), post.getPublisher());
-                } else {
-                    FirebaseDatabase.getInstance().getReference().child("likes")
-                            .child(post.getPostid()).child(firebaseUser.getUid()).removeValue();
-                }
+                //addNotification(post.getPostid(), post.getPublisher());
+            } else {
+                FirebaseDatabase.getInstance().getReference().child("likes")
+                        .child(post.getPostid()).child(firebaseUser.getUid()).removeValue();
             }
         });
 
-        holder.comment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                gotoCommentActivity(post);
-            }
+        holder.comment.setOnClickListener(v -> gotoCommentActivity(post));
+        holder.cardView.setOnClickListener(v -> gotoCommentActivity(post));
+        holder.addComment.setOnClickListener(v -> gotoCommentActivity(post));
+
+        holder.share.setOnClickListener(v -> {
+            share();
         });
 
-        holder.commentList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                gotoCommentActivity(post);
-            }
-        });
+        getLatestComment(post.getPostid(), holder.lusername, holder.latestComment);
 
-        holder.addComment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                gotoCommentActivity(post);
-            }
-        });
+        holder.removePost.setOnClickListener(v -> removePostDialog(post.getImageUrl(), post.getPublisher(), post.getPostid()));
 
-        holder.share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    Intent shareIntent = new Intent("android.intent.action.SEND");
-                    shareIntent.setType("text/plain");
-                    shareIntent.putExtra("android.intent.extra.SUBJECT", "FitMe");
-                    shareIntent.putExtra("android.intent.extra.TEXT", "\nJoin me in FitMe, a complete Fitness App\n\n" + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID + "\n\n");
-                    mContext.startActivity(Intent.createChooser(shareIntent, "choose one"));
-                } catch (Exception e) {
-                }
-            }
-        });
+    }
 
+    private void getPublisherName_Image(String publisher, ImageView profileImage, TextView username) {
+        FirebaseDatabase.getInstance().getReference().child("users").child(publisher)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.hasChild("imageurl")) {
+                            Glide.with(mContext).load(snapshot.child("imageurl").getValue().toString()).into(profileImage);
+                        } else {
+                            profileImage.setImageResource(R.drawable.ic_avatar_recent_login);
+                        }
+                        username.setText(snapshot.child("username").getValue().toString());
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
     }
 
     private void gotoCommentActivity(Post post) {
@@ -152,6 +158,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
     public class PostViewHolder extends RecyclerView.ViewHolder {
 
+        public CircleImageView profileImage;
+        public TextView username;
         public ImageView imageView;
         public ProgressBar progressBar;
         public TextView title;
@@ -162,15 +170,20 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         public TextView noOfLikes;
         public ImageView comment;
         public TextView noOfComments;
+        public CardView cardView;
         public TextView commentList;
         public ImageView share;
         public TextView addComment;
         public ExpandableTextView viewMore;
+        public TextView lusername;
         public TextView latestComment;
+        public ImageView removePost;
 
         public PostViewHolder(View itemView) {
             super(itemView);
 
+            profileImage = itemView.findViewById(R.id.image_profile);
+            username = itemView.findViewById(R.id.username);
             imageView = itemView.findViewById(R.id.post_image);
             progressBar = itemView.findViewById(R.id.progress_bar);
             title = itemView.findViewById(R.id.postTitle);
@@ -181,11 +194,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             noOfLikes = itemView.findViewById(R.id.no_of_likes);
             comment = itemView.findViewById(R.id.comment);
             noOfComments = itemView.findViewById(R.id.no_of_comments);
+            cardView = itemView.findViewById(R.id.cardView);
             commentList = itemView.findViewById(R.id.commentList);
             share = itemView.findViewById(R.id.share);
             addComment = itemView.findViewById(R.id.addComment);
             viewMore = itemView.findViewById(R.id.description);
+            lusername = itemView.findViewById(R.id.lusername);
             latestComment = itemView.findViewById(R.id.latestComment);
+            removePost = itemView.findViewById(R.id.removePost);
         }
     }
 
@@ -209,7 +225,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         });
     }
 
-    private void noOfLikes (String postId, final TextView text) {
+    private void noOfLikes(String postId, final TextView text) {
         FirebaseDatabase.getInstance().getReference().child("likes").child(postId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -223,7 +239,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         });
     }
 
-    private void noOfComments (String postId, final TextView text) {
+    private void noOfComments(String postId, final TextView text) {
         FirebaseDatabase.getInstance().getReference().child("comments").child(postId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -237,39 +253,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         });
     }
 
-    private void getLatestComments(String postId, final TextView latestComment) {
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("comments")
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.child(postId).exists()) {
-                            databaseReference.child("comments").child(postId).orderByKey().limitToLast(1)
-                                    .addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            Comment comment = snapshot.getValue(Comment.class);
-
-                                            latestComment.setText(comment.getComment());
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
-    }
-
-    private void getComments (String postId, final TextView text) {
+    private void getComments(String postId, final TextView text) {
         FirebaseDatabase.getInstance().getReference().child("comments").child(postId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -287,4 +271,86 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         });
     }
 
+    private void getLatestComment(String postid, TextView lusername, TextView latestComment) {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.child("comments").child(postid).orderByKey().limitToLast(1)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            for (DataSnapshot child : snapshot.getChildren()) {
+                                String publisher = child.child("publisher").getValue().toString();
+                                databaseReference.child("users").child(publisher).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        lusername.setText(snapshot.child("username").getValue().toString());
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+
+                                latestComment.setText(child.child("comment").getValue().toString());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
+    private void removePostDialog(String imageUrl, String publisher, String postid) {
+        CharSequence[] items;
+        if (publisher.endsWith(firebaseUser.getUid())) {
+            items = new CharSequence[]{"Remove Post", "Save"};
+        } else {
+            items = new CharSequence[]{"Save"};
+        }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setItems(items, (dialog, which) -> {
+            switch (which) {
+                case 0:
+                    StorageReference reference = FirebaseStorage.getInstance().getReferenceFromUrl(imageUrl);
+                    if (publisher.endsWith(firebaseUser.getUid())) {
+                        progressDialog.setMessage("Removing Post..");
+                        progressDialog.setCancelable(false);
+                        progressDialog.setIndeterminate(true);
+                        progressDialog.show();
+                        reference.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    FirebaseDatabase.getInstance().getReference()
+                                            .child("posts").child(postid).removeValue();
+                                    progressDialog.dismiss();
+                                }
+                            }
+                        });
+                    }
+                    break;
+                case 1:
+                    dialog.dismiss();
+                    progressDialog.dismiss();
+                    break;
+            }
+        });
+        builder.show();
+}
+
+    private void share() {
+        try {
+            Intent shareIntent = new Intent("android.intent.action.SEND");
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra("android.intent.extra.SUBJECT", "FitMe");
+            shareIntent.putExtra("android.intent.extra.TEXT", "\nJoin me in FitMe, a complete Fitness App\n\n" + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID + "\n\n");
+            mContext.startActivity(Intent.createChooser(shareIntent, "choose one"));
+        } catch (Exception e) {
+        }
+    }
 }

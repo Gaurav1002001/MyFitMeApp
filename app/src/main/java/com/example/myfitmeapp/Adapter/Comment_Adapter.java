@@ -12,9 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myfitmeapp.FriendsModel.User;
+import com.bumptech.glide.Glide;
 import com.example.myfitmeapp.Model.Comment;
-import com.example.myfitmeapp.Profile_PageInfoActivity;
+import com.example.myfitmeapp.Model.User;
+import com.example.myfitmeapp.MeFragment_Items.Profile_PageInfoActivity;
 import com.example.myfitmeapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -22,9 +23,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
 import java.util.List;
@@ -69,7 +70,7 @@ public class Comment_Adapter extends RecyclerView.Adapter<Comment_Adapter.ViewHo
 
                 holder.username.setText(user.getUsername());
                 if (user.getImageurl() != null) {
-                    Picasso.get().load(user.getImageurl()).into(holder.imageProfile);
+                    Glide.with(mContext).load(user.getImageurl()).into(holder.imageProfile);
                 } else {
                     holder.imageProfile.setImageResource(R.drawable.ic_avatar_recent_login);
                 }
@@ -98,6 +99,10 @@ public class Comment_Adapter extends RecyclerView.Adapter<Comment_Adapter.ViewHo
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
+                                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+                                    ref.child("posts").child(postId).child("lusername").removeValue();
+                                    ref.child("posts").child(postId).child("lcomment").removeValue();
+
                                     dialog.dismiss();
 
                                 }

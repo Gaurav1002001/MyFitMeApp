@@ -4,44 +4,53 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/fitme_logo"
+        android:icon="@drawable/logo_try"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logo_try"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyFitMeApp">
-        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-            android:theme="@style/Base.Theme.AppCompat"/>
+        <activity
+            android:name=".CoronaData.DetailActivity"
+            android:theme="@style/CustomTheme1" />
+        <activity
+            android:name=".Meditation_ContentActivity"
+            android:exported="false"
+            android:theme="@style/CustomTheme" />
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
         <activity
             android:name=".Post_Activity"
             android:exported="false"
-            android:theme="@style/CustomTheme1"/>
+            android:theme="@style/CustomTheme1" />
         <activity
-            android:name=".Profile_PageInfoActivity"
+            android:name=".MeFragment_Items.Profile_PageInfoActivity"
             android:exported="false"
             android:theme="@style/CustomTheme1" />
         <activity
             android:name=".CommentActivity"
             android:theme="@style/CustomTheme1" />
         <activity
-            android:name=".AddFriend"
+            android:name=".Friends.AddFriend"
             android:exported="false"
             android:theme="@style/CustomTheme1" />
         <activity
-            android:name=".TrainingStatusActivity"
+            android:name=".TrainingStatus.TrainingStatusActivity"
             android:exported="false"
             android:label="@string/title_activity_taining_status"
             android:theme="@style/CustomTheme1" />
         <activity
-            android:name=".Payment_PageActivity"
+            android:name=".ExploreFagment_Items.Payment_PageActivity"
             android:exported="false"
             android:label="@string/title_activity_payment_page"
             android:theme="@style/Theme.MyFitMeApp.NoActionBar1" />
         <activity
-            android:name=".Health_NutritionActivity"
+            android:name=".ExploreFagment_Items.Health_NutritionActivity"
             android:exported="false"
             android:theme="@style/CustomTheme" />
         <activity
@@ -63,126 +72,91 @@
             android:name=".Yoga.Yoga_AdvancedActivity"
             android:theme="@style/CustomTheme" />
         <activity
-            android:name=".ThankYou"
+            android:name=".KnowUser.ThankYou"
             android:exported="true"
-            android:theme="@style/Theme.MyFitMeApp.NoActionBar1" />
+            android:theme="@style/CustomTheme" />
         <activity
-            android:name=".Main_PageActivity"
+            android:name=".UserAccount.UserAccount_Container"
             android:exported="true"
-            android:theme="@style/Main_PageActivityTheme" />
+            android:theme="@style/CustomTheme" />
         <activity
-            android:name=".Know_UserActivity"
-            android:exported="true"
-            android:theme="@style/Theme.MyFitMeApp.NoActionBar1" />
-        <activity
-            android:name=".FriendsActivity"
+            android:name=".Friends.FriendsActivity"
             android:exported="false"
             android:label="@string/title_activity_friends"
             android:theme="@style/CustomTheme1" />
         <activity
-            android:name=".AffectedCountries"
+            android:name=".CoronaData.AffectedCountries"
             android:exported="true"
             android:theme="@style/Theme.MyFitMeApp.NoActionBar1" />
         <activity
-            android:name=".CoronaPageActivity"
+            android:name=".CoronaData.CoronaPageActivity"
             android:exported="true"
             android:theme="@style/Theme.MyFitMeApp.NoActionBar1" />
         <activity
-            android:name=".Delta_Activity"
+            android:name=".ExploreFagment_Items.Delta_Activity"
             android:theme="@style/CustomTheme" />
         <activity
-            android:name=".Golf_Activity"
+            android:name=".ExploreFagment_Items.Golf_Activity"
             android:theme="@style/CustomTheme" />
         <activity
-            android:name=".India_Activity"
+            android:name=".ExploreFagment_Items.India_Activity"
             android:theme="@style/CustomTheme" />
         <activity
-            android:name=".EchoActivity"
+            android:name=".ExploreFagment_Items.EchoActivity"
             android:theme="@style/CustomTheme" />
         <activity
-            android:name=".Motherhood_Fragment"
-            android:parentActivityName=".MainActivity"
+            android:name=".ExploreFagment_Items.Motherhood_Fragment"
+            android:parentActivityName=".BottomNavFragments.MainActivity"
             android:theme="@style/CustomTheme" />
         <activity
-            android:name=".Menstrual_Fragment"
-            android:parentActivityName=".MainActivity"
+            android:name=".ExploreFagment_Items.Menstrual_Fragment"
+            android:parentActivityName=".BottomNavFragments.MainActivity"
             android:theme="@style/CustomTheme" />
         <activity
-            android:name=".Soothing_Fragment"
-            android:parentActivityName=".MainActivity"
+            android:name=".ExploreFagment_Items.Soothing_Fragment"
+            android:parentActivityName=".BottomNavFragments.MainActivity"
             android:theme="@style/CustomTheme" />
         <activity
-            android:name=".Breathing_Fragment"
-            android:parentActivityName=".MainActivity"
+            android:name=".ExploreFagment_Items.Breathing_Fragment"
+            android:parentActivityName=".BottomNavFragments.MainActivity"
             android:theme="@style/CustomTheme" />
         <activity
-            android:name=".Morning_Fragment"
-            android:parentActivityName=".MainActivity"
+            android:name=".ExploreFagment_Items.Morning_Fragment"
+            android:parentActivityName=".BottomNavFragments.MainActivity"
             android:theme="@style/CustomTheme" />
         <activity
-            android:name=".AboutUs_Activity"
+            android:name=".MeFragment_Items.AboutUs_Activity"
             android:theme="@style/CustomTheme1" />
         <activity
-            android:name=".EditProfile_Activity"
+            android:name=".MeFragment_Items.EditProfile_Activity"
             android:theme="@style/CustomTheme1" />
         <activity
-            android:name=".Account_Activity1"
+            android:name=".MeFragment_Items.Account_Activity1"
             android:theme="@style/CustomTheme1" />
         <activity
-            android:name=".Reminder_Activity"
+            android:name=".MeFragment_Items.Reminder_Activity"
             android:theme="@style/CustomTheme1" />
         <activity
             android:name=".Meditation_PageActivity"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".BottomNavFragments.MainActivity"
             android:theme="@style/CustomTheme1" />
         <activity
-            android:name=".Meditation.Stay_Activity"
-            android:parentActivityName=".Meditation_PageActivity"
-            android:theme="@style/CustomTheme" />
-        <activity
-            android:name=".Meditation.Body_Activity"
-            android:parentActivityName=".Meditation_PageActivity"
-            android:theme="@style/CustomTheme" />
-        <activity
-            android:name=".Meditation.Breathing_Activity"
-            android:parentActivityName=".Meditation_PageActivity"
-            android:theme="@style/CustomTheme" />
-        <activity
-            android:name=".Meditation.Training_Activity"
-            android:parentActivityName=".Meditation_PageActivity"
-            android:theme="@style/CustomTheme" />
-        <activity
-            android:name=".Meditation.Accepting_Activity"
-            android:parentActivityName=".Meditation_PageActivity"
-            android:theme="@style/CustomTheme" />
-        <activity
-            android:name=".Meditation.Cultivative_Activity"
-            android:parentActivityName=".Meditation_PageActivity"
-            android:theme="@style/CustomTheme" />
-        <activity
-            android:name=".Meditation.Connect_Activity"
-            android:parentActivityName=".Meditation_PageActivity"
-            android:theme="@style/CustomTheme" />
-        <activity
-            android:name=".Gym_PageActivity"
-            android:parentActivityName=".MainActivity"
+            android:name=".Gym.Gym_PageActivity"
+            android:parentActivityName=".BottomNavFragments.MainActivity"
             android:theme="@style/MainActivityTheme" />
         <activity
-            android:name=".YogaPageActivity"
+            android:name=".Yoga.YogaPageActivity"
             android:theme="@style/MainActivityTheme" />
         <activity android:name=".Country_data" />
         <activity
-            android:name=".VerifyPageActivity"
-            android:parentActivityName=".Main_PageActivity"
-            android:theme="@style/CustomTheme1" />
+            android:name=".KnowUser.Know_UserContainer"
+            android:exported="true"
+            android:theme="@style/Theme.MyFitMeApp.NoActionBar1" />
         <activity
-            android:name=".KnowUserActivity_B"
-            android:theme="@style/Main_PageActivityTheme" />
-        <activity
-            android:name=".Detailed"
+            android:name=".CoronaData.Detailed"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".MainActivity"
+            android:name=".BottomNavFragments.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.MyFitMeApp.NoActionBar1" />
         <activity

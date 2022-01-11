@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Health_NutritionActivity"
+    tools:context=".ExploreFagment_Items.Health_NutritionActivity"
     android:fitsSystemWindows="true">
 
     <androidx.appcompat.widget.Toolbar

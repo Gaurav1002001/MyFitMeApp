@@ -10,10 +10,10 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorSecondary"
+        android:background="@drawable/bg_splash_yoga_gradient"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:title="Affected Countries" />
+        app:title="Affected Countries"
+        app:titleTextColor="@color/white"/>
 
     <EditText
         android:id="@+id/edtSearch"

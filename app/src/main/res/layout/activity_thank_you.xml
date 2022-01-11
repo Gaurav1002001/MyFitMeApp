@@ -26,7 +26,8 @@
             android:layout_marginTop="15dp"
             android:gravity="center"
             android:text="Just a moment while we optimize based on your answers"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
 
         <RelativeLayout
             android:layout_width="wrap_content"

@@ -53,19 +53,36 @@
         android:padding="10dp"
         android:orientation="vertical">
 
-        <EditText
+  <!--      <EditText
             android:id="@+id/postDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="post date"/>
+            android:hint="post date"/>   -->
 
-        <ImageView
-            android:id="@+id/post_image"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:scaleType="centerInside"
-            android:src="@mipmap/ic_launcher" />
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/post_image"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="20dp"
+                app:layout_constraintDimensionRatio="1:1"
+                tools:ignore="MissingConstraints" />
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/post_image"
+                app:layout_constraintEnd_toEndOf="@+id/post_image"
+                app:layout_constraintStart_toStartOf="@+id/post_image"
+                app:layout_constraintTop_toTopOf="@+id/post_image"
+                android:background="@drawable/progress_dialog_icon_animation"
+                android:visibility="visible"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <EditText
             android:id="@+id/title"
@@ -77,13 +94,13 @@
             android:id="@+id/time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="title"/>
+            android:hint="time"/>
 
         <EditText
             android:id="@+id/calorie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="title"/>
+            android:hint="calorie"/>
 
         <com.hendraanggrian.appcompat.widget.SocialAutoCompleteTextView
             android:id="@+id/description"

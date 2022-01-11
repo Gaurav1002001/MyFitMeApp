@@ -11,13 +11,18 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="5dp"
-        app:cardCornerRadius="5dp"
-        android:alpha="1.5">
+        android:alpha="1.5"
+        app:cardCornerRadius="5dp">
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_light"/>
 
         <TextView
             android:id="@+id/title"
@@ -42,11 +47,18 @@
             android:textSize="12sp" />
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_gravity="end|center_vertical"
-            android:layout_marginEnd="60dp"
-            android:src="@drawable/exo_icon_play" />
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/meditation_card_start_icon" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:visibility="visible" />
 
     </androidx.cardview.widget.CardView>
 

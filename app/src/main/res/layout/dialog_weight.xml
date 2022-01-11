@@ -53,10 +53,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
-                        android:hint="75"
+                        android:text="75"
+                        android:textColor="@color/black_30"
                         android:inputType="numberDecimal"
                         android:maxLength="5"
-                        android:textColor="@color/black"
                         android:textSize="50sp" />
 
                     <TextView

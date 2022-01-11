@@ -1,11 +1,13 @@
 package com.example.myfitmeapp.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -16,10 +18,9 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.example.myfitmeapp.Meditation_ContentActivity;
 import com.example.myfitmeapp.Model.Meditation;
 import com.example.myfitmeapp.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
@@ -27,12 +28,9 @@ public class MeditationAdapter extends RecyclerView.Adapter<MeditationAdapter.Po
     private Context mContext;
     private List<Meditation> meditationList;
 
-    private FirebaseUser firebaseUser;
-
     public MeditationAdapter(Context context, List<Meditation> list) {
         mContext = context;
         meditationList = list;
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     }
 
     @Override
@@ -51,13 +49,13 @@ public class MeditationAdapter extends RecyclerView.Adapter<MeditationAdapter.Po
                 .listener(new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                        //holder.progressBar.setVisibility(View.GONE);
+                        holder.progressBar.setVisibility(View.GONE);
                         return false;
                     }
 
                     @Override
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                        //holder.progressBar.setVisibility(View.GONE);
+                        holder.progressBar.setVisibility(View.GONE);
                         return false;
                     }
                 })
@@ -68,7 +66,9 @@ public class MeditationAdapter extends RecyclerView.Adapter<MeditationAdapter.Po
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(mContext, Meditation_ContentActivity.class);
+                intent.putExtra("id", meditation.getId());
+                mContext.startActivity(intent);
             }
         });
     }
@@ -83,6 +83,7 @@ public class MeditationAdapter extends RecyclerView.Adapter<MeditationAdapter.Po
         public ImageView imageView;
         public TextView title;
         public TextView duration;
+        public ProgressBar progressBar;
 
         public PostViewHolder(View itemView) {
             super(itemView);
@@ -90,6 +91,7 @@ public class MeditationAdapter extends RecyclerView.Adapter<MeditationAdapter.Po
             imageView = itemView.findViewById(R.id.imageView);
             title = itemView.findViewById(R.id.title);
             duration = itemView.findViewById(R.id.duration);
+            progressBar = itemView.findViewById(R.id.progress_bar);
         }
     }
 }

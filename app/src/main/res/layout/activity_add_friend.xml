@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddFriend">
+    tools:context=".Friends.AddFriend">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -49,13 +49,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/recycler_view_users"
                 android:layout_below="@id/bar"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/recycler_view_tags"
-                android:layout_below="@id/recycler_view_users"
-                android:layout_marginTop="5dp"/>
 
         </LinearLayout>
 

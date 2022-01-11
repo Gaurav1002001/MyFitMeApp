@@ -135,7 +135,7 @@
                 android:textAllCaps="false"
                 android:textColor="#fff"
                 android:textSize="18sp"
-                app:backgroundTint="@color/teal_200"
+                app:backgroundTint="@color/yoga_green"
                 android:layout_gravity="center"
                 android:layout_marginTop="60dp"/>
 
